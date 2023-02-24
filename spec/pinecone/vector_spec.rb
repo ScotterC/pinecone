@@ -79,6 +79,14 @@ RSpec.describe Pinecone::Vector do
         })
       end
     end
+
+    describe "missing index" do
+      it "raises an exception" do
+        VCR.use_cassette("missing_index") do
+          expect { Pinecone::Vector.new("missing-index") }.to raise_error(Pinecone::IndexNotFoundError)
+        end
+      end
+    end
   end
 
 end

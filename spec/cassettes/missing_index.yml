@@ -1,0 +1,111 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/missing-index
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Fri, 24 Feb 2023 20:41:44 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '6'
+      Content-Length:
+      - '14'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '404: Not Found'
+  recorded_at: Fri, 24 Feb 2023 20:41:44 GMT
+- request:
+    method: get
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/missing-index
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Fri, 24 Feb 2023 20:42:27 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '4'
+      Content-Length:
+      - '14'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '404: Not Found'
+  recorded_at: Fri, 24 Feb 2023 20:42:27 GMT
+- request:
+    method: get
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/missing-index
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Fri, 24 Feb 2023 20:42:54 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '5'
+      Content-Length:
+      - '14'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '404: Not Found'
+  recorded_at: Fri, 24 Feb 2023 20:42:54 GMT
+recorded_with: VCR 6.1.0
