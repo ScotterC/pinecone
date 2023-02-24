@@ -1,11 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: "<PINECONE_BASE_URI>/vectors/upsert"
+    method: get
+    uri: https://controller.us-east1-gcp.pinecone.io/databases
     body:
-      encoding: UTF-8
-      string: '"foo"'
+      encoding: US-ASCII
+      string: ''
     headers:
       Content-Type:
       - application/json
@@ -19,21 +19,23 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 200
+      message: OK
     headers:
       Content-Type:
-      - text/plain
-      Content-Length:
-      - '33'
+      - application/json; charset=UTF-8
       Date:
-      - Fri, 24 Feb 2023 02:01:28 GMT
+      - Fri, 24 Feb 2023 15:54:01 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '940'
+      Content-Length:
+      - '25'
       Server:
       - envoy
-      Connection:
-      - close
     body:
       encoding: UTF-8
-      string: ": Root element must be a message."
-  recorded_at: Fri, 24 Feb 2023 02:01:28 GMT
+      string: '["test-index","testing"]
+
+        '
+  recorded_at: Fri, 24 Feb 2023 15:54:01 GMT
 recorded_with: VCR 6.1.0

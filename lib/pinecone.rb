@@ -2,16 +2,18 @@ require "httparty"
 
 require "pinecone/client"
 require "pinecone/index"
+require "pinecone/vector"
 require "pinecone/version"
 
 module Pinecone
   class ConfigurationError < StandardError; end
   class Configuration
-    attr_writer :api_key, :base_uri
+    attr_writer :api_key, :base_uri, :environment
 
     def initialize
-      @api_key  = nil
-      @base_uri = nil
+      @api_key     = nil
+      @environment = nil
+      @base_uri    = nil
     end
 
     def api_key
@@ -24,6 +26,12 @@ module Pinecone
       return @base_uri if @base_uri
 
       raise ConfigurationError, "Pinecone domain not set"
+    end
+
+    def environment
+      return @environment if @environment
+
+      raise ConfigurationError, "Pinecone environment not set"
     end
   end
 

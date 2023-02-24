@@ -1,0 +1,73 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://controller.us-east1-gcp.pinecone.io/databases
+    body:
+      encoding: UTF-8
+      string: '{"metric":"dotproduct","name":"example-index","dimension":3}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Fri, 24 Feb 2023 16:01:22 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '845'
+      Content-Length:
+      - '34'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: index example-index already exists
+  recorded_at: Fri, 24 Feb 2023 16:01:22 GMT
+- request:
+    method: delete
+    uri: https://controller.us-east1-gcp.pinecone.io/databases/example-index
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      Date:
+      - Fri, 24 Feb 2023 16:01:22 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '13'
+      Content-Length:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Fri, 24 Feb 2023 16:01:22 GMT
+recorded_with: VCR 6.1.0

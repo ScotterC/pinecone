@@ -11,14 +11,14 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
   c.default_cassette_options = { record: ENV["NO_VCR"] == "true" ? :all : :new_episodes}
   c.filter_sensitive_data("<PINECONE_API_KEY>") { Pinecone.configuration.api_key }
-  c.filter_sensitive_data("<PINECONE_BASE_URI>") { Pinecone.configuration.base_uri }
+  c.filter_sensitive_data("<PINECONE_ENVIRONMENT>") { Pinecone.configuration.environment }
 end
 
 RSpec.configure do |c|
   c.before(:all) do
     Pinecone.configure do |config|
       config.api_key = ENV.fetch('PINECONE_API_KEY')
-      config.base_uri = ENV.fetch('PINECONE_BASE_URI')
+      config.environment = ENV.fetch('PINECONE_ENVIRONMENT')
     end
   end
 end

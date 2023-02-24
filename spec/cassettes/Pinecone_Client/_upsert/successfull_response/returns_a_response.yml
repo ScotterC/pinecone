@@ -1,8 +1,46 @@
 ---
 http_interactions:
 - request:
+    method: get
+    uri: https://controller.us-east1-gcp.pinecone.io/databases/example-index
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Fri, 24 Feb 2023 19:03:18 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '5'
+      Content-Length:
+      - '281'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"database":{"name":"example-index","metric":"dotproduct","dimension":3,"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1"},"status":{"waiting":["database"],"crashed":[],"host":"example-index-b2e8921.svc.us-east1-gcp.pinecone.io","port":433,"state":"Initializing","ready":false}}
+
+        '
+  recorded_at: Fri, 24 Feb 2023 19:03:18 GMT
+- request:
     method: post
-    uri: "<PINECONE_BASE_URI>/vectors/upsert"
+    uri: https://example-index-b2e8921.svc.us-east1-gcp.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
       string: '{"vectors":[{"values":[1,2,3],"id":"1"}]}'
@@ -25,9 +63,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Feb 2023 02:01:28 GMT
+      - Fri, 24 Feb 2023 19:04:53 GMT
       X-Envoy-Upstream-Service-Time:
-      - '11'
+      - '898'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -37,5 +75,43 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":1}'
-  recorded_at: Fri, 24 Feb 2023 02:01:28 GMT
+  recorded_at: Fri, 24 Feb 2023 19:04:54 GMT
+- request:
+    method: post
+    uri: https://example-index-b2e8921.svc.us-east1-gcp.pinecone.io/vectors/upsert
+    body:
+      encoding: UTF-8
+      string: '{"vectors":[{"values":[1,2,3],"id":"1"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 24 Feb 2023 19:04:55 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '9'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '19'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"upsertedCount":1}'
+  recorded_at: Fri, 24 Feb 2023 19:04:55 GMT
 recorded_with: VCR 6.1.0
