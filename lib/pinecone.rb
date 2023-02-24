@@ -7,6 +7,7 @@ require "pinecone/version"
 
 module Pinecone
   class ConfigurationError < StandardError; end
+  class IndexNotFoundError < StandardError; end
   class Configuration
     attr_writer :api_key, :base_uri, :environment
 
