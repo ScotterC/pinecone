@@ -1,4 +1,4 @@
-# Pinecone Vector DB Client (WIP)
+# Pinecone Ruby Client
 
 Note: This is currently minimal functionality of the Pinecone API. Pull requests to fill out the gem are welcome.
 
@@ -84,7 +84,6 @@ Index
 
 ## TODO
 
-- Resolve the index_name_project_id issue
 - Add functionality for
   - POST Describe Index Stats
   - POST Delete Vectors
