@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<PINECONE_BASE_URI>/vectors/upsert"
+    body:
+      encoding: UTF-8
+      string: '"foo"'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Type:
+      - text/plain
+      Content-Length:
+      - '33'
+      Date:
+      - Fri, 24 Feb 2023 02:01:28 GMT
+      Server:
+      - envoy
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: ": Root element must be a message."
+  recorded_at: Fri, 24 Feb 2023 02:01:28 GMT
+recorded_with: VCR 6.1.0

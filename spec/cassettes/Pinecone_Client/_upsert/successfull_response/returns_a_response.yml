@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<PINECONE_BASE_URI>/vectors/upsert"
+    body:
+      encoding: UTF-8
+      string: '{"vectors":[{"values":[1,2,3],"id":"1"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 24 Feb 2023 02:01:28 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '11'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '19'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"upsertedCount":1}'
+  recorded_at: Fri, 24 Feb 2023 02:01:28 GMT
+recorded_with: VCR 6.1.0

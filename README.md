@@ -12,7 +12,7 @@ Note: This is currently minimal functionality of the Pinecone API. Pull requests
 require 'pinecone'
 
 Pinecone.configure do |config|
-  config.api_key = ENV.fetch('PINECONE_API_KEY')
+  config.api_key  = ENV.fetch('PINECONE_API_KEY')
   config.base_uri = ENV.fetch('PINECONE_BASE_URI') # https://index_name-project_id.svc.environment.pinecone.io
 end
 ```
@@ -21,7 +21,7 @@ end
 
 Adding vectors to an existing DB
 ```ruby
-pinecone = Pinecone.new
+pinecone = Pinecone::Client.new
 # Note, options are currently hardcoded in this method
 # Index is set within base_uri
 pinecone.upsert(
@@ -43,14 +43,13 @@ pinecone.upsert(
 Querying DB with a vector
 ```ruby
   embedding = [0.0, -0.2, 0.4]
-  pinecone = Pinecone.new
+  pinecone = Pinecone::Client.new
   response = pinecode.query(embedding)
   response #=> 
 ```
 
 ## TODO
 
-- Tests
 - Robust funcitonality (errors, options etc) for
   - Upsert
   - Query
