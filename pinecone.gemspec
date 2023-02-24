@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name        = "pinecone"
-  s.version     = "0.0.0"
+  s.version     = "0.1.0"
   s.summary     = "Ruby client library for Pinecone Vector DB"
-  s.description = "Enables ruby access to upsert and query vectors in Pinecone"
+  s.description = "Ruby client library for Pinecone Vector DB"
   s.authors     = ["Scott Carleton"]
   s.email       = "scott@extrayarn.com"
   s.files       = ["lib/pinecone.rb"]
