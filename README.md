@@ -1,6 +1,6 @@
 # Pinecone Vector DB Client (WIP)
 
-Note: This is currently minimal functionality of the Pinecone API. Pull requests to fill out the gem are welcome. I recommend reading the code directly if you're going to use it.
+Note: This is currently minimal functionality of the Pinecone API. Pull requests to fill out the gem are welcome.
 
 ## Installation
 
@@ -9,22 +9,42 @@ Note: This is currently minimal functionality of the Pinecone API. Pull requests
 ## Configuration
 
 ```ruby
+require "dotenv/load"
 require 'pinecone'
 
 Pinecone.configure do |config|
   config.api_key  = ENV.fetch('PINECONE_API_KEY')
-  config.base_uri = ENV.fetch('PINECONE_BASE_URI') # https://index_name-project_id.svc.environment.pinecone.io
+  config.environemnt = ENV.fetch('PINECONE_ENVIRONMENT')
 end
 ```
 
-## Features
+## Index Operations
 
-Adding vectors to an existing DB
+Listing Indexes
 ```ruby
 pinecone = Pinecone::Client.new
+pinecone.list_indexes
+```
+
+Describe Index
+```ruby
+pinecone.describe_index("example-index")
+```
+
+Delete Index
+```ruby
+pinecone.delete_index("example-index")
+```
+
+## Vector Operations
+
+Adding vectors to an existing index
+```ruby
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+
 # Note, options are currently hardcoded in this method
-# Index is set within base_uri
-pinecone.upsert(
+index.upsert(
   vectors: {
     id: "1",
     metadata: {
@@ -40,23 +60,33 @@ pinecone.upsert(
 )
 ```
 
-Querying DB with a vector
+Querying index with a vector
 ```ruby
-  embedding = [0.0, -0.2, 0.4]
   pinecone = Pinecone::Client.new
-  response = pinecode.query(embedding)
-  response #=> 
+  index = pinecone.index("example-index")
+  embedding = [0.0, -0.2, 0.4]
+  response = index.query(embedding)
 ```
+
+## Supported Endpoints
+
+Vector 
+
+- Upsert
+- Query
+
+Index
+
+- List Indexes
+- Describe Index
+- Create Index
+- Delete Index
 
 ## TODO
 
-- Robust funcitonality (errors, options etc) for
-  - Upsert
-  - Query
+- Resolve the index_name_project_id issue
 - Add functionality for
-  - GET Describe Index Stats
   - POST Describe Index Stats
-  - DELETE Delete Vectors
   - POST Delete Vectors
   - GET Fetch
   - POST Update
@@ -64,8 +94,4 @@ Querying DB with a vector
   - POST create_collection
   - GET describe_collection
   - DELETE delete_collection
-  - GET list_indexes
-  - POST create_index
-  - GET describe_index
-  - DELETE delete_index
   - Patch configure_index
