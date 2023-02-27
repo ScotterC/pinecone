@@ -31,6 +31,15 @@ Describe Index
 pinecone.describe_index("example-index")
 ```
 
+Create Index
+```ruby
+pinecone.create_index({
+  "metric": "dotproduct",
+  "name": "example-index",
+  "dimension": 3,
+})
+```
+
 Delete Index
 ```ruby
 pinecone.delete_index("example-index")
@@ -65,7 +74,19 @@ Querying index with a vector
   pinecone = Pinecone::Client.new
   index = pinecone.index("example-index")
   embedding = [0.0, -0.2, 0.4]
-  response = index.query(embedding)
+  response = index.query(vector: embedding)
+```
+
+Querying index with options
+```ruby
+  pinecone = Pinecone::Client.new
+  index = pinecone.index("example-index")
+  embedding = [0.0, -0.2, 0.4]
+  response = index.query(vector: embedding, 
+                         namespace: "example-namespace",
+                         top_k: 10,
+                         include_values: false,
+                         include_metadata: true)
 ```
 
 ## Supported Endpoints
@@ -84,11 +105,12 @@ Index
 
 ## TODO
 
+- Add filter, sparse vector and id options to query request
 - Add functionality for
   - POST Describe Index Stats
   - POST Delete Vectors
-  - GET Fetch
-  - POST Update
+  - GET Fetch Vectors
+  - POST Update Vectors
   - GET list_collections
   - POST create_collection
   - GET describe_collection
