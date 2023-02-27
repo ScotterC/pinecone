@@ -14,7 +14,7 @@ require 'pinecone'
 
 Pinecone.configure do |config|
   config.api_key  = ENV.fetch('PINECONE_API_KEY')
-  config.environemnt = ENV.fetch('PINECONE_ENVIRONMENT')
+  config.environment = ENV.fetch('PINECONE_ENVIRONMENT')
 end
 ```
 
