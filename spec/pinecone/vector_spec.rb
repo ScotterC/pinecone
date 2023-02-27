@@ -44,16 +44,17 @@ RSpec.describe Pinecone::Vector do
         { values: [1, -1, 0], id: "3" }
       ] 
     } }
-
-    before do
-      index.upsert(data)
-    end
-
-    let(:response) {
-      index.query([0.5, -0.5, 0])
-    }      
+    let(:query_vector) { [0.5, -0.5, 0] }     
 
     describe "successfull response" do
+      before do
+        index.upsert(data)
+      end
+
+      let(:response) {
+        index.query(vector: query_vector)
+      } 
+  
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
         expect(response.parsed_response).to eq({
@@ -76,6 +77,41 @@ RSpec.describe Pinecone::Vector do
                 }
             ],
             "namespace" => ""
+        })
+      end
+    end
+
+    describe "with namespace" do
+      before do
+        index.upsert(data.merge(namespace: "example-namespace"))
+      end
+
+      let(:response) {
+        index.query(namespace: "example-namespace", vector: query_vector)
+      }
+
+      it "returns a response" do
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.parsed_response).to eq({
+          "results" => [],
+          "matches" => [
+            {
+                    "id" => "3",
+                "score" => 1,
+                "values" => []
+            },
+            {
+                    "id" => "2",
+                "score" => -0.5,
+                "values" => []
+            },
+            {
+                    "id" => "1",
+                "score" => -0.5,
+                "values" => []
+            }
+        ],
+          "namespace" => "example-namespace"
         })
       end
     end

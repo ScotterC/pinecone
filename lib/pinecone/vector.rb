@@ -17,14 +17,15 @@ module Pinecone
       self.class.post('/vectors/upsert', payload)
     end
 
-    def query(vector)
-      defaults = {
-        "includeValues": false,
-        "includeMetadata": true,
-        "topK": 5,
-        "vector": vector
+    def query(namespace: "", vector:, top_k: 10, include_values: false, include_metadata: true)
+      inputs = {
+        "namespace": namespace,
+        "includeValues": include_values,
+        "includeMetadata": include_metadata,
+        "topK": top_k,
+        "vector": vector,
       }.to_json
-      payload = options.merge(body: defaults)
+      payload = options.merge(body: inputs)
       self.class.post('/query', payload)
     end
     

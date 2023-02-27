@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pinecone (0.0.0)
+    pinecone (0.1.0)
 
 GEM
   remote: https://rubygems.org/
