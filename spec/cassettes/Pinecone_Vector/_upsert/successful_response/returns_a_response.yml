@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
+    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"test-index","dimension":3}'
+      string: '{"vectors":[{"values":[1,2,3],"id":"1"}]}'
     headers:
       Content-Type:
       - application/json
@@ -19,19 +19,23 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 201
-      message: Created
+      code: 200
+      message: OK
     headers:
+      Content-Type:
+      - application/json
       Date:
-      - Tue, 21 Mar 2023 01:08:17 GMT
+      - Tue, 21 Mar 2023 01:00:43 GMT
       X-Envoy-Upstream-Service-Time:
-      - '1474'
-      Content-Length:
+      - '9'
+      Grpc-Status:
       - '0'
+      Content-Length:
+      - '19'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: ''
-  recorded_at: Tue, 21 Mar 2023 01:08:17 GMT
+      string: '{"upsertedCount":1}'
+  recorded_at: Tue, 21 Mar 2023 01:00:43 GMT
 recorded_with: VCR 6.1.0

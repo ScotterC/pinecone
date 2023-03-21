@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://controller.us-east1-gcp.pinecone.io/databases
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
     body:
       encoding: US-ASCII
       string: ''
@@ -25,17 +25,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Fri, 24 Feb 2023 15:54:01 GMT
+      - Tue, 21 Mar 2023 01:04:21 GMT
       X-Envoy-Upstream-Service-Time:
-      - '940'
+      - '1448'
       Content-Length:
-      - '25'
+      - '31'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: '["test-index","testing"]
+      string: '["example-index","test-index"]
 
         '
-  recorded_at: Fri, 24 Feb 2023 15:54:01 GMT
+  recorded_at: Tue, 21 Mar 2023 01:04:22 GMT
 recorded_with: VCR 6.1.0

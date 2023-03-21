@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
+    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"test-index","dimension":3}'
+      string: '"foo"'
     headers:
       Content-Type:
       - application/json
@@ -19,19 +19,21 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 201
-      message: Created
+      code: 400
+      message: Bad Request
     headers:
-      Date:
-      - Tue, 21 Mar 2023 01:08:17 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '1474'
+      Content-Type:
+      - text/plain
       Content-Length:
-      - '0'
+      - '33'
+      Date:
+      - Tue, 21 Mar 2023 01:00:43 GMT
       Server:
       - envoy
+      Connection:
+      - close
     body:
       encoding: UTF-8
-      string: ''
-  recorded_at: Tue, 21 Mar 2023 01:08:17 GMT
+      string: ": Root element must be a message."
+  recorded_at: Tue, 21 Mar 2023 01:00:44 GMT
 recorded_with: VCR 6.1.0

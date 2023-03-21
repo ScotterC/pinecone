@@ -1,44 +1,8 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://controller.us-east1-gcp.pinecone.io/databases
-    body:
-      encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"example-index","dimension":3}'
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 409
-      message: Conflict
-    headers:
-      Content-Type:
-      - text/plain; charset=UTF-8
-      Date:
-      - Fri, 24 Feb 2023 16:01:22 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '845'
-      Content-Length:
-      - '34'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: index example-index already exists
-  recorded_at: Fri, 24 Feb 2023 16:01:22 GMT
-- request:
     method: delete
-    uri: https://controller.us-east1-gcp.pinecone.io/databases/example-index
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/example-index
     body:
       encoding: US-ASCII
       string: ''
@@ -59,9 +23,9 @@ http_interactions:
       message: Accepted
     headers:
       Date:
-      - Fri, 24 Feb 2023 16:01:22 GMT
+      - Tue, 21 Mar 2023 01:00:43 GMT
       X-Envoy-Upstream-Service-Time:
-      - '13'
+      - '11'
       Content-Length:
       - '0'
       Server:
@@ -69,5 +33,75 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Fri, 24 Feb 2023 16:01:22 GMT
+  recorded_at: Tue, 21 Mar 2023 01:00:43 GMT
+- request:
+    method: post
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
+    body:
+      encoding: UTF-8
+      string: '{"metric":"dotproduct","name":"test-index","dimension":3}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Tue, 21 Mar 2023 01:04:29 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '1359'
+      Content-Length:
+      - '31'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: index test-index already exists
+  recorded_at: Tue, 21 Mar 2023 01:04:29 GMT
+- request:
+    method: delete
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/test-index
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      Date:
+      - Tue, 21 Mar 2023 01:04:29 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '24'
+      Content-Length:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Tue, 21 Mar 2023 01:04:29 GMT
 recorded_with: VCR 6.1.0

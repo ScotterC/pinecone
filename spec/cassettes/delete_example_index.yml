@@ -1,7 +1,7 @@
 ---
 http_interactions:
 - request:
-    method: get
+    method: delete
     uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/example-index
     body:
       encoding: US-ASCII
@@ -19,23 +19,21 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 200
-      message: OK
+      code: 409
+      message: Conflict
     headers:
       Content-Type:
-      - application/json; charset=UTF-8
+      - text/plain; charset=UTF-8
       Date:
-      - Tue, 21 Mar 2023 01:04:32 GMT
+      - Tue, 21 Mar 2023 01:04:33 GMT
       X-Envoy-Upstream-Service-Time:
-      - '4'
+      - '6'
       Content-Length:
-      - '281'
+      - '70'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"database":{"name":"example-index","metric":"dotproduct","dimension":3,"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1"},"status":{"waiting":["database"],"crashed":[],"host":"example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","port":433,"state":"Initializing","ready":false}}
-
-        '
-  recorded_at: Tue, 21 Mar 2023 01:04:32 GMT
+      string: There is a pending operation on this resource. Please try again later.
+  recorded_at: Tue, 21 Mar 2023 01:04:33 GMT
 recorded_with: VCR 6.1.0

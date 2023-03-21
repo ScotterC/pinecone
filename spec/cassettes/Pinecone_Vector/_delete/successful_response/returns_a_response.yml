@@ -2,46 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
+    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"test-index","dimension":3}'
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 409
-      message: Conflict
-    headers:
-      Content-Type:
-      - text/plain; charset=UTF-8
-      Date:
-      - Tue, 21 Mar 2023 01:04:27 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '2067'
-      Content-Length:
-      - '31'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: index test-index already exists
-  recorded_at: Tue, 21 Mar 2023 01:04:27 GMT
-- request:
-    method: get
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/test-index
-    body:
-      encoding: US-ASCII
-      string: ''
+      string: '{"vectors":[{"values":[1,2,3],"id":"5"}]}'
     headers:
       Content-Type:
       - application/json
@@ -59,19 +23,57 @@ http_interactions:
       message: OK
     headers:
       Content-Type:
-      - application/json; charset=UTF-8
+      - application/json
       Date:
-      - Tue, 21 Mar 2023 01:04:28 GMT
+      - Tue, 21 Mar 2023 01:00:43 GMT
       X-Envoy-Upstream-Service-Time:
-      - '6'
+      - '10'
+      Grpc-Status:
+      - '0'
       Content-Length:
-      - '257'
+      - '19'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"database":{"name":"test-index","metric":"dotproduct","dimension":3,"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1"},"status":{"waiting":[],"crashed":[],"host":"test-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","port":433,"state":"Ready","ready":true}}
-
-        '
-  recorded_at: Tue, 21 Mar 2023 01:04:28 GMT
+      string: '{"upsertedCount":1}'
+  recorded_at: Tue, 21 Mar 2023 01:00:44 GMT
+- request:
+    method: post
+    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
+    body:
+      encoding: UTF-8
+      string: '{"namespace":"","ids":["5"],"deleteAll":false}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 21 Mar 2023 01:12:30 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '10'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '2'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: "{}"
+  recorded_at: Tue, 21 Mar 2023 01:12:30 GMT
 recorded_with: VCR 6.1.0

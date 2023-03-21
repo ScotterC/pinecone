@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 RSpec.describe Pinecone::Vector do
   let(:index) { 
     VCR.use_cassette("use_index") do
@@ -14,17 +13,18 @@ RSpec.describe Pinecone::Vector do
       index.upsert(data)
     }      
 
-    describe "successfull response" do
+    describe "successful response" do
       let(:response) {
         index.upsert(data)
       }  
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
         expect(response.parsed_response).to eq({"upsertedCount"=>1})
       end
     end
 
-    describe "unsuccessfull response" do
+    describe "unsuccessful response" do
       let(:response) {
         index.upsert("foo")
       } 
@@ -32,6 +32,22 @@ RSpec.describe Pinecone::Vector do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(400)
         expect(response.parsed_response).to eq(": Root element must be a message.")
+      end
+    end
+  end
+
+  describe "#delete", :vcr do
+    let(:data) { { vectors: [{ values: [1, 2, 3], id: "5" }] } }
+
+    describe "successful response" do
+      let(:response) {
+        index.delete(ids: ["5"])
+      }
+
+      it "returns a response" do
+        index.upsert(data)
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
       end
     end
   end
@@ -46,7 +62,7 @@ RSpec.describe Pinecone::Vector do
     } }
     let(:query_vector) { [0.5, -0.5, 0] }     
 
-    describe "successfull response" do
+    describe "successful response" do
       before do
         index.upsert(data)
       end
