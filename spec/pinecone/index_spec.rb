@@ -83,7 +83,7 @@ RSpec.describe Pinecone::Index do
   end
 
   describe "#delete", :vcr do
-    let(:index_name) { "example-index" }
+    let(:index_name) { "test-index" }
 
     before do
       client.create({

@@ -12,6 +12,16 @@ module Pinecone
       }
     end
 
+    def delete(namespace: "", ids: [], delete_all: false)
+      inputs = {
+        "namespace": namespace,
+        "ids": ids,
+        "deleteAll": delete_all,
+      }.to_json
+      payload = options.merge(body: inputs)
+      self.class.post('/vectors/delete', payload)
+    end
+
     def upsert(body)
       payload = options.merge(body: body.to_json)
       self.class.post('/vectors/upsert', payload)

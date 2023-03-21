@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://example-index-b2e8921.svc.us-east1-gcp.pinecone.io/vectors/upsert
+    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
       string: '{"vectors":[{"values":[1,2,3],"id":"1"},{"values":[0,1,-1],"id":"2"},{"values":[1,-1,0],"id":"3"}]}'
@@ -25,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Feb 2023 19:07:21 GMT
+      - Tue, 21 Mar 2023 01:07:27 GMT
       X-Envoy-Upstream-Service-Time:
-      - '50'
+      - '87'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -37,13 +37,13 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":3}'
-  recorded_at: Fri, 24 Feb 2023 19:07:21 GMT
+  recorded_at: Tue, 21 Mar 2023 01:07:27 GMT
 - request:
     method: post
-    uri: https://example-index-b2e8921.svc.us-east1-gcp.pinecone.io/query
+    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/query
     body:
       encoding: UTF-8
-      string: '{"includeValues":false,"includeMetadata":true,"topK":5,"vector":[0.5,-0.5,0]}'
+      string: '{"namespace":"","includeValues":false,"includeMetadata":true,"topK":10,"vector":[0.5,-0.5,0]}'
     headers:
       Content-Type:
       - application/json
@@ -63,7 +63,7 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Feb 2023 19:07:21 GMT
+      - Tue, 21 Mar 2023 01:07:27 GMT
       X-Envoy-Upstream-Service-Time:
       - '1'
       Grpc-Status:
@@ -75,5 +75,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"results":[],"matches":[{"id":"3","score":1,"values":[]},{"id":"2","score":-0.5,"values":[]},{"id":"1","score":-0.5,"values":[]}],"namespace":""}'
-  recorded_at: Fri, 24 Feb 2023 19:07:21 GMT
+  recorded_at: Tue, 21 Mar 2023 01:07:27 GMT
 recorded_with: VCR 6.1.0

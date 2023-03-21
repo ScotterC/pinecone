@@ -5,7 +5,7 @@ http_interactions:
     uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
     body:
       encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"test-index","dimension":3}'
+      string: '{"metric":"dotproduct","name":"example-index","dimension":3}'
     headers:
       Content-Type:
       - application/json
@@ -19,19 +19,21 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 201
-      message: Created
+      code: 409
+      message: Conflict
     headers:
+      Content-Type:
+      - text/plain; charset=UTF-8
       Date:
-      - Tue, 21 Mar 2023 01:08:17 GMT
+      - Tue, 21 Mar 2023 01:04:35 GMT
       X-Envoy-Upstream-Service-Time:
-      - '1474'
+      - '1709'
       Content-Length:
-      - '0'
+      - '34'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: ''
-  recorded_at: Tue, 21 Mar 2023 01:08:17 GMT
+      string: index example-index already exists
+  recorded_at: Tue, 21 Mar 2023 01:04:35 GMT
 recorded_with: VCR 6.1.0

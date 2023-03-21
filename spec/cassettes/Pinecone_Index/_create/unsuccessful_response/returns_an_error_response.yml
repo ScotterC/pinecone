@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://controller.us-east1-gcp.pinecone.io/databases
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
     body:
       encoding: UTF-8
       string: '{"metric":"dotproduct","name":"test-index","dimension":3}'
@@ -25,9 +25,9 @@ http_interactions:
       Content-Type:
       - text/plain; charset=UTF-8
       Date:
-      - Fri, 24 Feb 2023 15:56:55 GMT
+      - Tue, 21 Mar 2023 01:04:25 GMT
       X-Envoy-Upstream-Service-Time:
-      - '686'
+      - '1570'
       Content-Length:
       - '31'
       Server:
@@ -35,5 +35,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: index test-index already exists
-  recorded_at: Fri, 24 Feb 2023 15:56:55 GMT
+  recorded_at: Tue, 21 Mar 2023 01:04:25 GMT
 recorded_with: VCR 6.1.0
