@@ -22,6 +22,13 @@ module Pinecone
       self.class.post('/vectors/delete', payload)
     end
 
+    # This requires manually building the query string to unbundle ids
+    def fetch(namespace: "", ids: [])
+      ids_query_string = ids.map { |id| "ids=#{id}" }.join('&')
+      query_string = "namespace=#{namespace}&#{ids_query_string}"
+      self.class.get("/vectors/fetch?#{query_string}", options)
+    end
+
     def upsert(body)
       payload = options.merge(body: body.to_json)
       self.class.post('/vectors/upsert', payload)

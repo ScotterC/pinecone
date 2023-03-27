@@ -89,6 +89,16 @@ Querying index with options
                          include_metadata: true)
 ```
 
+Fetching a vector from an index
+```ruby
+  pinecone = Pinecone::Client.new
+  index = pinecone.index("example-index")
+  index.fetch(
+    ids: ["1"], 
+    namespace: "example-namespace"
+  )
+```
+
 Deleting a vector from an index
 ```ruby
   pinecone = Pinecone::Client.new
@@ -106,6 +116,8 @@ Vector
 
 - Upsert
 - Query
+- Fetch
+- Delete
 
 Index
 
@@ -119,7 +131,6 @@ Index
 - Add filter, sparse vector and id options to query request
 - Add functionality for
   - POST Describe Index Stats
-  - GET Fetch Vectors
   - POST Update Vectors
   - GET list_collections
   - POST create_collection

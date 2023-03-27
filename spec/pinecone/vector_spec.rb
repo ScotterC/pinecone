@@ -52,6 +52,35 @@ RSpec.describe Pinecone::Vector do
     end
   end
 
+  describe "#fetch", :vcr do
+    describe "successful response" do
+      let(:response) {
+        index.fetch(ids: ["1", "2"])
+      }
+
+      it "returns a response" do
+        index.upsert({ vectors: [{ values: [1, 2, 3], id: "1" }] })
+        index.upsert({ vectors: [{ values: [1, 2, 3], id: "2" }] })
+
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response).to eq({
+          "namespace" => "",
+          "vectors" => {
+            "1" => {
+              "id" => "1",
+              "values" => [1, 2, 3]
+            },
+            "2" => {
+              "id" => "2",
+              "values" => [1, 2, 3]
+            }
+          }
+        })
+      end
+    end
+  end
+
   describe "#query", :vcr do
     let(:data) { { 
       vectors: [
