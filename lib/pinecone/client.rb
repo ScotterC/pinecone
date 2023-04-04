@@ -18,6 +18,22 @@ module Pinecone
       Pinecone::Index.new.delete(index_name)
     end
 
+    def list_collections
+      Pinecone::Collection.new.list
+    end
+
+    def describe_collection(collection_name)
+      Pinecone::Collection.new.describe(collection_name)
+    end
+
+    def create_collection(body)
+      Pinecone::Collection.new.create(body)
+    end
+
+    def delete_collection(collection_name)
+      Pinecone::Collection.new.delete(collection_name)
+    end
+
     # This is a very confusing naming convention
     def index(index_name)
       @index ||= Pinecone::Vector.new(index_name)

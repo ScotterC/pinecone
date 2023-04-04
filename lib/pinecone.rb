@@ -3,6 +3,7 @@ require "httparty"
 require "pinecone/client"
 require "pinecone/index"
 require "pinecone/vector"
+require "pinecone/collection"
 require "pinecone/version"
 
 module Pinecone
@@ -48,46 +49,3 @@ module Pinecone
     yield(configuration)
   end
 end
-
-# Vector Operations
-
-# # GET Describe Index Stats
-# https://index_name-project_id.svc.environment.pinecone.io/describe_index_stats
-
-# # POST Describe Index Stats
-# https://index_name-project_id.svc.environment.pinecone.io/describe_index_stats
-
-# # DELETE Delete Vectors
-# https://index_name-project_id.svc.environment.pinecone.io/vectors/delete
-
-# # POST Delete Vectors
-# # The Delete operation deletes vectors, by id, from a single namespace.
-# https://index_name-project_id.svc.environment.pinecone.io/vectors/delete
-
-# # GET Fetch
-# # The Fetch operation looks up and returns vectors, by ID, from a single namespace.
-# https://index_name-project_id.svc.environment.pinecone.io/vectors/fetch
-
-# # POST Update
-# # The Update operation updates vector in a namespace.
-# # If a value is included, it will overwrite the previous value.
-# https://index_name-project_id.svc.environment.pinecone.io/vectors/update
-
-# # GET list_collections
-# https://controller.unknown.pinecone.io/collections
-
-# POST create_collection
-
-# GET describe_collection
-
-# DELETE delete_collection
-
-# GET list_indexes
-
-# POST create_index
-
-# GET describe_index
-
-# DELETEdelete_index
-
-# Patch configure_index

@@ -20,6 +20,7 @@ RSpec.describe Pinecone::Index do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
         expect(response.parsed_response).to be_a(Array)
+        expect(response.parsed_response).to include("test-index")
       end
     end
   end

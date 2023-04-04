@@ -1,6 +1,6 @@
 # Pinecone Ruby Client
 
-Note: This is currently minimal functionality of the Pinecone API. Pull requests to fill out the gem are welcome.
+This is most of the Pinecone API functionality and fully tested. Please see #TODO section for the endpoints that aren't fully fleshed out yet. Contributions are welcome!
 
 ## Installation
 
@@ -110,21 +110,34 @@ Deleting a vector from an index
   )
 ```
 
-## Supported Endpoints
+## Collection Operations
 
-Vector 
+Creating a collection
+```ruby
+  pinecone = Pinecone::Client.new
+  pinecone.create_collection({
+    name: "example-collection", 
+    source: "example-index"
+  })
+```
 
-- Upsert
-- Query
-- Fetch
-- Delete
+List collections
+```ruby
+  pinecone = Pinecone::Client.new
+  pinecone.list_collections
+```
 
-Index
+Describe a collection
+```ruby
+  pinecone = Pinecone::Client.new
+  pinecone.describe_collection("example-collection")
+```
 
-- List Indexes
-- Describe Index
-- Create Index
-- Delete Index
+Delete a collection
+```ruby
+  pinecone = Pinecone::Client.new
+  pinecone.delete_collection("example-collection")
+```
 
 ## TODO
 
@@ -132,8 +145,14 @@ Index
 - Add functionality for
   - POST Describe Index Stats
   - POST Update Vectors
-  - GET list_collections
-  - POST create_collection
-  - GET describe_collection
-  - DELETE delete_collection
   - Patch configure_index
+
+## Contributing
+
+Contributions welcome!
+
+- Clone the repo locally
+- `bundle` to install gems
+- run tests with `rspec`
+- `mv .env.copy .env` and add Pinecone API Key if developing a new endpoint or modifying existing ones
+  - to disable VCR and hit real endpoints, `NO_VCR=true rspec`

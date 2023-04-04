@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/collections
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 04 Apr 2023 00:18:27 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '18'
+      Content-Length:
+      - '20'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '["testing-06be060"]
+
+        '
+  recorded_at: Tue, 04 Apr 2023 00:18:27 GMT
+recorded_with: VCR 6.1.0

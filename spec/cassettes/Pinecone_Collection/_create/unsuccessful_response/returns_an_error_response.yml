@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/collections
+    body:
+      encoding: UTF-8
+      string: '{"name":"test-collection","source":"example-index"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Tue, 04 Apr 2023 00:18:27 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '57'
+      Content-Length:
+      - '49'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: collection request test-collection already exists
+  recorded_at: Tue, 04 Apr 2023 00:18:28 GMT
+recorded_with: VCR 6.1.0
