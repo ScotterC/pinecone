@@ -98,31 +98,48 @@ RSpec.describe Pinecone::Vector do
 
       let(:response) {
         index.query(vector: query_vector)
-      } 
+      }
+
+      let(:query_object) {
+        Pinecone::Vector::Query.new(vector: query_vector)
+      }
+
+      let(:response_with_object) {
+        index.query(query_object)
+      }
+
+      let(:valid_result) {
+        {
+          "results" => [],
+          "matches" => [
+            {
+                "id" => "3",
+                "score" => 1,
+                "values" => []
+            },
+            {
+                "id" => "2",
+                "score" => -0.5,
+                "values" => []
+            },
+            {
+                "id" => "1",
+                "score" => -0.5,
+                "values" => []
+            }
+          ],
+          "namespace" => ""
+        }
+      }
   
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
-        expect(response.parsed_response).to eq({
-              "results" => [],
-              "matches" => [
-                {
-                        "id" => "3",
-                    "score" => 1,
-                    "values" => []
-                },
-                {
-                        "id" => "2",
-                    "score" => -0.5,
-                    "values" => []
-                },
-                {
-                        "id" => "1",
-                    "score" => -0.5,
-                    "values" => []
-                }
-            ],
-            "namespace" => ""
-        })
+        expect(response.parsed_response).to eq(valid_result)
+      end
+
+      it "returns a response when queried with object" do
+        expect(response_with_object).to be_a(HTTParty::Response)
+        expect(response_with_object.parsed_response).to eq(valid_result)        
       end
     end
 
@@ -141,17 +158,17 @@ RSpec.describe Pinecone::Vector do
           "results" => [],
           "matches" => [
             {
-                    "id" => "3",
+                "id" => "3",
                 "score" => 1,
                 "values" => []
             },
             {
-                    "id" => "2",
+                "id" => "2",
                 "score" => -0.5,
                 "values" => []
             },
             {
-                    "id" => "1",
+                "id" => "1",
                 "score" => -0.5,
                 "values" => []
             }

@@ -48,6 +48,7 @@ pinecone.delete_index("example-index")
 ## Vector Operations
 
 Adding vectors to an existing index
+
 ```ruby
 pinecone = Pinecone::Client.new
 index = pinecone.index("example-index")
@@ -110,6 +111,71 @@ Deleting a vector from an index
   )
 ```
 
+### Filtering queries
+
+Add a `filter` option to apply filters to your query. You can use vector metadata to limit your search. See [metadata filtering](https://www.pinecone.io/docs/metadata-filtering/) in Pinecode documentation.
+
+```ruby
+  pinecone = Pinecone::Client.new
+  index = pinecone.index("example-index")
+  embedding = [0.0, -0.2, 0.4]
+  response = index.query(
+    vector: embedding,
+    filter: {
+      "genre": "comedy"
+    }
+  )
+```
+
+Metadata filters can be combined with AND and OR. Other operators are also supported.
+
+```ruby
+{ "$and": [{ "genre": "comedy" }, { "actor": "Brad Pitt" }] } # Genre is 'comedy' and actor is 'Brad Pitt'
+{ "$or": [{ "genre": "comedy" }, { "genre": "action" }] } # Genre is 'comedy' or 'action'
+{ "genre": { "$eq": "comedy" }} # Genre is 'comedy'
+{ "favorite": { "$eq": true }} # Is a favorite
+{ "genre": { "$ne": "comedy" }} # Genre is not 'comedy'
+{ "favorite": { "$ne": true }} # Is not a favorite
+{ "genre": { "$in": ["comedy", "action"] }} # Genre is in the specified values
+{ "genre": { "$nin": ["comedy", "action"] }} # Genre is not in the specified values
+{ "$gt": 1 }
+{ "$gte": 0.5 }
+{ "$lt": -0.5 }
+{ "$lte": -1 }
+```
+
+Specifying an invalid filter raises `ArgumentError` with an error message.
+
+### Sparse Vectors
+
+```ruby
+  pinecone = Pinecone::Client.new
+  index = pinecone.index("example-index")
+  embedding = [0.0, -0.2, 0.4]
+  response = index.query(
+    vector: embedding,
+    sparse_vector: {
+      indices: [10, 20, 30],
+      values: [0, 0.5, -1]
+    }
+  )
+```
+
+The length of indices and values must match.
+
+### Query by ID
+
+```ruby
+  pinecone = Pinecone::Client.new
+  index = pinecone.index("example-index")
+  embedding = [0.0, -0.2, 0.4]
+  response = index.query(
+    id: "vector1"
+  )
+```
+
+Either `vector` or `id` can be supplied as a query parameter, not both. This constraint is validated.
+
 ## Collection Operations
 
 Creating a collection
@@ -141,11 +207,11 @@ Delete a collection
 
 ## TODO
 
-- Add filter, sparse vector and id options to query request
-- Add functionality for
-  - POST Describe Index Stats
-  - POST Update Vectors
-  - Patch configure_index
+- [x] Add filter, sparse vector and id options to query request
+- [ ] Add functionality for
+  - [ ] POST Describe Index Stats
+  - [ ] POST Update Vectors
+  - [ ] Patch configure_index
 
 ## Contributing
 

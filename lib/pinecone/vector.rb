@@ -1,3 +1,7 @@
+require "pinecone/vector/query"
+require "pinecone/vector/filter"
+require "pinecone/vector/sparse_vector"
+
 module Pinecone
   class Vector
     include HTTParty
@@ -22,10 +26,8 @@ module Pinecone
       self.class.post('/vectors/delete', payload)
     end
 
-    # This requires manually building the query string to unbundle ids
     def fetch(namespace: "", ids: [])
-      ids_query_string = ids.map { |id| "ids=#{id}" }.join('&')
-      query_string = "namespace=#{namespace}&#{ids_query_string}"
+      query_string = URI.encode_www_form({ namespace: namespace, ids: ids})
       self.class.get("/vectors/fetch?#{query_string}", options)
     end
 
@@ -34,15 +36,9 @@ module Pinecone
       self.class.post('/vectors/upsert', payload)
     end
 
-    def query(namespace: "", vector:, top_k: 10, include_values: false, include_metadata: true)
-      inputs = {
-        "namespace": namespace,
-        "includeValues": include_values,
-        "includeMetadata": include_metadata,
-        "topK": top_k,
-        "vector": vector,
-      }.to_json
-      payload = options.merge(body: inputs)
+    def query(query)
+      object = query.is_a?(Pinecone::Vector::Query) ? query : Pinecone::Vector::Query.new(query)
+      payload = options.merge(body: object.to_json)
       self.class.post('/query', payload)
     end
     
