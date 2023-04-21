@@ -52,9 +52,8 @@ Adding vectors to an existing index
 pinecone = Pinecone::Client.new
 index = pinecone.index("example-index")
 
-# Note, options are currently hardcoded in this method
 index.upsert(
-  vectors: {
+  vectors: [{
     id: "1",
     metadata: {
       key: value
@@ -65,7 +64,7 @@ index.upsert(
       0.2,
       0.0
     ]
-  }
+  }]
 )
 ```
 
