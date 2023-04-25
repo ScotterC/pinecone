@@ -9,4 +9,14 @@ Gem::Specification.new do |s|
   s.homepage    = "https://rubygems.org/gems/pinecone"
   s.metadata    = {"source_code_uri" => "https://github.com/ScotterC/pinecone"}
   s.license     = "MIT"
+
+  s.add_dependency "httparty", "~> 0.21.0"
+
+  s.add_development_dependency "dotenv", "~> 2.8"
+  s.add_development_dependency "awesome_print"
+  s.add_development_dependency "rake", "~> 13.0"
+  s.add_development_dependency "debug", "~> 1.7"
+  s.add_development_dependency "rspec", "~> 3.12"
+  s.add_development_dependency "webmock", "~> 3.14"
+  s.add_development_dependency "vcr", "~> 6.1"
 end
