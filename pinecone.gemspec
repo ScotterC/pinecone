@@ -1,6 +1,8 @@
+require_relative "lib/pinecone/version"
+
 Gem::Specification.new do |s|
   s.name        = "pinecone"
-  s.version     = "0.1.2"
+  s.version     = Pinecone::VERSION
   s.summary     = "Ruby client library for Pinecone Vector DB"
   s.description = "Ruby client library which includes index and vector operations to upload embeddings into Pinecone and do similarity searches on them."
   s.authors     = ["Scott Carleton"]
@@ -13,7 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency "httparty", "~> 0.21.0"
 
   s.add_development_dependency "dotenv", "~> 2.8"
-  s.add_development_dependency "awesome_print"
+  s.add_development_dependency "awesome_print", '~> 1.9'
   s.add_development_dependency "rake", "~> 13.0"
   s.add_development_dependency "debug", "~> 1.7"
   s.add_development_dependency "rspec", "~> 3.12"
