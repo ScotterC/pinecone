@@ -49,6 +49,7 @@ module Pinecone
     def options
       {
         headers: @headers,
+        debug_output: $stdout
       }
     end
 
