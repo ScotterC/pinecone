@@ -4,6 +4,14 @@ require "spec_helper"
 
 module Pinecone
   RSpec.describe Vector::Filter do
+    describe "basic functionality" do
+      let(:filter) { described_class.new("genre": {"$eq": "comedy"}) }
+
+      it "does not raise error with valid filter" do
+        expect{ filter }.not_to raise_error
+      end
+    end
+
     describe "Validations" do
       context "when $and is specified" do
         let(:filter) { described_class.new("$and": [{ "genre": "comedy" }, { "genre": "drama" }]) }

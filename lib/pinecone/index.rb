@@ -28,6 +28,11 @@ module Pinecone
       self.class.delete("/databases/#{index_name}", options)
     end
 
+    def configure(index_name, body)
+      payload = options.merge(body: body.to_json)
+      self.class.patch("/databases/#{index_name}", payload)
+    end
+
     def options
       {
         headers: @headers,

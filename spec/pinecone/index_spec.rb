@@ -106,4 +106,20 @@ RSpec.describe Pinecone::Index do
       end
     end
   end
+
+  describe "#configure_index", :vcr do
+    let(:index_name) { "example-index" }
+
+    let(:response) {
+      client.configure(index_name, replicas: 2)
+    }
+
+    describe "successful response" do
+      it "returns a 200 that it's been updated" do
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(202)
+        expect(response.parsed_response).to be_nil
+      end
+    end
+  end
 end

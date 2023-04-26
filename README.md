@@ -1,6 +1,6 @@
 # Pinecone Ruby Client
 
-This is most of the Pinecone API functionality and fully tested. Please see #TODO section for the endpoints that aren't fully fleshed out yet. Contributions are welcome!
+This is the complete Pinecone API and fully tested. Bug reports and contributions are welcome! Also, if you're interested in being a fellow maintainer, let me know.
 
 ## Installation
 
@@ -45,6 +45,15 @@ Delete Index
 pinecone.delete_index("example-index")
 ```
 
+Scale replicas
+```ruby
+new_number_of_replicas = 4
+pinecone.configure_index("example-index", {
+  replicas: new_number_of_replicas
+  pod_type: "s1.x1"
+})
+```
+
 ## Vector Operations
 
 Adding vectors to an existing index
@@ -71,55 +80,66 @@ index.upsert(
 
 Querying index with a vector
 ```ruby
-  pinecone = Pinecone::Client.new
-  index = pinecone.index("example-index")
-  embedding = [0.0, -0.2, 0.4]
-  response = index.query(vector: embedding)
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+embedding = [0.0, -0.2, 0.4]
+response = index.query(vector: embedding)
 ```
 
 Querying index with options
 ```ruby
-  pinecone = Pinecone::Client.new
-  index = pinecone.index("example-index")
-  embedding = [0.0, -0.2, 0.4]
-  response = index.query(vector: embedding, 
-                         namespace: "example-namespace",
-                         top_k: 10,
-                         include_values: false,
-                         include_metadata: true)
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+embedding = [0.0, -0.2, 0.4]
+response = index.query(vector: embedding, 
+                        namespace: "example-namespace",
+                        top_k: 10,
+                        include_values: false,
+                        include_metadata: true)
 ```
 
 Fetching a vector from an index
 ```ruby
-  pinecone = Pinecone::Client.new
-  index = pinecone.index("example-index")
-  index.fetch(
-    ids: ["1"], 
-    namespace: "example-namespace"
-  )
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+index.fetch(
+  ids: ["1"], 
+  namespace: "example-namespace"
+)
 ```
 
 Updating a vector in an index
 ```ruby
-  pinecone = Pinecone::Client.new
-  index = pinecone.index("example-index")
-  index.update(
-    id: "1", 
-    values: [0.1, -0.2, 0.0],
-    set_metadata: { genre: "drama" },
-    namespace: "example-namespace"
-  )
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+index.update(
+  id: "1", 
+  values: [0.1, -0.2, 0.0],
+  set_metadata: { genre: "drama" },
+  namespace: "example-namespace"
+)
 ```
 
 Deleting a vector from an index
 ```ruby
-  pinecone = Pinecone::Client.new
-  index = pinecone.index("example-index")
-  index.delete(
-    ids: ["1"], 
-    namespace: "example-namespace", 
-    delete_all: false
-  )
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+index.delete(
+  ids: ["1"], 
+  namespace: "example-namespace", 
+  delete_all: false
+)
+```
+
+Describe index statistics. Can be filtered - see Filtering queries
+```ruby
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+index.describe_index_stats(
+  filter: {
+    "genre": { "$eq": "comedy" }
+  }
+)
 ```
 
 ### Filtering queries
@@ -127,15 +147,15 @@ Deleting a vector from an index
 Add a `filter` option to apply filters to your query. You can use vector metadata to limit your search. See [metadata filtering](https://www.pinecone.io/docs/metadata-filtering/) in Pinecode documentation.
 
 ```ruby
-  pinecone = Pinecone::Client.new
-  index = pinecone.index("example-index")
-  embedding = [0.0, -0.2, 0.4]
-  response = index.query(
-    vector: embedding,
-    filter: {
-      "genre": "comedy"
-    }
-  )
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+embedding = [0.0, -0.2, 0.4]
+response = index.query(
+  vector: embedding,
+  filter: {
+    "genre": { "$eq": "comedy" }
+  }
+)
 ```
 
 Metadata filters can be combined with AND and OR. Other operators are also supported.
@@ -160,16 +180,16 @@ Specifying an invalid filter raises `ArgumentError` with an error message.
 ### Sparse Vectors
 
 ```ruby
-  pinecone = Pinecone::Client.new
-  index = pinecone.index("example-index")
-  embedding = [0.0, -0.2, 0.4]
-  response = index.query(
-    vector: embedding,
-    sparse_vector: {
-      indices: [10, 20, 30],
-      values: [0, 0.5, -1]
-    }
-  )
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+embedding = [0.0, -0.2, 0.4]
+response = index.query(
+  vector: embedding,
+  sparse_vector: {
+    indices: [10, 20, 30],
+    values: [0, 0.5, -1]
+  }
+)
 ```
 
 The length of indices and values must match.
@@ -177,12 +197,12 @@ The length of indices and values must match.
 ### Query by ID
 
 ```ruby
-  pinecone = Pinecone::Client.new
-  index = pinecone.index("example-index")
-  embedding = [0.0, -0.2, 0.4]
-  response = index.query(
-    id: "vector1"
-  )
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+embedding = [0.0, -0.2, 0.4]
+response = index.query(
+  id: "vector1"
+)
 ```
 
 Either `vector` or `id` can be supplied as a query parameter, not both. This constraint is validated.
@@ -191,37 +211,27 @@ Either `vector` or `id` can be supplied as a query parameter, not both. This con
 
 Creating a collection
 ```ruby
-  pinecone = Pinecone::Client.new
-  pinecone.create_collection({
-    name: "example-collection", 
-    source: "example-index"
-  })
+pinecone = Pinecone::Client.new
+pinecone.create_collection({
+  name: "example-collection", 
+  source: "example-index"
+})
 ```
 
 List collections
 ```ruby
-  pinecone = Pinecone::Client.new
-  pinecone.list_collections
+pinecone.list_collections
 ```
 
 Describe a collection
 ```ruby
-  pinecone = Pinecone::Client.new
-  pinecone.describe_collection("example-collection")
+pinecone.describe_collection("example-collection")
 ```
 
 Delete a collection
 ```ruby
-  pinecone = Pinecone::Client.new
-  pinecone.delete_collection("example-collection")
+pinecone.delete_collection("example-collection")
 ```
-
-## TODO
-
-- [x] Add filter, sparse vector and id options to query request
-- [ ] Add functionality for
-  - [ ] POST Describe Index Stats
-  - [ ] Patch configure_index
 
 ## Contributing
 
@@ -232,3 +242,8 @@ Contributions welcome!
 - run tests with `rspec`
 - `mv .env.copy .env` and add Pinecone API Key if developing a new endpoint or modifying existing ones
   - to disable VCR and hit real endpoints, `NO_VCR=true rspec`
+- To setup cloud indexes when writing new tests `ruby spec/support/setup.rb start` and `stop` to delete them
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

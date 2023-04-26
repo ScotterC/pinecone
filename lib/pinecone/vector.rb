@@ -55,6 +55,15 @@ module Pinecone
       self.class.post('/vectors/update', payload)
     end
 
+    def describe_index_stats(filter: {})
+      payload = if filter.empty?
+        options
+      else
+        options.merge(body: {filter: filter}.to_json)
+      end
+      self.class.post('/describe_index_stats', payload)
+    end
+
 
     def options
       {
