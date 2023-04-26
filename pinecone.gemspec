@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description = "Ruby client library which includes index and vector operations to upload embeddings into Pinecone and do similarity searches on them."
   s.authors     = ["Scott Carleton"]
   s.email       = "scott@extrayarn.com"
-  s.files       = Dir["lib/pinecone.rb", "lib/pinecone/*.rb"]
+  s.files       = Dir["lib/pinecone.rb", "lib/pinecone/**/*.rb"]
   s.homepage    = "https://rubygems.org/gems/pinecone"
   s.metadata    = {"source_code_uri" => "https://github.com/ScotterC/pinecone"}
   s.license     = "MIT"
