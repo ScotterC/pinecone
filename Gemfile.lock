@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    pinecone (0.1.4)
+    pinecone (0.1.5)
       dry-struct (~> 1.5.0)
-      dry-validation
+      dry-validation (~> 1.9.0)
       httparty (~> 0.21.0)
 
 GEM
