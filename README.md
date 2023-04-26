@@ -155,7 +155,6 @@ Delete a collection
 - Add filter, sparse vector and id options to query request
 - Add functionality for
   - POST Describe Index Stats
-  - POST Update Vectors
   - Patch configure_index
 
 ## Contributing
