@@ -45,7 +45,21 @@ module Pinecone
       payload = options.merge(body: inputs)
       self.class.post('/query', payload)
     end
-    
+
+    def update(id:, values: [], sparse_values: {indices: [], values: []}, set_metadata: {}, namespace: "")
+      inputs = {
+        "id": id
+      }
+      inputs["values"] = values unless values.empty?
+      inputs["sparseValues"] = sparse_values unless sparse_values[:indices].empty? || sparse_values[:values].empty?
+      inputs["setMetadata"] = set_metadata unless set_metadata.empty?
+      inputs["namespace"] = namespace unless namespace.empty?
+
+      payload = options.merge(body: inputs.to_json)
+      self.class.post('/vectors/update', payload)
+    end
+
+
     def options
       {
         headers: @headers,

@@ -98,6 +98,18 @@ Fetching a vector from an index
   )
 ```
 
+Updating a vector in an index
+```ruby
+  pinecone = Pinecone::Client.new
+  index = pinecone.index("example-index")
+  index.update(
+    id: "1", 
+    values: [0.1, -0.2, 0.0],
+    set_metadata: { genre: "drama" },
+    namespace: "example-namespace"
+  )
+```
+
 Deleting a vector from an index
 ```ruby
   pinecone = Pinecone::Client.new
@@ -143,7 +155,6 @@ Delete a collection
 - Add filter, sparse vector and id options to query request
 - Add functionality for
   - POST Describe Index Stats
-  - POST Update Vectors
   - Patch configure_index
 
 ## Contributing

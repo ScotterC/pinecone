@@ -25,17 +25,17 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Tue, 21 Mar 2023 01:04:32 GMT
+      - Wed, 26 Apr 2023 13:53:51 GMT
       X-Envoy-Upstream-Service-Time:
-      - '4'
+      - '6'
       Content-Length:
-      - '281'
+      - '263'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"database":{"name":"example-index","metric":"dotproduct","dimension":3,"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1"},"status":{"waiting":["database"],"crashed":[],"host":"example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","port":433,"state":"Initializing","ready":false}}
+      string: '{"database":{"name":"example-index","metric":"dotproduct","dimension":3,"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1"},"status":{"waiting":[],"crashed":[],"host":"example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","port":433,"state":"Ready","ready":true}}
 
         '
-  recorded_at: Tue, 21 Mar 2023 01:04:32 GMT
+  recorded_at: Wed, 26 Apr 2023 13:53:51 GMT
 recorded_with: VCR 6.1.0

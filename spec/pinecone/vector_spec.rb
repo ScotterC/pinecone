@@ -81,6 +81,22 @@ RSpec.describe Pinecone::Vector do
     end
   end
 
+  describe "#update", :vcr do
+    describe "successful response" do
+      let(:response) {
+        index.update(id: "1", values: [1, 0, 3], set_metadata: { genre: "drama" })
+      }
+
+      it "returns a response" do
+        index.upsert({ vectors: [{ values: [1, 2, 3], id: "1" }] })
+
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response).to eq({})
+      end
+    end
+  end
+
   describe "#query", :vcr do
     let(:data) { { 
       vectors: [
