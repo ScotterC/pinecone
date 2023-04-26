@@ -34,7 +34,10 @@ module Pinecone
       attribute :include_metadata, Dry::Types['bool'].default(true)
       attribute :top_k, Dry::Types['integer'].default(10)
       attribute? :vector, Dry::Types['array'].of(Dry::Types['float'] | Dry::Types['integer'])
-      attribute? :filter, Filter
+      # Disabled contract since it wasn't carrying forward attributes to to_json
+      # See failing test in query_spec.rb
+      # attribute? :filter, Filter 
+      attribute? :filter, Dry::Types['hash']
       attribute? :sparse_vector, SparseVector
       attribute? :id, Dry::Types['string']
 

@@ -1,11 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: get
+    method: patch
     uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/example-index
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"replicas":2}'
     headers:
       Content-Type:
       - application/json
@@ -19,23 +19,19 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 200
-      message: OK
+      code: 202
+      message: Accepted
     headers:
-      Content-Type:
-      - application/json; charset=UTF-8
       Date:
-      - Wed, 26 Apr 2023 15:52:39 GMT
+      - Wed, 26 Apr 2023 14:42:57 GMT
       X-Envoy-Upstream-Service-Time:
-      - '4'
+      - '1058'
       Content-Length:
-      - '263'
+      - '0'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"database":{"name":"example-index","metric":"dotproduct","dimension":3,"replicas":2,"shards":1,"pods":2,"pod_type":"p1.x1"},"status":{"waiting":[],"crashed":[],"host":"example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","port":433,"state":"Ready","ready":true}}
-
-        '
-  recorded_at: Wed, 26 Apr 2023 15:52:39 GMT
+      string: ''
+  recorded_at: Wed, 26 Apr 2023 14:42:57 GMT
 recorded_with: VCR 6.1.0

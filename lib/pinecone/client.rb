@@ -18,6 +18,10 @@ module Pinecone
       Pinecone::Index.new.delete(index_name)
     end
 
+    def configure_index(index_name, body)
+      Pinecone::Index.new.configure(index_name, body)
+    end
+
     def list_collections
       Pinecone::Collection.new.list
     end

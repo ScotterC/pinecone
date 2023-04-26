@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/describe_index_stats
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 26 Apr 2023 14:46:38 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '1'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '90'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"namespaces":{"":{"vectorCount":3}},"dimension":3,"indexFullness":0,"totalVectorCount":3}'
+  recorded_at: Wed, 26 Apr 2023 14:46:38 GMT
+recorded_with: VCR 6.1.0

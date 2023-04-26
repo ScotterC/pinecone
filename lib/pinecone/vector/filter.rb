@@ -13,7 +13,7 @@ end
 
 module Pinecone
   class Vector
-    class Filter < Hash
+    class Filter < Dry::Struct
       class FilterContract < Dry::Validation::Contract
         schema do
           optional(:$and).filled(:array)

@@ -157,6 +157,17 @@ RSpec.describe Pinecone::Vector do
         expect(response_with_object).to be_a(HTTParty::Response)
         expect(response_with_object.parsed_response).to eq(valid_result)        
       end
+
+      describe "with filter" do
+        let(:filter) { { "genre": { "$eq": "comedy"} } }
+        let(:response) { index.query(vector: query_vector, filter: filter) }
+
+        it "returns a response" do
+          expect(response).to be_a(HTTParty::Response)
+          expect(response.code).to eq(200)
+          expect(response.parsed_response).to eq(valid_result)
+        end
+      end
     end
 
     describe "with namespace" do
@@ -203,4 +214,37 @@ RSpec.describe Pinecone::Vector do
     end
   end
 
+  describe "#describe_index_stats", :vcr do
+    let(:response) {
+      index.describe_index_stats
+    }
+
+    it "returns a successful response" do
+      expect(response).to be_a(HTTParty::Response)
+      expect(response.code).to eq(200)
+      expect(response.parsed_response).to eq({
+        "namespaces"=>{""=>{"vectorCount"=>3}}, 
+        "dimension"=>3, 
+        "indexFullness"=>0, 
+        "totalVectorCount"=>3
+      })
+    end
+
+    describe "with filter" do
+      let(:filter) { { "genre": { "$eq": "comedy"} } }
+      let(:response) {
+        index.describe_index_stats(filter: filter)
+      }
+      it "returns a succesful response" do
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response).to eq({
+          "namespaces"=>{}, 
+          "dimension"=>3, 
+          "indexFullness"=>0, 
+          "totalVectorCount"=>3
+        })
+      end
+    end
+  end
 end
