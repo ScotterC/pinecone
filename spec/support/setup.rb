@@ -1,3 +1,11 @@
+# Usage
+#
+# Creates an example test index
+# ruby spec/support/setup.rb start
+#
+# Deletes test index
+# ruby spec/support/setup.rb stop 
+
 require 'bundler/setup'
 Bundler.setup
 require "dotenv/load"
