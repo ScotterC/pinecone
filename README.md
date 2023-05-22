@@ -63,12 +63,12 @@ pinecone = Pinecone::Client.new
 index = pinecone.index("example-index")
 
 index.upsert(
+  namespace: "example-namespace",
   vectors: [{
     id: "1",
     metadata: {
       key: value
     },
-    namespace: "example-namespace",
     values: [
       0.1,
       0.2,
