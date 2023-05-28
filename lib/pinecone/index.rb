@@ -12,25 +12,25 @@ module Pinecone
     end
 
     def list
-      self.class.get('/databases', options)
+      self.class.get("#{@base_uri}/databases", options)
     end
 
     def describe(index_name)
-      self.class.get("/databases/#{index_name}", options)
+      self.class.get("#{@base_uri}/databases/#{index_name}", options)
     end
     
     def create(body)
       payload = options.merge(body: body.to_json)
-      self.class.post('/databases', payload)
+      self.class.post("#{@base_uri}/databases", payload)
     end
 
     def delete(index_name)
-      self.class.delete("/databases/#{index_name}", options)
+      self.class.delete("#{@base_uri}/databases/#{index_name}", options)
     end
 
     def configure(index_name, body)
       payload = options.merge(body: body.to_json)
-      self.class.patch("/databases/#{index_name}", payload)
+      self.class.patch("#{@base_uri}/databases/#{index_name}", payload)
     end
 
     def options

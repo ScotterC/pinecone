@@ -72,7 +72,7 @@ RSpec.describe Pinecone::Index do
           },
             "status" => {
               "crashed" => [],
-                 "host" => "test-index-b2e8921.svc.us-east1-gcp.pinecone.io",
+                 "host" => "test-index-b2e8921.svc.#{ENV['PINECONE_ENVIRONMENT']}.pinecone.io",
                  "port" => 433,
                 "ready" => true,
                 "state" => "Ready",

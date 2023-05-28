@@ -40,7 +40,7 @@ module Pinecone
 
     # This is a very confusing naming convention
     def index(index_name)
-      @index ||= Pinecone::Vector.new(index_name)
+      Pinecone::Vector.new(index_name)
     end
   end
 end

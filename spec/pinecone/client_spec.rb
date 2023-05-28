@@ -15,6 +15,28 @@ RSpec.describe Pinecone::Client do
     end
   end
 
+  describe "#index", :vcr do
+    let(:parsed_response_1) {
+      {"status" => {"host" => "example-index-1.svc.us-west4-gcp-free.pinecone.io"}}
+    }
+    let(:parsed_response_2) {
+      {"status" => {"host" => "example-index-2.svc.us-west4-gcp-free.pinecone.io"}}
+    }
+
+    it "allows multiple indices" do
+      response_1 = instance_double(HTTParty::Response, body: '', code: 200, parsed_response: parsed_response_1)
+      allow_any_instance_of(Pinecone::Index).to receive(:describe).and_return(response_1)
+      index_1 = client.index('example-index-1')
+
+      response_2 = instance_double(HTTParty::Response, body: '', code: 200, parsed_response: parsed_response_2)
+      allow_any_instance_of(Pinecone::Index).to receive(:describe).and_return(response_2)
+      index_2 = client.index('example-index-2')
+
+      expect(index_1.base_uri).to match(/example-index-1/)
+      expect(index_2.base_uri).to match(/example-index-2/)
+    end
+  end
+
   describe "#upsert", :vcr do
     let(:data) { { vectors: [{ values: [1, 2, 3], id: "1" }] } }
     let(:response) {
@@ -31,15 +53,6 @@ RSpec.describe Pinecone::Client do
         expect(response).to be_a(HTTParty::Response)
         expect(response.parsed_response).to eq({"upsertedCount"=>1})
       end
-    end
-  end
-
-  describe "#index" do
-    describe "supports multiple indices" do
-      index_1 = Pinecone::Client.new.index('example-index-1')
-      index_2 = Pinecone::Client.new.index('example-index-2')
-      expect(index_1.base_uri).to match(/example-index-1/)
-      expect(index_2.base_uri).to match(/example-index-2/)
     end
   end
 end
