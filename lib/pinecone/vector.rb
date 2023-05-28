@@ -6,6 +6,8 @@ module Pinecone
   class Vector
     include HTTParty
 
+    attr_reader :base_uri
+
     def initialize(index_name)
       @base_uri = set_base_uri(index_name)
 
@@ -23,23 +25,23 @@ module Pinecone
         "deleteAll": delete_all,
       }.to_json
       payload = options.merge(body: inputs)
-      self.class.post('/vectors/delete', payload)
+      self.class.post("#{@base_uri}/vectors/delete", payload)
     end
 
     def fetch(namespace: "", ids: [])
       query_string = URI.encode_www_form({ namespace: namespace, ids: ids})
-      self.class.get("/vectors/fetch?#{query_string}", options)
+      self.class.get("#{@base_uri}/vectors/fetch?#{query_string}", options)
     end
 
     def upsert(body)
       payload = options.merge(body: body.to_json)
-      self.class.post('/vectors/upsert', payload)
+      self.class.post("#{@base_uri}/vectors/upsert", payload)
     end
 
     def query(query)
       object = query.is_a?(Pinecone::Vector::Query) ? query : Pinecone::Vector::Query.new(query)
       payload = options.merge(body: object.to_json)
-      self.class.post('/query', payload)
+      self.class.post("#{@base_uri}/query", payload)
     end
 
     def update(id:, values: [], sparse_values: {indices: [], values: []}, set_metadata: {}, namespace: "")
@@ -52,7 +54,7 @@ module Pinecone
       inputs["namespace"] = namespace unless namespace.empty?
 
       payload = options.merge(body: inputs.to_json)
-      self.class.post('/vectors/update', payload)
+      self.class.post("#{@base_uri}/vectors/update", payload)
     end
 
     def describe_index_stats(filter: {})
@@ -61,7 +63,7 @@ module Pinecone
       else
         options.merge(body: {filter: filter}.to_json)
       end
-      self.class.post('/describe_index_stats', payload)
+      self.class.post("#{@base_uri}/describe_index_stats", payload)
     end
 
 

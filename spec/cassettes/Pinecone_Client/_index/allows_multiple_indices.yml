@@ -1,45 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://controller.us-east1-gcp.pinecone.io/databases
+    method: get
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/example-index-1
     body:
-      encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"example-index","dimension":3}'
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 201
-      message: Created
-    headers:
-      Date:
-      - Fri, 24 Feb 2023 19:03:18 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '898'
-      Content-Length:
-      - '0'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
+      encoding: US-ASCII
       string: ''
-  recorded_at: Fri, 24 Feb 2023 19:03:18 GMT
-- request:
-    method: post
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
-    body:
-      encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"example-index","dimension":3}'
     headers:
       Content-Type:
       - application/json
@@ -53,22 +19,57 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 400
-      message: Bad Request
+      code: 404
+      message: Not Found
     headers:
       Content-Type:
       - text/plain; charset=UTF-8
       Date:
-      - Sun, 28 May 2023 19:55:44 GMT
+      - Sun, 28 May 2023 20:11:23 GMT
       X-Envoy-Upstream-Service-Time:
-      - '1423'
+      - '3'
       Content-Length:
-      - '131'
+      - '14'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: The index exceeds the project quota of 1 pods by 1 pods. Upgrade your
-        account or change the project settings to increase the quota.
-  recorded_at: Sun, 28 May 2023 19:55:44 GMT
+      string: '404: Not Found'
+  recorded_at: Sun, 28 May 2023 20:11:23 GMT
+- request:
+    method: get
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/example-index
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - text/plain; charset=UTF-8
+      Date:
+      - Sun, 28 May 2023 20:11:59 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '5'
+      Content-Length:
+      - '14'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '404: Not Found'
+  recorded_at: Sun, 28 May 2023 20:11:59 GMT
 recorded_with: VCR 6.1.0

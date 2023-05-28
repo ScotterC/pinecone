@@ -3,7 +3,7 @@ module Pinecone
     include HTTParty
 
     def initialize
-      @base_uri = "https://controller.#{Pinecone.configuration.environment}.pinecone.io"
+      self.class.base_uri "https://controller.#{Pinecone.configuration.environment}.pinecone.io"
 
       @headers = {
         "Content-Type" => "application/json",
