@@ -7,7 +7,7 @@ module Pinecone
     include HTTParty
 
     def initialize(index_name)
-      @base_url = set_base_uri(index_name)
+      @base_uri = set_base_uri(index_name)
 
       @headers = {
         "Content-Type" => "application/json",
