@@ -17,10 +17,10 @@ Pinecone.configure do |config|
 end
 
 client = Pinecone::Index.new
-index_name = "example-index"
+indices = ["example-index-1", "example-index-2"]
 valid_attributes = {
   "metric": "dotproduct",
-  "name": index_name,
+  "name": "example-index-1",
   "dimension": 3,
 }
 
@@ -28,11 +28,16 @@ valid_attributes = {
 if ARGV.length == 1
   case ARGV[0].downcase
   when 'start'
-    puts "Setting up #{index_name}"
-    client.create(valid_attributes)
+    indices.each do |index_name|
+      puts "Setting up #{index_name}"
+      valid_attributes["name"] = index_name
+      client.create(valid_attributes)
+    end
   when 'stop'
-    puts "Deleting #{index_name}"
-    client.delete(index_name)
+    indices.each do |index_name|
+      puts "Deleting #{index_name}"
+      client.delete(index_name)
+    end
   else
     puts "Invalid argument. Use 'start' to create the index or 'stop' to delete the index."
   end
