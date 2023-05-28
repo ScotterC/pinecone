@@ -38,8 +38,8 @@ RSpec.describe Pinecone::Client do
     describe "supports multiple indices" do
       index_1 = Pinecone::Client.new.index('index-1')
       index_2 = Pinecone::Client.new.index('index-2')
-      expect(index_1.base_uri).to equal("https://controller.#{Pinecone.configuration.environment}.pinecone.io")
-      expect(index_2.base_uri).to equal("https://controller.#{Pinecone.configuration.environment}.pinecone.io")
+      expect(index_1.base_uri).to match(/index-1/)
+      expect(index_2.base_uri).to match(/index-2/)
     end
   end
 end
