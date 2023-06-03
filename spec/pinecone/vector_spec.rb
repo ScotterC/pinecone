@@ -53,7 +53,7 @@ RSpec.describe Pinecone::Vector do
 
     describe "successful response with filters" do
       let(:response) {
-        index.delete(filter: { "genre": "comedy"})
+        index.delete(filter: { genre: "comedy" })
       }
 
       it "returns a response" do
