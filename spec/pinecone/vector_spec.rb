@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe Pinecone::Vector do
-  let(:index) { 
+  let(:index) {
     VCR.use_cassette("use_index") do
-      Pinecone::Vector.new("example-index") 
+      Pinecone::Vector.new("example-index")
     end
   }
 
@@ -11,12 +11,12 @@ RSpec.describe Pinecone::Vector do
     let(:data) { { vectors: [{ values: [1, 2, 3], id: "1" }] } }
     let(:response) {
       index.upsert(data)
-    }      
+    }
 
     describe "successful response" do
       let(:response) {
         index.upsert(data)
-      }  
+      }
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
@@ -27,7 +27,7 @@ RSpec.describe Pinecone::Vector do
     describe "unsuccessful response" do
       let(:response) {
         index.upsert("foo")
-      } 
+      }
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(400)
@@ -42,6 +42,18 @@ RSpec.describe Pinecone::Vector do
     describe "successful response" do
       let(:response) {
         index.delete(ids: ["5"])
+      }
+
+      it "returns a response" do
+        index.upsert(data)
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+      end
+    end
+
+    describe "successful response with filters" do
+      let(:response) {
+        index.delete(filter: { genre: "comedy" })
       }
 
       it "returns a response" do
@@ -98,14 +110,14 @@ RSpec.describe Pinecone::Vector do
   end
 
   describe "#query", :vcr do
-    let(:data) { { 
+    let(:data) { {
       vectors: [
         { values: [1, 2, 3], id: "1" },
         { values: [0, 1, -1], id: "2" },
         { values: [1, -1, 0], id: "3" }
-      ] 
+      ]
     } }
-    let(:query_vector) { [0.5, -0.5, 0] }     
+    let(:query_vector) { [0.5, -0.5, 0] }
 
     describe "successful response" do
       before do
@@ -147,7 +159,7 @@ RSpec.describe Pinecone::Vector do
           "namespace" => ""
         }
       }
-  
+
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
         expect(response.parsed_response).to eq(valid_result)
@@ -155,7 +167,7 @@ RSpec.describe Pinecone::Vector do
 
       it "returns a response when queried with object" do
         expect(response_with_object).to be_a(HTTParty::Response)
-        expect(response_with_object.parsed_response).to eq(valid_result)        
+        expect(response_with_object.parsed_response).to eq(valid_result)
       end
 
       describe "with filter" do
@@ -223,9 +235,9 @@ RSpec.describe Pinecone::Vector do
       expect(response).to be_a(HTTParty::Response)
       expect(response.code).to eq(200)
       expect(response.parsed_response).to eq({
-        "namespaces"=>{""=>{"vectorCount"=>3}}, 
-        "dimension"=>3, 
-        "indexFullness"=>0, 
+        "namespaces"=>{""=>{"vectorCount"=>3}},
+        "dimension"=>3,
+        "indexFullness"=>0,
         "totalVectorCount"=>3
       })
     end
@@ -239,9 +251,9 @@ RSpec.describe Pinecone::Vector do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
         expect(response.parsed_response).to eq({
-          "namespaces"=>{}, 
-          "dimension"=>3, 
-          "indexFullness"=>0, 
+          "namespaces"=>{},
+          "dimension"=>3,
+          "indexFullness"=>0,
           "totalVectorCount"=>3
         })
       end
