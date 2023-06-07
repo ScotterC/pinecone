@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/example-index
+    uri: "<PINECONE_INDEX_NAME_1>"
     body:
       encoding: US-ASCII
       string: ''
@@ -25,17 +25,55 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Wed, 26 Apr 2023 15:52:39 GMT
+      - Wed, 07 Jun 2023 16:42:16 GMT
       X-Envoy-Upstream-Service-Time:
       - '4'
       Content-Length:
-      - '263'
+      - '267'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"database":{"name":"example-index","metric":"dotproduct","dimension":3,"replicas":2,"shards":1,"pods":2,"pod_type":"p1.x1"},"status":{"waiting":[],"crashed":[],"host":"example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","port":433,"state":"Ready","ready":true}}
+      string: '{"database":{"name":"example-index-1","metric":"dotproduct","dimension":3,"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1"},"status":{"waiting":[],"crashed":[],"host":"example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","port":433,"state":"Ready","ready":true}}
 
         '
-  recorded_at: Wed, 26 Apr 2023 15:52:39 GMT
+  recorded_at: Wed, 07 Jun 2023 16:42:16 GMT
+- request:
+    method: get
+    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/<PINECONE_INDEX_NAME_1>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 07 Jun 2023 16:42:56 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '4'
+      Content-Length:
+      - '267'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"database":{"name":"example-index-1","metric":"dotproduct","dimension":3,"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1"},"status":{"waiting":[],"crashed":[],"host":"example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","port":433,"state":"Ready","ready":true}}
+
+        '
+  recorded_at: Wed, 07 Jun 2023 16:42:56 GMT
 recorded_with: VCR 6.1.0

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 RSpec.describe Pinecone::Vector do
   let(:index) {
-    VCR.use_cassette("use_index") do
-      Pinecone::Vector.new("example-index")
+    VCR.use_cassette("use_index") do 
+      Pinecone::Vector.new("example-index-1")
     end
   }
 

@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<PINECONE_INDEX_NAME_1>"
+    body:
+      encoding: UTF-8
+      string: '{"vectors":[{"values":[1,2,3],"id":"5"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 07 Jun 2023 16:40:06 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '11'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '19'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"upsertedCount":1}'
+  recorded_at: Wed, 07 Jun 2023 16:40:07 GMT
+- request:
+    method: post
+    uri: "<PINECONE_INDEX_NAME_1>"
+    body:
+      encoding: UTF-8
+      string: '{"namespace":"","ids":[],"deleteAll":false,"filter":{"genre":"comedy"}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 07 Jun 2023 16:40:06 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '9'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '2'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: "{}"
+  recorded_at: Wed, 07 Jun 2023 16:40:07 GMT
+recorded_with: VCR 6.1.0

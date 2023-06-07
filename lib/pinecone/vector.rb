@@ -6,10 +6,11 @@ module Pinecone
   class Vector
     include HTTParty
 
-    attr_reader :base_uri
+    attr_reader :base_uri, :index_name
 
     def initialize(index_name)
-      @base_uri = set_base_uri(index_name)
+      @index_name = index_name
+      @base_uri = set_base_uri
 
       @headers = {
         "Content-Type" => "application/json",
@@ -77,7 +78,7 @@ module Pinecone
     private
 
     # https://index_name-project_id.svc.environment.pinecone.io
-    def set_base_uri(index_name)
+    def set_base_uri
       index_description = Pinecone::Index.new.describe(index_name)
       raise Pinecone::IndexNotFoundError, "Index #{index_name} does not exist" if index_description.code != 200
       uri = index_description.parsed_response["status"]["host"]
