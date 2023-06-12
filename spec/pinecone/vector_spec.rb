@@ -3,9 +3,13 @@ require 'spec_helper'
 RSpec.describe Pinecone::Vector do
   let(:index) {
     VCR.use_cassette("use_index") do
-      Pinecone::Vector.new("example-index")
+      Pinecone::Vector.new("example-index-1")
     end
   }
+
+  after :each do
+    index.delete(delete_all: true)
+  end
 
   describe "#upsert", :vcr do
     let(:data) { { vectors: [{ values: [1, 2, 3], id: "1" }] } }
@@ -62,6 +66,17 @@ RSpec.describe Pinecone::Vector do
         expect(response.code).to eq(200)
       end
     end
+
+    context "when delete_all is true" do
+      let(:response) {
+        index.delete(delete_all: true)
+      }
+      it "returns a response" do
+        index.upsert(data)
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+      end
+    end
   end
 
   describe "#fetch", :vcr do
@@ -112,8 +127,8 @@ RSpec.describe Pinecone::Vector do
   describe "#query", :vcr do
     let(:data) { {
       vectors: [
-        { values: [1, 2, 3], id: "1" },
-        { values: [0, 1, -1], id: "2" },
+        { values: [1, 2, 3], id: "1", metadata: { genre: "comedy" } },
+        { values: [0, 1, -1], id: "2", metadata: { genre: "comedy" } },
         { values: [1, -1, 0], id: "3" }
       ]
     } }
@@ -147,11 +162,13 @@ RSpec.describe Pinecone::Vector do
             },
             {
                 "id" => "2",
+                "metadata"=>{"genre"=>"comedy"}, 
                 "score" => -0.5,
                 "values" => []
             },
             {
                 "id" => "1",
+                "metadata"=>{"genre"=>"comedy"}, 
                 "score" => -0.5,
                 "values" => []
             }
@@ -159,6 +176,7 @@ RSpec.describe Pinecone::Vector do
           "namespace" => ""
         }
       }
+      
 
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
@@ -171,6 +189,27 @@ RSpec.describe Pinecone::Vector do
       end
 
       describe "with filter" do
+        let(:valid_result) {
+          {
+            "results" => [],
+            "matches" => [
+              {
+                "id"=>"2", 
+                "metadata"=>{"genre"=>"comedy"}, 
+                "score"=>-0.5, 
+                "values"=>[]
+              }, 
+              {
+                "id"=>"1", 
+                "metadata"=>{"genre"=>"comedy"}, 
+                "score"=>-0.5, 
+                "values"=>[]
+              }
+            ],
+            "namespace" => ""
+          }
+        }
+        
         let(:filter) { { "genre": { "$eq": "comedy"} } }
         let(:response) { index.query(vector: query_vector, filter: filter) }
 
@@ -183,8 +222,13 @@ RSpec.describe Pinecone::Vector do
     end
 
     describe "with namespace" do
+      let(:namespace) { "example-namespace" }
       before do
-        index.upsert(data.merge(namespace: "example-namespace"))
+        index.upsert(data.merge(namespace: namespace))
+      end
+
+      after :each do
+        index.delete(delete_all: true, namespace: namespace)
       end
 
       let(:response) {
@@ -203,11 +247,13 @@ RSpec.describe Pinecone::Vector do
             },
             {
                 "id" => "2",
+                "metadata"=>{"genre"=>"comedy"}, 
                 "score" => -0.5,
                 "values" => []
             },
             {
                 "id" => "1",
+                "metadata"=>{"genre"=>"comedy"}, 
                 "score" => -0.5,
                 "values" => []
             }
@@ -227,9 +273,21 @@ RSpec.describe Pinecone::Vector do
   end
 
   describe "#describe_index_stats", :vcr do
+    let(:data) { {
+      vectors: [
+        { values: [1, 2, 3], id: "1", metadata: { genre: "comedy" } },
+        { values: [0, 1, -1], id: "2", metadata: { genre: "comedy" } },
+        { values: [1, -1, 0], id: "3" }
+      ]
+    } }
+
     let(:response) {
       index.describe_index_stats
     }
+
+    before do
+      index.upsert(data)
+    end
 
     it "returns a successful response" do
       expect(response).to be_a(HTTParty::Response)
@@ -251,7 +309,7 @@ RSpec.describe Pinecone::Vector do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
         expect(response.parsed_response).to eq({
-          "namespaces"=>{},
+          "namespaces"=>{""=>{"vectorCount"=>2}},
           "dimension"=>3,
           "indexFullness"=>0,
           "totalVectorCount"=>3
