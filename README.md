@@ -121,13 +121,18 @@ index.update(
 ```
 
 Deleting a vector from an index
+
+Note, that only one of `ids`, `delete_all` or `filter` can be included. If `ids` are present or `delete_all: true` then the filter is removed from the request.
 ```ruby
 pinecone = Pinecone::Client.new
 index = pinecone.index("example-index")
 index.delete(
   ids: ["1"], 
   namespace: "example-namespace", 
-  delete_all: false
+  delete_all: false,
+  filter: {
+    "genre": { "$eq": "comedy" }
+  }
 )
 ```
 
