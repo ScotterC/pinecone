@@ -24,8 +24,10 @@ module Pinecone
         "ids": ids,
         "deleteAll": delete_all,
         "filter": filter,
-      }.to_json
-      payload = options.merge(body: inputs)
+      }
+      
+      inputs.delete(:filter) if delete_all || ids.any?
+      payload = options.merge(body: inputs.to_json)
       self.class.post("#{@base_uri}/vectors/delete", payload)
     end
 

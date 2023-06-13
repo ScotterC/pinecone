@@ -336,4 +336,156 @@ http_interactions:
       encoding: UTF-8
       string: '{"results":[],"matches":[{"id":"3","score":1.00000012,"values":[]},{"id":"1","score":-0.188982248,"values":[]},{"id":"2","score":-0.50000006,"values":[]}],"namespace":"example-namespace"}'
   recorded_at: Tue, 21 Mar 2023 01:00:45 GMT
+- request:
+    method: post
+    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
+    body:
+      encoding: UTF-8
+      string: '{"vectors":[{"values":[1,2,3],"id":"1","metadata":{"genre":"comedy"}},{"values":[0,1,-1],"id":"2","metadata":{"genre":"comedy"}},{"values":[1,-1,0],"id":"3"}],"namespace":"example-namespace"}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 18:54:59 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '78'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '19'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"upsertedCount":3}'
+  recorded_at: Mon, 12 Jun 2023 18:54:59 GMT
+- request:
+    method: post
+    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/query
+    body:
+      encoding: UTF-8
+      string: '{"namespace":"example-namespace","includeValues":false,"includeMetadata":true,"topK":10,"vector":[0.5,-0.5,0]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 18:54:59 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '1'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '223'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"results":[],"matches":[{"id":"3","score":1,"values":[]},{"id":"2","score":-0.5,"values":[],"metadata":{"genre":"comedy"}},{"id":"1","score":-0.5,"values":[],"metadata":{"genre":"comedy"}}],"namespace":"example-namespace"}'
+  recorded_at: Mon, 12 Jun 2023 18:54:59 GMT
+- request:
+    method: post
+    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
+    body:
+      encoding: UTF-8
+      string: '{"namespace":"example-namespace","ids":[],"deleteAll":true}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 18:54:59 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '8'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '2'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: "{}"
+  recorded_at: Mon, 12 Jun 2023 18:54:59 GMT
+- request:
+    method: post
+    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
+    body:
+      encoding: UTF-8
+      string: '{"namespace":"","ids":[],"deleteAll":true}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 12 Jun 2023 18:54:59 GMT
+      X-Envoy-Upstream-Service-Time:
+      - '8'
+      Grpc-Status:
+      - '0'
+      Content-Length:
+      - '2'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: "{}"
+  recorded_at: Mon, 12 Jun 2023 18:54:59 GMT
 recorded_with: VCR 6.1.0

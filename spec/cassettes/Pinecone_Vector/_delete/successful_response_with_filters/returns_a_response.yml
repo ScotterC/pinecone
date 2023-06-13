@@ -2,48 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/describe_index_stats
-    body:
-      encoding: UTF-8
-      string: '{"filter":{"genre":{"$eq":"comedy"}}}'
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 26 Apr 2023 15:52:39 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '1'
-      Grpc-Status:
-      - '0'
-      Content-Length:
-      - '70'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":3}'
-  recorded_at: Wed, 26 Apr 2023 15:52:39 GMT
-- request:
-    method: post
     uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
-      string: '{"vectors":[{"values":[1,2,3],"id":"1","metadata":{"genre":"comedy"}},{"values":[0,1,-1],"id":"2","metadata":{"genre":"comedy"}},{"values":[1,-1,0],"id":"3"}]}'
+      string: '{"vectors":[{"values":[1,2,3],"id":"5"}]}'
     headers:
       Content-Type:
       - application/json
@@ -63,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 18:55:01 GMT
+      - Mon, 12 Jun 2023 18:54:54 GMT
       X-Envoy-Upstream-Service-Time:
-      - '50'
+      - '26'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -74,14 +36,14 @@ http_interactions:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"upsertedCount":3}'
-  recorded_at: Mon, 12 Jun 2023 18:55:01 GMT
+      string: '{"upsertedCount":1}'
+  recorded_at: Mon, 12 Jun 2023 18:54:54 GMT
 - request:
     method: post
-    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/describe_index_stats
+    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
     body:
       encoding: UTF-8
-      string: '{"filter":{"genre":{"$eq":"comedy"}}}'
+      string: '{"namespace":"","ids":[],"deleteAll":false,"filter":{"genre":"comedy"}}'
     headers:
       Content-Type:
       - application/json
@@ -101,19 +63,19 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 18:55:01 GMT
+      - Mon, 12 Jun 2023 18:54:54 GMT
       X-Envoy-Upstream-Service-Time:
-      - '0'
+      - '8'
       Grpc-Status:
       - '0'
       Content-Length:
-      - '90'
+      - '2'
       Server:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"namespaces":{"":{"vectorCount":2}},"dimension":3,"indexFullness":0,"totalVectorCount":3}'
-  recorded_at: Mon, 12 Jun 2023 18:55:01 GMT
+      string: "{}"
+  recorded_at: Mon, 12 Jun 2023 18:54:54 GMT
 - request:
     method: post
     uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
@@ -139,9 +101,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 18:55:01 GMT
+      - Mon, 12 Jun 2023 18:54:54 GMT
       X-Envoy-Upstream-Service-Time:
-      - '11'
+      - '7'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -151,5 +113,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Mon, 12 Jun 2023 18:55:01 GMT
+  recorded_at: Mon, 12 Jun 2023 18:54:54 GMT
 recorded_with: VCR 6.1.0
