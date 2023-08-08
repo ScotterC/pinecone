@@ -1,6 +1,10 @@
 # Pinecone Ruby Client
+[![Gem Version](https://badge.fury.io/rb/pinecone.svg)](https://badge.fury.io/rb/pinecone)
+![GitHub](https://img.shields.io/github/license/scotterc/pinecone)
 
-This is the complete Pinecone API and fully tested. Bug reports and contributions are welcome! Also, if you're interested in being a fellow maintainer, let me know.
+[Ruby AI Builders Discord](https://discord.gg/k4Uc224xVD)
+
+This is the complete Pinecone API and fully tested. Bug reports and contributions are welcome!
 
 ## Installation
 
