@@ -5,7 +5,7 @@ RSpec.describe Pinecone::Collection do
   let(:valid_attributes) {
     {
       name: "test-collection",
-      source: "example-index"
+      source: "test-index"
     }
   }
 
@@ -17,7 +17,7 @@ RSpec.describe Pinecone::Collection do
     it "returns a response with list of collections" do
       expect(response).to be_a(HTTParty::Response)
       expect(response.code).to eq(200)
-      expect(response.parsed_response).to be_a(Array)
+      expect(response.parsed_response).to be_a(Hash)
     end
   end
 
@@ -58,8 +58,10 @@ RSpec.describe Pinecone::Collection do
         expect(response.code).to eq(200)
         expect(response.parsed_response).to eq({
           "name"=>"test-collection", 
+          "size"=>0,
           "status"=>"Initializing", 
-          "dimension"=>3
+          "dimension"=>3,
+          "vector_count"=>0
         })
       end
     end
