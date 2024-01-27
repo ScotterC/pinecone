@@ -3,7 +3,7 @@ module Pinecone
     include HTTParty
 
     def initialize
-      self.class.base_uri "https://controller.#{Pinecone.configuration.environment}.pinecone.io"
+      self.class.base_uri "https://api.pinecone.io"
       @headers = {
         "Content-Type" => "application/json",
         "Accept" => "application/json",
@@ -12,25 +12,25 @@ module Pinecone
     end
 
     def list
-      self.class.get("/databases", options)
+      self.class.get('/indexes', options)
     end
 
     def describe(index_name)
-      self.class.get("/databases/#{index_name}", options)
+      self.class.get("/indexes/#{index_name}", options)
     end
 
     def create(body)
       payload = options.merge(body: body.to_json)
-      self.class.post("/databases", payload)
+      self.class.post('/indexes', payload)
     end
 
     def delete(index_name)
-      self.class.delete("/databases/#{index_name}", options)
+      self.class.delete("/indexes/#{index_name}", options)
     end
 
     def configure(index_name, body)
       payload = options.merge(body: body.to_json)
-      self.class.patch("/databases/#{index_name}", payload)
+      self.class.patch("/indexes/#{index_name}", payload)
     end
 
     def options

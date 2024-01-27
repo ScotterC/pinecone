@@ -91,7 +91,7 @@ RSpec.describe Pinecone::Vector do
 
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
-        expect(response.parsed_response).to eq({
+        expect(response.parsed_response).to match(
           "namespace" => "",
           "vectors" => {
             "1" => {
@@ -102,8 +102,9 @@ RSpec.describe Pinecone::Vector do
               "id" => "2",
               "values" => [1, 2, 3]
             }
-          }
-        })
+          },
+          "usage" => { "readUnits" => 2 }
+        )
       end
     end
   end

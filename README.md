@@ -41,6 +41,12 @@ pinecone.create_index({
   "metric": "dotproduct",
   "name": "example-index",
   "dimension": 3,
+  "spec": {
+        "pod": {
+          "environment": "gcp-starter",
+          "pod_type": "starter"
+        }
+      }
 })
 ```
 
