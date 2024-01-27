@@ -81,7 +81,7 @@ module Pinecone
     def set_base_uri(index_name)
       index_description = Pinecone::Index.new.describe(index_name)
       raise Pinecone::IndexNotFoundError, "Index #{index_name} does not exist" if index_description.code != 200
-      uri = index_description.parsed_response["status"]["host"]
+      uri = index_description.parsed_response["host"]
       "https://#{uri}"
     end
   end
