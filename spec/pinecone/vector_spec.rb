@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe Pinecone::Vector do
   let(:index) {
@@ -12,7 +12,7 @@ RSpec.describe Pinecone::Vector do
   end
 
   describe "#upsert", :vcr do
-    let(:data) { { vectors: [{ values: [1, 2, 3], id: "1" }] } }
+    let(:data) { {vectors: [{values: [1, 2, 3], id: "1"}]} }
     let(:response) {
       index.upsert(data)
     }
@@ -24,7 +24,7 @@ RSpec.describe Pinecone::Vector do
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
-        expect(response.parsed_response).to eq({"upsertedCount"=>1})
+        expect(response.parsed_response).to eq({"upsertedCount" => 1})
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe Pinecone::Vector do
   end
 
   describe "#delete", :vcr do
-    let(:data) { { vectors: [{ values: [1, 2, 3], id: "5" }] } }
+    let(:data) { {vectors: [{values: [1, 2, 3], id: "5"}]} }
 
     describe "successful response" do
       let(:response) {
@@ -57,7 +57,7 @@ RSpec.describe Pinecone::Vector do
 
     describe "successful response with filters" do
       let(:response) {
-        index.delete(filter: { genre: "comedy" })
+        index.delete(filter: {genre: "comedy"})
       }
 
       it "returns a response" do
@@ -86,8 +86,8 @@ RSpec.describe Pinecone::Vector do
       }
 
       it "returns a response" do
-        index.upsert({ vectors: [{ values: [1, 2, 3], id: "1" }] })
-        index.upsert({ vectors: [{ values: [1, 2, 3], id: "2" }] })
+        index.upsert({vectors: [{values: [1, 2, 3], id: "1"}]})
+        index.upsert({vectors: [{values: [1, 2, 3], id: "2"}]})
 
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
@@ -111,11 +111,11 @@ RSpec.describe Pinecone::Vector do
   describe "#update", :vcr do
     describe "successful response" do
       let(:response) {
-        index.update(id: "1", values: [1, 0, 3], set_metadata: { genre: "drama" })
+        index.update(id: "1", values: [1, 0, 3], set_metadata: {genre: "drama"})
       }
 
       it "returns a response" do
-        index.upsert({ vectors: [{ values: [1, 2, 3], id: "1" }] })
+        index.upsert({vectors: [{values: [1, 2, 3], id: "1"}]})
 
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
@@ -125,13 +125,15 @@ RSpec.describe Pinecone::Vector do
   end
 
   describe "#query", :vcr do
-    let(:data) { {
-      vectors: [
-        { values: [1, 2, 3], id: "1", metadata: { genre: "comedy" } },
-        { values: [0, 1, -1], id: "2", metadata: { genre: "comedy" } },
-        { values: [1, -1, 0], id: "3" }
-      ]
-    } }
+    let(:data) {
+      {
+        vectors: [
+          {values: [1, 2, 3], id: "1", metadata: {genre: "comedy"}},
+          {values: [0, 1, -1], id: "2", metadata: {genre: "comedy"}},
+          {values: [1, -1, 0], id: "3"}
+        ]
+      }
+    }
     let(:query_vector) { [0.5, -0.5, 0] }
 
     describe "successful response" do
@@ -156,27 +158,26 @@ RSpec.describe Pinecone::Vector do
           "results" => [],
           "matches" => [
             {
-                "id" => "3",
-                "score" => 1,
-                "values" => []
+              "id" => "3",
+              "score" => 1,
+              "values" => []
             },
             {
-                "id" => "2",
-                "metadata"=>{"genre"=>"comedy"}, 
-                "score" => -0.5,
-                "values" => []
+              "id" => "2",
+              "metadata" => {"genre" => "comedy"},
+              "score" => -0.5,
+              "values" => []
             },
             {
-                "id" => "1",
-                "metadata"=>{"genre"=>"comedy"}, 
-                "score" => -0.5,
-                "values" => []
+              "id" => "1",
+              "metadata" => {"genre" => "comedy"},
+              "score" => -0.5,
+              "values" => []
             }
           ],
           "namespace" => ""
         }
       }
-      
 
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
@@ -194,23 +195,23 @@ RSpec.describe Pinecone::Vector do
             "results" => [],
             "matches" => [
               {
-                "id"=>"2", 
-                "metadata"=>{"genre"=>"comedy"}, 
-                "score"=>-0.5, 
-                "values"=>[]
-              }, 
+                "id" => "2",
+                "metadata" => {"genre" => "comedy"},
+                "score" => -0.5,
+                "values" => []
+              },
               {
-                "id"=>"1", 
-                "metadata"=>{"genre"=>"comedy"}, 
-                "score"=>-0.5, 
-                "values"=>[]
+                "id" => "1",
+                "metadata" => {"genre" => "comedy"},
+                "score" => -0.5,
+                "values" => []
               }
             ],
             "namespace" => ""
           }
         }
-        
-        let(:filter) { { "genre": { "$eq": "comedy"} } }
+
+        let(:filter) { {genre: {"$eq": "comedy"}} }
         let(:response) { index.query(vector: query_vector, filter: filter) }
 
         it "returns a response" do
@@ -241,23 +242,23 @@ RSpec.describe Pinecone::Vector do
           "results" => [],
           "matches" => [
             {
-                "id" => "3",
-                "score" => 1,
-                "values" => []
+              "id" => "3",
+              "score" => 1,
+              "values" => []
             },
             {
-                "id" => "2",
-                "metadata"=>{"genre"=>"comedy"}, 
-                "score" => -0.5,
-                "values" => []
+              "id" => "2",
+              "metadata" => {"genre" => "comedy"},
+              "score" => -0.5,
+              "values" => []
             },
             {
-                "id" => "1",
-                "metadata"=>{"genre"=>"comedy"}, 
-                "score" => -0.5,
-                "values" => []
+              "id" => "1",
+              "metadata" => {"genre" => "comedy"},
+              "score" => -0.5,
+              "values" => []
             }
-        ],
+          ],
           "namespace" => "example-namespace"
         })
       end
@@ -273,13 +274,15 @@ RSpec.describe Pinecone::Vector do
   end
 
   describe "#describe_index_stats", :vcr do
-    let(:data) { {
-      vectors: [
-        { values: [1, 2, 3], id: "1", metadata: { genre: "comedy" } },
-        { values: [0, 1, -1], id: "2", metadata: { genre: "comedy" } },
-        { values: [1, -1, 0], id: "3" }
-      ]
-    } }
+    let(:data) {
+      {
+        vectors: [
+          {values: [1, 2, 3], id: "1", metadata: {genre: "comedy"}},
+          {values: [0, 1, -1], id: "2", metadata: {genre: "comedy"}},
+          {values: [1, -1, 0], id: "3"}
+        ]
+      }
+    }
 
     let(:response) {
       index.describe_index_stats
@@ -293,15 +296,15 @@ RSpec.describe Pinecone::Vector do
       expect(response).to be_a(HTTParty::Response)
       expect(response.code).to eq(200)
       expect(response.parsed_response).to eq({
-        "namespaces"=>{""=>{"vectorCount"=>3}},
-        "dimension"=>3,
-        "indexFullness"=>0,
-        "totalVectorCount"=>3
+        "namespaces" => {"" => {"vectorCount" => 3}},
+        "dimension" => 3,
+        "indexFullness" => 0,
+        "totalVectorCount" => 3
       })
     end
 
     describe "with filter" do
-      let(:filter) { { "genre": { "$eq": "comedy"} } }
+      let(:filter) { {genre: {"$eq": "comedy"}} }
       let(:response) {
         index.describe_index_stats(filter: filter)
       }
@@ -309,10 +312,10 @@ RSpec.describe Pinecone::Vector do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
         expect(response.parsed_response).to eq({
-          "namespaces"=>{""=>{"vectorCount"=>2}},
-          "dimension"=>3,
-          "indexFullness"=>0,
-          "totalVectorCount"=>3
+          "namespaces" => {"" => {"vectorCount" => 2}},
+          "dimension" => 3,
+          "indexFullness" => 0,
+          "totalVectorCount" => 3
         })
       end
     end

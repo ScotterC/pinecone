@@ -24,8 +24,8 @@ module Pinecone
         end
       end
 
-      attribute :indices, Dry::Types['array'].of(Dry::Types['integer'])
-      attribute :values, Dry::Types['array'].of(Dry::Types['float'] | Dry::Types['integer'])
+      attribute :indices, Dry::Types["array"].of(Dry::Types["integer"])
+      attribute :values, Dry::Types["array"].of(Dry::Types["float"] | Dry::Types["integer"])
 
       def self.new(input)
         validation = SparseVectorContract.new.call(input)

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe Pinecone::Collection do
   let(:client) { Pinecone::Collection.new }
@@ -12,7 +12,7 @@ RSpec.describe Pinecone::Collection do
   describe "#list", :vcr do
     let(:response) {
       client.list
-    }    
+    }
 
     it "returns a response with list of collections" do
       expect(response).to be_a(HTTParty::Response)
@@ -24,7 +24,7 @@ RSpec.describe Pinecone::Collection do
   describe "#create", :vcr do
     let(:response) {
       client.create(valid_attributes)
-    }      
+    }
 
     describe "successful response" do
       it "returns a response with collection creation details" do
@@ -57,9 +57,9 @@ RSpec.describe Pinecone::Collection do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
         expect(response.parsed_response).to eq({
-          "name"=>"test-collection", 
-          "status"=>"Initializing", 
-          "dimension"=>3
+          "name" => "test-collection",
+          "status" => "Initializing",
+          "dimension" => 3
         })
       end
     end
@@ -70,9 +70,9 @@ RSpec.describe Pinecone::Collection do
 
     before do
       client.create({
-        "metric": "dotproduct",
-        "name": collection_name,
-        "dimension": 3,
+        metric: "dotproduct",
+        name: collection_name,
+        dimension: 3
       })
     end
 

@@ -1,4 +1,4 @@
-require 'spec_helper' 
+require "spec_helper"
 
 RSpec.describe Pinecone do
   it "has a version number" do

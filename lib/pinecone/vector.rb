@@ -14,25 +14,25 @@ module Pinecone
       @headers = {
         "Content-Type" => "application/json",
         "Accept" => "application/json",
-        "Api-Key" => Pinecone.configuration.api_key,
+        "Api-Key" => Pinecone.configuration.api_key
       }
     end
 
     def delete(namespace: "", ids: [], delete_all: false, filter: {})
       inputs = {
-        "namespace": namespace,
-        "ids": ids,
-        "deleteAll": delete_all,
-        "filter": filter,
+        namespace: namespace,
+        ids: ids,
+        deleteAll: delete_all,
+        filter: filter
       }
-      
+
       inputs.delete(:filter) if delete_all || ids.any?
       payload = options.merge(body: inputs.to_json)
       self.class.post("#{@base_uri}/vectors/delete", payload)
     end
 
     def fetch(namespace: "", ids: [])
-      query_string = URI.encode_www_form({ namespace: namespace, ids: ids})
+      query_string = URI.encode_www_form({namespace: namespace, ids: ids})
       self.class.get("#{@base_uri}/vectors/fetch?#{query_string}", options)
     end
 
@@ -49,7 +49,7 @@ module Pinecone
 
     def update(id:, values: [], sparse_values: {indices: [], values: []}, set_metadata: {}, namespace: "")
       inputs = {
-        "id": id
+        id: id
       }
       inputs["values"] = values unless values.empty?
       inputs["sparseValues"] = sparse_values unless sparse_values[:indices].empty? || sparse_values[:values].empty?
@@ -69,10 +69,9 @@ module Pinecone
       self.class.post("#{@base_uri}/describe_index_stats", payload)
     end
 
-
     def options
       {
-        headers: @headers,
+        headers: @headers
       }
     end
 

@@ -8,12 +8,12 @@ module Pinecone
       @headers = {
         "Content-Type" => "application/json",
         "Accept" => "application/json",
-        "Api-Key" => Pinecone.configuration.api_key,
+        "Api-Key" => Pinecone.configuration.api_key
       }
     end
 
     def list
-      self.class.get('/collections', options)
+      self.class.get("/collections", options)
     end
 
     def describe(collection_name)
@@ -22,7 +22,7 @@ module Pinecone
 
     def create(body)
       payload = options.merge(body: body.to_json)
-      self.class.post('/collections', payload)
+      self.class.post("/collections", payload)
     end
 
     def delete(collection_name)
@@ -31,7 +31,7 @@ module Pinecone
 
     def options
       {
-        headers: @headers,
+        headers: @headers
       }
     end
   end
