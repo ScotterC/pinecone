@@ -6,9 +6,9 @@ require "dry-validation"
 module Types
   include Dry.Types()
 
-  StringOrNumberOrBoolean = Dry::Types['string'] | Dry::Types['integer'] | Dry::Types['float'] | Dry::Types['bool']
-  StringOrNumber = Dry::Types['string'] | Dry::Types['integer'] | Dry::Types['float']
-  Number = Dry::Types['integer'] | Dry::Types['float']
+  StringOrNumberOrBoolean = Dry::Types["string"] | Dry::Types["integer"] | Dry::Types["float"] | Dry::Types["bool"]
+  StringOrNumber = Dry::Types["string"] | Dry::Types["integer"] | Dry::Types["float"]
+  Number = Dry::Types["integer"] | Dry::Types["float"]
 end
 
 module Pinecone
@@ -50,7 +50,7 @@ module Pinecone
 
         def to_filter(input)
           return false unless input.is_a?(Hash)
-          return Filter.new(input)
+          Filter.new(input)
         end
       end
 

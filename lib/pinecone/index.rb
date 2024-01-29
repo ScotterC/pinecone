@@ -7,21 +7,21 @@ module Pinecone
       @headers = {
         "Content-Type" => "application/json",
         "Accept" => "application/json",
-        "Api-Key" => Pinecone.configuration.api_key,
+        "Api-Key" => Pinecone.configuration.api_key
       }
     end
 
     def list
-      self.class.get('/databases', options)
+      self.class.get("/databases", options)
     end
 
     def describe(index_name)
       self.class.get("/databases/#{index_name}", options)
     end
-    
+
     def create(body)
       payload = options.merge(body: body.to_json)
-      self.class.post('/databases', payload)
+      self.class.post("/databases", payload)
     end
 
     def delete(index_name)
@@ -35,7 +35,7 @@ module Pinecone
 
     def options
       {
-        headers: @headers,
+        headers: @headers
       }
     end
   end

@@ -29,17 +29,17 @@ module Pinecone
 
       schema schema.strict
 
-      attribute :namespace, Dry::Types['string'].default("")
-      attribute :include_values, Dry::Types['bool'].default(false)
-      attribute :include_metadata, Dry::Types['bool'].default(true)
-      attribute :top_k, Dry::Types['integer'].default(10)
-      attribute? :vector, Dry::Types['array'].of(Dry::Types['float'] | Dry::Types['integer'])
+      attribute :namespace, Dry::Types["string"].default("")
+      attribute :include_values, Dry::Types["bool"].default(false)
+      attribute :include_metadata, Dry::Types["bool"].default(true)
+      attribute :top_k, Dry::Types["integer"].default(10)
+      attribute? :vector, Dry::Types["array"].of(Dry::Types["float"] | Dry::Types["integer"])
       # Disabled contract since it wasn't carrying forward attributes to to_json
       # See failing test in query_spec.rb
-      # attribute? :filter, Filter 
-      attribute? :filter, Dry::Types['hash']
+      # attribute? :filter, Filter
+      attribute? :filter, Dry::Types["hash"]
       attribute? :sparse_vector, SparseVector
-      attribute? :id, Dry::Types['string']
+      attribute? :id, Dry::Types["string"]
 
       def self.new(input)
         validation = QueryContract.new.call(input)
@@ -53,7 +53,7 @@ module Pinecone
       def to_json
         to_h.map do |key, value|
           [key.to_s.split("_").map.with_index do |word, index|
-            index == 0 ? word : word.capitalize
+            (index == 0) ? word : word.capitalize
           end.join.to_sym, value]
         end.to_h.to_json
       end
