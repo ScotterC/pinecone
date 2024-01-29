@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/example-index
+    uri: https://api.pinecone.io/indexes/example-index-2
     body:
       encoding: UTF-8
-      string: '{"replicas":2}'
+      string: '{"spec":{"pod":{"replicas":2}}}'
     headers:
       Content-Type:
       - application/json
@@ -19,19 +19,31 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 202
-      message: Accepted
+      code: 200
+      message: OK
     headers:
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Cloud-Trace-Context:
+      - 837f40d8583fc1088f6d4254119bd238
       Date:
-      - Wed, 26 Apr 2023 14:42:57 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '1058'
-      Content-Length:
-      - '0'
+      - Mon, 29 Jan 2024 16:11:10 GMT
       Server:
-      - envoy
+      - Google Frontend
+      Content-Length:
+      - '257'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: ''
-  recorded_at: Wed, 26 Apr 2023 14:42:57 GMT
+      string: '{"name":"example-index-2","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":2,"shards":1,"pods":2,"pod_type":"","environment":"<PINECONE_ENVIRONMENT>"}}}'
+  recorded_at: Mon, 29 Jan 2024 16:11:10 GMT
 recorded_with: VCR 6.1.0

@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe Pinecone::Vector do
   let(:index) {
     VCR.use_cassette("use_index") do
-      Pinecone::Vector.new("example-index-1")
+      Pinecone::Vector.new("example-index-2")
     end
   }
 
@@ -102,8 +102,7 @@ RSpec.describe Pinecone::Vector do
               "id" => "2",
               "values" => [1, 2, 3]
             }
-          },
-          "usage" => { "readUnits" => 2 }
+          }
         )
       end
     end

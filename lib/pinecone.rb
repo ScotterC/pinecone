@@ -1,5 +1,6 @@
 require "httparty"
 
+require "pinecone/response_parser"
 require "pinecone/client"
 require "pinecone/index"
 require "pinecone/vector"

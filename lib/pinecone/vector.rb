@@ -5,6 +5,7 @@ require "pinecone/vector/sparse_vector"
 module Pinecone
   class Vector
     include HTTParty
+    parser Pinecone::ResponseParser
 
     attr_reader :base_uri
 

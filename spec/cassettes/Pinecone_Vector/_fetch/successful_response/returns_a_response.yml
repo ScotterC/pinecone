@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
+    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
       string: '{"vectors":[{"values":[1,2,3],"id":"1"}]}'
@@ -25,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Mar 2023 18:30:10 GMT
+      - Mon, 29 Jan 2024 16:11:13 GMT
       X-Envoy-Upstream-Service-Time:
-      - '324'
+      - '14'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -37,10 +37,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":1}'
-  recorded_at: Mon, 27 Mar 2023 18:30:10 GMT
+  recorded_at: Mon, 29 Jan 2024 16:11:13 GMT
 - request:
     method: post
-    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
+    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
       string: '{"vectors":[{"values":[1,2,3],"id":"2"}]}'
@@ -63,9 +63,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Mar 2023 18:43:36 GMT
+      - Mon, 29 Jan 2024 16:11:13 GMT
       X-Envoy-Upstream-Service-Time:
-      - '13'
+      - '12'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -75,10 +75,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":1}'
-  recorded_at: Mon, 27 Mar 2023 18:43:36 GMT
+  recorded_at: Mon, 29 Jan 2024 16:11:14 GMT
 - request:
     method: get
-    uri: https://example-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/fetch?ids=2&namespace=
+    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/fetch?ids=2&namespace=
     body:
       encoding: US-ASCII
       string: ''
@@ -101,9 +101,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Mar 2023 18:52:04 GMT
+      - Mon, 29 Jan 2024 16:11:13 GMT
       X-Envoy-Upstream-Service-Time:
-      - '2'
+      - '1'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -112,125 +112,11 @@ http_interactions:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"vectors":{"1":{"id":"1","values":[1,2,3]},"2":{"id":"2","values":[1,2,3]}},"namespace":""}'
-  recorded_at: Mon, 27 Mar 2023 18:52:04 GMT
+      string: '{"vectors":{"2":{"id":"2","values":[1,2,3]},"1":{"id":"1","values":[1,2,3]}},"namespace":""}'
+  recorded_at: Mon, 29 Jan 2024 16:11:14 GMT
 - request:
     method: post
-    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
-    body:
-      encoding: UTF-8
-      string: '{"vectors":[{"values":[1,2,3],"id":"1"}]}'
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json
-      Date:
-      - Mon, 12 Jun 2023 18:54:55 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '8'
-      Grpc-Status:
-      - '0'
-      Content-Length:
-      - '19'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"upsertedCount":1}'
-  recorded_at: Mon, 12 Jun 2023 18:54:55 GMT
-- request:
-    method: post
-    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
-    body:
-      encoding: UTF-8
-      string: '{"vectors":[{"values":[1,2,3],"id":"2"}]}'
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json
-      Date:
-      - Mon, 12 Jun 2023 18:54:55 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '8'
-      Grpc-Status:
-      - '0'
-      Content-Length:
-      - '19'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"upsertedCount":1}'
-  recorded_at: Mon, 12 Jun 2023 18:54:55 GMT
-- request:
-    method: get
-    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/fetch?ids=2&namespace=
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json
-      Date:
-      - Mon, 12 Jun 2023 18:54:55 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '0'
-      Grpc-Status:
-      - '0'
-      Content-Length:
-      - '92'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"vectors":{"1":{"id":"1","values":[1,2,3]},"2":{"id":"2","values":[1,2,3]}},"namespace":""}'
-  recorded_at: Mon, 12 Jun 2023 18:54:56 GMT
-- request:
-    method: post
-    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
+    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
     body:
       encoding: UTF-8
       string: '{"namespace":"","ids":[],"deleteAll":true}'
@@ -253,9 +139,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 18:54:55 GMT
+      - Mon, 29 Jan 2024 16:11:14 GMT
       X-Envoy-Upstream-Service-Time:
-      - '7'
+      - '12'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -265,5 +151,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Mon, 12 Jun 2023 18:54:56 GMT
+  recorded_at: Mon, 29 Jan 2024 16:11:14 GMT
 recorded_with: VCR 6.1.0

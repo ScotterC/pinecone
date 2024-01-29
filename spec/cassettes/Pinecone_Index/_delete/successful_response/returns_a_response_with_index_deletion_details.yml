@@ -1,42 +1,8 @@
 ---
 http_interactions:
 - request:
-    method: delete
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/example-index
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 202
-      message: Accepted
-    headers:
-      Date:
-      - Tue, 21 Mar 2023 01:00:43 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '11'
-      Content-Length:
-      - '0'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: ''
-  recorded_at: Tue, 21 Mar 2023 01:00:43 GMT
-- request:
     method: post
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
+    uri: https://api.pinecone.io/indexes
     body:
       encoding: UTF-8
       string: '{"metric":"dotproduct","name":"test-index","dimension":3}'
@@ -53,26 +19,37 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 409
-      message: Conflict
+      code: 422
+      message: unknown
     headers:
       Content-Type:
-      - text/plain; charset=UTF-8
+      - text/plain; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Cloud-Trace-Context:
+      - b51d7cb981be3ea2998f58d39591799a
       Date:
-      - Tue, 21 Mar 2023 01:04:29 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '1359'
-      Content-Length:
-      - '31'
+      - Mon, 29 Jan 2024 16:11:10 GMT
       Server:
-      - envoy
+      - Google Frontend
+      Content-Length:
+      - '98'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: index test-index already exists
-  recorded_at: Tue, 21 Mar 2023 01:04:29 GMT
+      string: 'Failed to deserialize the JSON body into the target type: missing field
+        `spec` at line 1 column 57'
+  recorded_at: Mon, 29 Jan 2024 16:11:10 GMT
 - request:
     method: delete
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/test-index
+    uri: https://api.pinecone.io/indexes/test-index
     body:
       encoding: US-ASCII
       string: ''
@@ -92,16 +69,28 @@ http_interactions:
       code: 202
       message: Accepted
     headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Cloud-Trace-Context:
+      - 8f76c29120bd0e7d29982bc1b8d43acb
       Date:
-      - Tue, 21 Mar 2023 01:04:29 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '24'
+      - Mon, 29 Jan 2024 16:11:10 GMT
+      Content-Type:
+      - text/html
+      Server:
+      - Google Frontend
       Content-Length:
       - '0'
-      Server:
-      - envoy
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Tue, 21 Mar 2023 01:04:29 GMT
+  recorded_at: Mon, 29 Jan 2024 16:11:10 GMT
 recorded_with: VCR 6.1.0

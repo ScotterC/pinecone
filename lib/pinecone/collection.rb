@@ -1,6 +1,7 @@
 module Pinecone
   class Collection
     include HTTParty
+    parser Pinecone::ResponseParser
 
     def initialize
       self.class.base_uri "https://api.pinecone.io"

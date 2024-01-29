@@ -1,6 +1,7 @@
 module Pinecone
   class Index
     include HTTParty
+    parser Pinecone::ResponseParser
 
     def initialize
       self.class.base_uri "https://api.pinecone.io"
@@ -12,7 +13,7 @@ module Pinecone
     end
 
     def list
-      self.class.get('/indexes', options)
+      self.class.get("/indexes", options)
     end
 
     def describe(index_name)
@@ -21,7 +22,7 @@ module Pinecone
 
     def create(body)
       payload = options.merge(body: body.to_json)
-      self.class.post('/indexes', payload)
+      self.class.post("/indexes", payload)
     end
 
     def delete(index_name)

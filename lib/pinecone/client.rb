@@ -39,6 +39,7 @@ module Pinecone
     end
 
     # This is a very confusing naming convention
+    # Pinecone's reference now delineates between 'control plane' and 'data plane' which we'll reflect eventually
     def index(index_name)
       Pinecone::Vector.new(index_name)
     end

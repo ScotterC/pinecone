@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
+    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
       string: '{"vectors":[{"values":[1,2,3],"id":"1","metadata":{"genre":"comedy"}},{"values":[0,1,-1],"id":"2","metadata":{"genre":"comedy"}},{"values":[1,-1,0],"id":"3"}]}'
@@ -25,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 18:55:00 GMT
+      - Mon, 29 Jan 2024 16:11:17 GMT
       X-Envoy-Upstream-Service-Time:
-      - '49'
+      - '50'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -37,10 +37,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":3}'
-  recorded_at: Mon, 12 Jun 2023 18:55:00 GMT
+  recorded_at: Mon, 29 Jan 2024 16:11:18 GMT
 - request:
     method: post
-    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/describe_index_stats
+    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/describe_index_stats
     body:
       encoding: UTF-8
       string: ''
@@ -63,7 +63,7 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 18:55:00 GMT
+      - Mon, 29 Jan 2024 16:11:17 GMT
       X-Envoy-Upstream-Service-Time:
       - '0'
       Grpc-Status:
@@ -75,10 +75,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"namespaces":{"":{"vectorCount":3}},"dimension":3,"indexFullness":0,"totalVectorCount":3}'
-  recorded_at: Mon, 12 Jun 2023 18:55:01 GMT
+  recorded_at: Mon, 29 Jan 2024 16:11:18 GMT
 - request:
     method: post
-    uri: https://example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
+    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
     body:
       encoding: UTF-8
       string: '{"namespace":"","ids":[],"deleteAll":true}'
@@ -101,9 +101,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 18:55:00 GMT
+      - Mon, 29 Jan 2024 16:11:17 GMT
       X-Envoy-Upstream-Service-Time:
-      - '9'
+      - '15'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -113,5 +113,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Mon, 12 Jun 2023 18:55:01 GMT
+  recorded_at: Mon, 29 Jan 2024 16:11:18 GMT
 recorded_with: VCR 6.1.0
