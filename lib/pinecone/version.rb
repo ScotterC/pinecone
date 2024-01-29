@@ -1,3 +1,3 @@
 module Pinecone
-  VERSION = "0.1.71".freeze
+  VERSION = "1.0.1".freeze
 end
