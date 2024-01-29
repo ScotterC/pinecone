@@ -4,13 +4,13 @@ RSpec.describe Pinecone::Index do
   let(:client) { Pinecone::Index.new }
   let(:valid_attributes) {
     {
-      "metric": "dotproduct",
-      "name": "test-index",
-      "dimension": 3,
-      "spec": {
-        "pod": {
-          "environment": ENV['PINECONE_ENVIRONMENT'],
-          "pod_type": "p1.x1"
+      metric: "dotproduct",
+      name: "test-index",
+      dimension: 3,
+      spec: {
+        pod: {
+          environment: ENV["PINECONE_ENVIRONMENT"],
+          pod_type: "p1.x1"
         }
       }
     }
@@ -18,13 +18,13 @@ RSpec.describe Pinecone::Index do
 
   let(:serverless_attributes) {
     {
-      "metric": "dotproduct",
-      "name": "test-index-serverless",
-      "dimension": 3,
-      "spec": {
-        "serverless": {
-          "cloud": "aws",
-          "region": "us-west-2"
+      metric: "dotproduct",
+      name: "test-index-serverless",
+      dimension: 3,
+      spec: {
+        serverless: {
+          cloud: "aws",
+          region: "us-west-2"
         }
       }
     }
@@ -40,7 +40,7 @@ RSpec.describe Pinecone::Index do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
         expect(response.parsed_response).to be_a(Hash)
-        expect(response.parsed_response["indexes"].map { |index| index["name"] }).to include("test-index")
+        expect(response["indexes"].map { |h| h["name"] }).to include("example-index-2")
       end
     end
   end
@@ -52,17 +52,29 @@ RSpec.describe Pinecone::Index do
       }
 
       describe "successful response" do
+        before do
+          response = client.delete(serverless_attributes[:name])
+          sleep 1
+          if response.ok?
+            expect(client.describe(serverless_attributes[:name]).code).to eq(404)
+          end
+        end
+
         it "returns a response with index creation details" do
           expect(response).to be_a(HTTParty::Response)
           expect(response.code).to eq(201)
         end
       end
-      
+
       describe "unsuccessful response" do
+        before do
+          expect(client.describe(serverless_attributes[:name]).code).to eq(200)
+        end
+
         it "returns an error response" do
           expect(response).to be_a(HTTParty::Response)
           expect(response.code).to eq(409)
-          expect(response.parsed_response).to eq("index test-index-serverless already exists")
+          expect(response["error"]["message"]).to eq("Resource  already exists")
         end
       end
     end
@@ -71,6 +83,11 @@ RSpec.describe Pinecone::Index do
       let(:response) {
         client.create(valid_attributes)
       }
+
+      before do
+        client.delete(valid_attributes[:name])
+      end
+
       describe "successful response" do
         it "returns a response with index creation details" do
           expect(response).to be_a(HTTParty::Response)
@@ -82,11 +99,15 @@ RSpec.describe Pinecone::Index do
         let(:response) {
           client.create(valid_attributes)
         }
-  
+
+        before do
+          expect(client.describe(valid_attributes[:name]).code).to eq(200)
+        end
+
         it "returns an error response" do
           expect(response).to be_a(HTTParty::Response)
           expect(response.code).to eq(409)
-          expect(response.parsed_response).to eq("index test-index already exists")
+          expect(response["error"]["message"]).to eq("Resource  already exists")
         end
       end
     end
@@ -139,17 +160,17 @@ RSpec.describe Pinecone::Index do
   end
 
   describe "#configure_index", :vcr do
-    let(:index_name) { "example-index" }
+    let(:index_name) { "example-index-2" }
 
     let(:response) {
-      client.configure(index_name, spec: { pod: { replicas: 2 } })
+      client.configure(index_name, spec: {pod: {replicas: 2}})
     }
 
     describe "successful response" do
       it "returns a 200 that it's been updated" do
         expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(202)
-        expect(response.parsed_response).to be_nil
+        expect(response.code).to eq(200)
+        expect(response["spec"]["pod"]["pods"]).to eq(2)
       end
     end
   end

@@ -1,8 +1,8 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: https://api.pinecone.io/indexes/example-index-1
+    method: delete
+    uri: https://api.pinecone.io/indexes/test-index-serverless
     body:
       encoding: US-ASCII
       string: ''
@@ -19,11 +19,11 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
     headers:
       Content-Type:
-      - application/json
+      - text/plain; charset=utf-8
       Access-Control-Allow-Origin:
       - "*"
       Vary:
@@ -31,27 +31,28 @@ http_interactions:
       Access-Control-Expose-Headers:
       - "*"
       X-Cloud-Trace-Context:
-      - b99a9832922308350296cf16819e88ba
+      - 2de0b655129807b647c4004f7e09131d
       Date:
-      - Mon, 29 Jan 2024 16:11:03 GMT
+      - Mon, 29 Jan 2024 16:11:06 GMT
       Server:
       - Google Frontend
       Content-Length:
-      - '262'
+      - '96'
       Via:
       - 1.1 google
       Alt-Svc:
       - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: '{"name":"example-index-1","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1","environment":"<PINECONE_ENVIRONMENT>"}}}'
-  recorded_at: Mon, 29 Jan 2024 16:11:03 GMT
+      string: '{"error":{"code":"NOT_FOUND","message":"Resource test-index-serverless
+        not found"},"status":404}'
+  recorded_at: Mon, 29 Jan 2024 16:11:06 GMT
 - request:
-    method: get
-    uri: https://api.pinecone.io/indexes/example-index-2
+    method: post
+    uri: https://api.pinecone.io/indexes
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"metric":"dotproduct","name":"test-index-serverless","dimension":3,"spec":{"serverless":{"cloud":"aws","region":"us-west-2"}}}'
     headers:
       Content-Type:
       - application/json
@@ -65,8 +66,8 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 200
-      message: OK
+      code: 201
+      message: Created
     headers:
       Content-Type:
       - application/json
@@ -77,19 +78,19 @@ http_interactions:
       Access-Control-Expose-Headers:
       - "*"
       X-Cloud-Trace-Context:
-      - abe3f59322f5acfb635964489d26fddc
+      - 03e1012638513548aa7255399b8cee5e
       Date:
-      - Mon, 29 Jan 2024 16:11:03 GMT
+      - Mon, 29 Jan 2024 16:11:07 GMT
       Server:
       - Google Frontend
       Content-Length:
-      - '262'
+      - '245'
       Via:
       - 1.1 google
       Alt-Svc:
       - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: '{"name":"example-index-2","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1","environment":"<PINECONE_ENVIRONMENT>"}}}'
-  recorded_at: Mon, 29 Jan 2024 16:11:03 GMT
+      string: '{"name":"test-index-serverless","metric":"dotproduct","dimension":3,"status":{"ready":false,"state":"Initializing"},"host":"test-index-serverless-b2e8921.svc.apw5-4e34-81fa.pinecone.io","spec":{"serverless":{"region":"us-west-2","cloud":"aws"}}}'
+  recorded_at: Mon, 29 Jan 2024 16:11:07 GMT
 recorded_with: VCR 6.1.0

@@ -1,11 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://api.pinecone.io/indexes
+    method: delete
+    uri: https://api.pinecone.io/indexes/test-index
     body:
-      encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"test-index","dimension":3,"spec":{"pod":{"environment":"<PINECONE_ENVIRONMENT>","pod_type":"p1.x1"}}}'
+      encoding: US-ASCII
+      string: ''
     headers:
       Content-Type:
       - application/json
@@ -19,11 +19,9 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 409
-      message: Conflict
+      code: 202
+      message: Accepted
     headers:
-      Content-Type:
-      - text/plain; charset=utf-8
       Access-Control-Allow-Origin:
       - "*"
       Vary:
@@ -31,20 +29,22 @@ http_interactions:
       Access-Control-Expose-Headers:
       - "*"
       X-Cloud-Trace-Context:
-      - '08f00017bd89df0bbab60412e8c9cede'
+      - ba53318f09574c92dc5614faf4235ea6
       Date:
       - Mon, 29 Jan 2024 16:11:09 GMT
+      Content-Type:
+      - text/html
       Server:
       - Google Frontend
       Content-Length:
-      - '85'
+      - '0'
       Via:
       - 1.1 google
       Alt-Svc:
       - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: '{"error":{"code":"ALREADY_EXISTS","message":"Resource  already exists"},"status":409}'
+      string: ''
   recorded_at: Mon, 29 Jan 2024 16:11:09 GMT
 - request:
     method: get
@@ -77,7 +77,7 @@ http_interactions:
       Access-Control-Expose-Headers:
       - "*"
       X-Cloud-Trace-Context:
-      - 959c95dccda4f19ecb88f9519ee737be
+      - 3c95d77a6c8649db143ebb23a3bc1bd9
       Date:
       - Mon, 29 Jan 2024 16:11:09 GMT
       Server:
@@ -91,5 +91,51 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"name":"test-index","metric":"dotproduct","dimension":3,"status":{"ready":false,"state":"Terminating"},"host":"test-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1","environment":"<PINECONE_ENVIRONMENT>"}}}'
+  recorded_at: Mon, 29 Jan 2024 16:11:09 GMT
+- request:
+    method: post
+    uri: https://api.pinecone.io/indexes
+    body:
+      encoding: UTF-8
+      string: '{"metric":"dotproduct","name":"test-index","dimension":3,"spec":{"pod":{"environment":"<PINECONE_ENVIRONMENT>","pod_type":"p1.x1"}}}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      Content-Type:
+      - text/plain; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Cloud-Trace-Context:
+      - e5f57e6cdcd435d24a76df6e7b4a71c3
+      Date:
+      - Mon, 29 Jan 2024 16:11:09 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '85'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: '{"error":{"code":"ALREADY_EXISTS","message":"Resource  already exists"},"status":409}'
   recorded_at: Mon, 29 Jan 2024 16:11:09 GMT
 recorded_with: VCR 6.1.0

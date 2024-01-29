@@ -21,7 +21,14 @@ indices = ["example-index-1", "example-index-2"]
 valid_attributes = {
   metric: "dotproduct",
   name: "example-index-1",
-  dimension: 3
+  dimension: 3,
+  spec: {
+    pod: {
+      environment: ENV.fetch("PINECONE_ENVIRONMENT"),
+      pod_type: "p1.x1",
+      pods: 1
+    }
+  }
 }
 
 # Check if an argument was provided
@@ -30,13 +37,16 @@ if ARGV.length == 1
   when "start"
     indices.each do |index_name|
       puts "Setting up #{index_name}"
-      valid_attributes["name"] = index_name
-      client.create(valid_attributes)
+      valid_attributes[:name] = index_name
+      response = client.create(valid_attributes)
+      puts response if response.code != 201
     end
   when "stop"
+    indices << "test-index-serverless"
     indices.each do |index_name|
       puts "Deleting #{index_name}"
-      client.delete(index_name)
+      response = client.delete(index_name)
+      puts response if response.code != 202
     end
   else
     puts "Invalid argument. Use 'start' to create the index or 'stop' to delete the index."

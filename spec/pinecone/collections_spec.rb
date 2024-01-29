@@ -5,7 +5,7 @@ RSpec.describe Pinecone::Collection do
   let(:valid_attributes) {
     {
       name: "test-collection",
-      source: "test-index"
+      source: "example-index-2"
     }
   }
 
@@ -41,7 +41,7 @@ RSpec.describe Pinecone::Collection do
       it "returns an error response" do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(409)
-        expect(response.parsed_response).to eq("collection request test-collection already exists")
+        expect(response["error"]["message"]).to eq("Resource  already exists")
       end
     end
   end
@@ -57,11 +57,9 @@ RSpec.describe Pinecone::Collection do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
         expect(response.parsed_response).to eq({
-          "name"=>"test-collection", 
-          "size"=>0,
-          "status"=>"Initializing", 
-          "dimension"=>3,
-          "vector_count"=>0
+          "name" => "test-collection",
+          "status" => "Initializing",
+          "environment" => "us-east1-gcp"
         })
       end
     end

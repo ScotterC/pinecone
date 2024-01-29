@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/missing-index
+    uri: https://api.pinecone.io/indexes/missing-index
     body:
       encoding: US-ASCII
       string: ''
@@ -23,89 +23,28 @@ http_interactions:
       message: Not Found
     headers:
       Content-Type:
-      - text/plain; charset=UTF-8
+      - text/plain; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Cloud-Trace-Context:
+      - b4b4d3c232c5c250b9ba778e586334cf
       Date:
-      - Mon, 12 Jun 2023 18:47:50 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '5'
-      Content-Length:
-      - '14'
+      - Mon, 29 Jan 2024 16:11:17 GMT
       Server:
-      - envoy
+      - Google Frontend
+      Content-Length:
+      - '88'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: '404: Not Found'
-  recorded_at: Mon, 12 Jun 2023 18:47:50 GMT
-- request:
-    method: get
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/missing-index
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 404
-      message: Not Found
-    headers:
-      Content-Type:
-      - text/plain; charset=UTF-8
-      Date:
-      - Mon, 12 Jun 2023 18:51:08 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '3'
-      Content-Length:
-      - '14'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '404: Not Found'
-  recorded_at: Mon, 12 Jun 2023 18:51:08 GMT
-- request:
-    method: get
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases/missing-index
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 404
-      message: Not Found
-    headers:
-      Content-Type:
-      - text/plain; charset=UTF-8
-      Date:
-      - Mon, 12 Jun 2023 18:55:00 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '5'
-      Content-Length:
-      - '14'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '404: Not Found'
-  recorded_at: Mon, 12 Jun 2023 18:55:00 GMT
+      string: '{"error":{"code":"NOT_FOUND","message":"Resource missing-index not
+        found"},"status":404}'
+  recorded_at: Mon, 29 Jan 2024 16:11:17 GMT
 recorded_with: VCR 6.1.0

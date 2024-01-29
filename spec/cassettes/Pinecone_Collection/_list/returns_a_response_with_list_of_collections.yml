@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/collections
+    uri: https://api.pinecone.io/collections
     body:
       encoding: US-ASCII
       string: ''
@@ -23,19 +23,27 @@ http_interactions:
       message: OK
     headers:
       Content-Type:
-      - application/json; charset=UTF-8
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Cloud-Trace-Context:
+      - 5f365bc4160b52f6be27ff61d3c42296
       Date:
-      - Tue, 04 Apr 2023 00:18:27 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '18'
-      Content-Length:
-      - '20'
+      - Mon, 29 Jan 2024 16:11:05 GMT
       Server:
-      - envoy
+      - Google Frontend
+      Content-Length:
+      - '18'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: '["testing-06be060"]
-
-        '
-  recorded_at: Tue, 04 Apr 2023 00:18:27 GMT
+      string: '{"collections":[]}'
+  recorded_at: Mon, 29 Jan 2024 16:11:05 GMT
 recorded_with: VCR 6.1.0

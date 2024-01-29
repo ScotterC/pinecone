@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://controller.us-east1-gcp.pinecone.io/databases
+    uri: https://api.pinecone.io/indexes
     body:
       encoding: UTF-8
       string: '{"metric":"dotproduct","name":"example-index","dimension":3}'
@@ -19,56 +19,32 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 201
-      message: Created
-    headers:
-      Date:
-      - Fri, 24 Feb 2023 19:03:18 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '898'
-      Content-Length:
-      - '0'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: ''
-  recorded_at: Fri, 24 Feb 2023 19:03:18 GMT
-- request:
-    method: post
-    uri: https://controller.<PINECONE_ENVIRONMENT>.pinecone.io/databases
-    body:
-      encoding: UTF-8
-      string: '{"metric":"dotproduct","name":"example-index","dimension":3}'
+      code: 422
+      message: unknown
     headers:
       Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 400
-      message: Bad Request
-    headers:
-      Content-Type:
-      - text/plain; charset=UTF-8
+      - text/plain; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Cloud-Trace-Context:
+      - 2b7107a0b3bd164ecaf09c3b89459498
       Date:
-      - Sun, 28 May 2023 19:55:44 GMT
-      X-Envoy-Upstream-Service-Time:
-      - '1423'
-      Content-Length:
-      - '131'
+      - Mon, 29 Jan 2024 16:11:03 GMT
       Server:
-      - envoy
+      - Google Frontend
+      Content-Length:
+      - '98'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: The index exceeds the project quota of 1 pods by 1 pods. Upgrade your
-        account or change the project settings to increase the quota.
-  recorded_at: Sun, 28 May 2023 19:55:44 GMT
+      string: 'Failed to deserialize the JSON body into the target type: missing field
+        `spec` at line 1 column 60'
+  recorded_at: Mon, 29 Jan 2024 16:11:03 GMT
 recorded_with: VCR 6.1.0
