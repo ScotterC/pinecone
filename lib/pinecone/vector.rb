@@ -37,6 +37,17 @@ module Pinecone
       self.class.get("#{@base_uri}/vectors/fetch?#{query_string}", options)
     end
 
+    def list(namespace: "", prefix: "", limit: nil, pagination_token: "")
+      query_params = {}
+      query_params["namespace"] = namespace unless namespace.empty?
+      query_params["prefix"] = prefix unless prefix.empty?
+      query_params["limit"] = limit if limit
+      query_params["paginationToken"] = pagination_token unless pagination_token.empty?
+
+      query_string = URI.encode_www_form(query_params)
+      self.class.get("#{@base_uri}/vectors/list?#{query_string}", options)
+    end
+
     def upsert(body)
       payload = options.merge(body: body.to_json)
       self.class.post("#{@base_uri}/vectors/upsert", payload)
