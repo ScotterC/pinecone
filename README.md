@@ -118,6 +118,18 @@ index.fetch(
 )
 ```
 
+List vector IDs from an index (only for serverless indexes)
+```ruby
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+index.list(
+  namespace: "example-namespace",
+  prefix: "example-prefix",
+  limit: 50,
+  pagination_token: "example-token"
+)
+```
+
 Updating a vector in an index
 ```ruby
 pinecone = Pinecone::Client.new
@@ -255,6 +267,7 @@ Contributions welcome!
 - Clone the repo locally
 - `bundle` to install gems
 - run tests with `rspec`
+- run linter with `standardrb`
 - `mv .env.copy .env` and add Pinecone API Key if developing a new endpoint or modifying existing ones
   - to disable VCR and hit real endpoints, `NO_VCR=true rspec`
 - To setup cloud indexes when writing new tests `ruby spec/support/setup.rb start` and `stop` to delete them
