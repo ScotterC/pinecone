@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.pinecone.io/collections
     body:
       encoding: UTF-8
-      string: '{"name":"test-collection","source":"example-index-2"}'
+      string: '{"name":"test-collection","source":"server-index"}'
     headers:
       Content-Type:
       - application/json
@@ -30,10 +30,12 @@ http_interactions:
       - origin,access-control-request-method,access-control-request-headers
       Access-Control-Expose-Headers:
       - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
       X-Cloud-Trace-Context:
-      - 4472ac2194f657615fa60a2626c3aeed
+      - 2757e8939f721ebff6ed1c5ccbf55a5b
       Date:
-      - Mon, 29 Jan 2024 16:11:05 GMT
+      - Wed, 07 Aug 2024 18:33:58 GMT
       Server:
       - Google Frontend
       Content-Length:
@@ -45,7 +47,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"error":{"code":"ALREADY_EXISTS","message":"Resource  already exists"},"status":409}'
-  recorded_at: Mon, 29 Jan 2024 16:11:05 GMT
+  recorded_at: Wed, 07 Aug 2024 18:33:58 GMT
 - request:
     method: get
     uri: https://api.pinecone.io/collections/test-collection
@@ -76,10 +78,12 @@ http_interactions:
       - origin,access-control-request-method,access-control-request-headers
       Access-Control-Expose-Headers:
       - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
       X-Cloud-Trace-Context:
-      - 4aaf85c45f1931bf56c8f90db9498da2
+      - c19830c2064b47114970fabc7f95c3b6
       Date:
-      - Mon, 29 Jan 2024 16:11:05 GMT
+      - Wed, 07 Aug 2024 18:33:58 GMT
       Server:
       - Google Frontend
       Content-Length:
@@ -91,5 +95,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"name":"test-collection","status":"Initializing","environment":"<PINECONE_ENVIRONMENT>"}'
-  recorded_at: Mon, 29 Jan 2024 16:11:05 GMT
+  recorded_at: Wed, 07 Aug 2024 18:33:58 GMT
 recorded_with: VCR 6.1.0

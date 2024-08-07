@@ -30,20 +30,22 @@ http_interactions:
       - origin,access-control-request-method,access-control-request-headers
       Access-Control-Expose-Headers:
       - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
       X-Cloud-Trace-Context:
-      - 877d0152bcd8c88a115e98db891bc334
+      - 635b10ea83b6505a676d267480217a36
       Date:
-      - Mon, 29 Jan 2024 16:11:06 GMT
+      - Wed, 07 Aug 2024 18:26:45 GMT
       Server:
       - Google Frontend
       Content-Length:
-      - '539'
+      - '736'
       Via:
       - 1.1 google
       Alt-Svc:
       - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
     body:
       encoding: UTF-8
-      string: '{"indexes":[{"name":"example-index-1","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"example-index-1-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1","environment":"<PINECONE_ENVIRONMENT>"}}},{"name":"example-index-2","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1","environment":"<PINECONE_ENVIRONMENT>"}}}]}'
-  recorded_at: Mon, 29 Jan 2024 16:11:06 GMT
+      string: '{"indexes":[{"name":"server-index","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":2,"shards":1,"pods":2,"pod_type":"p1.x1","environment":"<PINECONE_ENVIRONMENT>"}}},{"name":"test-index-serverless","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"test-index-serverless-b2e8921.svc.apw5-4e34-81fa.pinecone.io","spec":{"serverless":{"region":"us-west-2","cloud":"aws"}}},{"name":"serverless-index","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io","spec":{"serverless":{"region":"us-east-1","cloud":"aws"}}}]}'
+  recorded_at: Wed, 07 Aug 2024 18:26:45 GMT
 recorded_with: VCR 6.1.0

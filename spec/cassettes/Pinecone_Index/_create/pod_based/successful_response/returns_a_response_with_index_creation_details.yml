@@ -30,10 +30,12 @@ http_interactions:
       - origin,access-control-request-method,access-control-request-headers
       Access-Control-Expose-Headers:
       - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
       X-Cloud-Trace-Context:
-      - e365f4b418d3a76a6da7d0f6353d8ecf
+      - 69b78b09986f062bb234440a48497b6b
       Date:
-      - Mon, 29 Jan 2024 16:11:08 GMT
+      - Wed, 07 Aug 2024 18:26:47 GMT
       Server:
       - Google Frontend
       Content-Length:
@@ -45,7 +47,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"error":{"code":"NOT_FOUND","message":"Resource test-index not found"},"status":404}'
-  recorded_at: Mon, 29 Jan 2024 16:11:08 GMT
+  recorded_at: Wed, 07 Aug 2024 18:26:47 GMT
 - request:
     method: post
     uri: https://api.pinecone.io/indexes
@@ -70,16 +72,20 @@ http_interactions:
     headers:
       Content-Type:
       - application/json
+      X-Pinecone-Operation-Id:
+      - 075f5b9c-64f4-473e-a7e6-49d0b1355d71
       Access-Control-Allow-Origin:
       - "*"
       Vary:
       - origin,access-control-request-method,access-control-request-headers
       Access-Control-Expose-Headers:
       - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
       X-Cloud-Trace-Context:
-      - b2331ad2c7cb2e981a4fa02f3f6a72e2
+      - e3e30b65af5abec72c4677b388f55c9c
       Date:
-      - Mon, 29 Jan 2024 16:11:08 GMT
+      - Wed, 07 Aug 2024 18:26:48 GMT
       Server:
       - Google Frontend
       Content-Length:
@@ -91,5 +97,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"name":"test-index","metric":"dotproduct","dimension":3,"status":{"ready":false,"state":"Initializing"},"host":"test-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1","environment":"<PINECONE_ENVIRONMENT>"}}}'
-  recorded_at: Mon, 29 Jan 2024 16:11:08 GMT
+  recorded_at: Wed, 07 Aug 2024 18:26:48 GMT
 recorded_with: VCR 6.1.0

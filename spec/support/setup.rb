@@ -17,10 +17,22 @@ Pinecone.configure do |config|
 end
 
 client = Pinecone::Index.new
-indices = ["example-index-1", "example-index-2"]
-valid_attributes = {
+indices = ["serverless-index", "server-index"]
+serverless_valid_attributes = {
   metric: "dotproduct",
-  name: "example-index-1",
+  name: "serverless-index",
+  dimension: 3,
+  spec: {
+    serverless: {
+      cloud: "aws",
+      region: "us-east-1"
+    }
+  }
+}
+
+server_valid_attributes = {
+  metric: "dotproduct",
+  name: "server-index",
   dimension: 3,
   spec: {
     pod: {
@@ -37,8 +49,9 @@ if ARGV.length == 1
   when "start"
     indices.each do |index_name|
       puts "Setting up #{index_name}"
-      valid_attributes[:name] = index_name
-      response = client.create(valid_attributes)
+      attributes = index_name.start_with?("serverless") ? serverless_valid_attributes : server_valid_attributes
+      attributes[:name] = index_name
+      response = client.create(attributes)
       puts response if response.code != 201
     end
   when "stop"
