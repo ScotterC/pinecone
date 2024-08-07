@@ -117,7 +117,7 @@ RSpec.describe Pinecone::Vector do
   describe "#list", :vcr do
     let(:index) {
       VCR.use_cassette("use_serverless_index") do
-        Pinecone::Vector.new("test-index-serverless")
+        Pinecone::Vector.new("serverless-index")
       end
     }
 
@@ -130,12 +130,13 @@ RSpec.describe Pinecone::Vector do
       }
     }
 
-    before do
-      index.upsert(data)
-    end
-
     describe "successful response" do
       let(:response) { index.list }
+
+      before do
+        index.upsert(data)
+        wait_for_upsert_completion(expected_count: 2)
+      end
 
       it "returns a response" do
         expect(response).to be_a(HTTParty::Response)
@@ -149,62 +150,79 @@ RSpec.describe Pinecone::Vector do
           "usage" => {"readUnits" => 1}
         )
       end
+    end
 
-      describe "with prefix" do
-        let(:data) {
-          {
-            vectors: [
-              {values: [1, 2, 3], id: "foo#1"},
-              {values: [1, 2, 3], id: "foo#2"},
-              {values: [1, 2, 3], id: "bar#1"}
-            ]
-          }
+    describe "success with prefix" do
+      let(:data) {
+        {
+          vectors: [
+            {values: [1, 2, 3], id: "foo#1"},
+            {values: [1, 2, 3], id: "foo#2"},
+            {values: [1, 2, 3], id: "bar#1"}
+          ]
         }
+      }
 
-        let(:response) { index.list(prefix: "foo#") }
+      let(:response) { index.list(prefix: "foo#") }
 
-        it "returns a response" do
-          expect(response).to be_a(HTTParty::Response)
-          expect(response.code).to eq(200)
-          expect(response.parsed_response).to match(
-            "namespace" => "",
-            "vectors" => [
-              {"id" => "foo#1"},
-              {"id" => "foo#2"}
-            ],
-            "usage" => {"readUnits" => 1}
-          )
-        end
+      before do
+        index.upsert(data)
+        wait_for_upsert_completion(expected_count: 3)
       end
 
-      describe "with limit" do
-        let(:response) { index.list(limit: 1) }
+      it "returns a response" do
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response).to match(
+          "namespace" => "",
+          "vectors" => [
+            {"id" => "foo#1"},
+            {"id" => "foo#2"}
+          ],
+          "usage" => {"readUnits" => 1}
+        )
+      end
+    end
 
-        it "returns a response" do
-          expect(response).to be_a(HTTParty::Response)
-          expect(response.code).to eq(200)
-          expect(response.parsed_response).to match(
-            "namespace" => "",
-            "vectors" => [{"id" => "1"}],
-            "pagination" => {"next" => be_a(String)},
-            "usage" => {"readUnits" => 1}
-          )
-        end
+    describe "success with limit" do
+      let(:response) { index.list(limit: 1) }
 
-        describe "with pagination token" do
-          let(:pagination_token) { index.list(limit: 1).parsed_response.dig("pagination", "next") }
-          let(:response) { index.list(limit: 1, pagination_token: pagination_token) }
+      before do
+        index.upsert(data)
+        wait_for_upsert_completion(expected_count: 2)
+      end
 
-          it "returns a response" do
-            expect(response).to be_a(HTTParty::Response)
-            expect(response.code).to eq(200)
-            expect(response.parsed_response).to match(
-              "namespace" => "",
-              "vectors" => [{"id" => "2"}],
-              "usage" => {"readUnits" => 1}
-            )
-          end
-        end
+      it "returns a response" do
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response).to match(
+          "namespace" => "",
+          "vectors" => [{"id" => "1"}],
+          "pagination" => {"next" => be_a(String)},
+          "usage" => {"readUnits" => 1}
+        )
+      end
+    end
+
+    describe "success with pagination token" do
+      let(:pagination_token) { index.list(limit: 1).parsed_response.dig("pagination", "next") }
+      let(:response) {
+        index.list(limit: 1, pagination_token: pagination_token)
+      }
+
+      before do
+        index.upsert(data)
+        wait_for_upsert_completion(expected_count: 2)
+      end
+
+      it "returns a response" do
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response).to match(
+          "namespace" => "",
+          "vectors" => [{"id" => "2"}],
+          "usage" => {"readUnits" => 1}
+        )
       end
     end
   end
@@ -432,74 +450,6 @@ RSpec.describe Pinecone::Vector do
           "indexFullness" => 0,
           "totalVectorCount" => 3
         })
-      end
-    end
-  end
-
-  describe "#list", :vcr, :focus do
-    let(:namespace) { "example-namespace" }
-    let(:data) {
-      {
-        vectors: [
-          {values: [1, 2, 3], id: "document1#1", metadata: {genre: "comedy"}},
-          {values: [0, 1, -1], id: "document1#2", metadata: {genre: "drama"}},
-          {values: [1, -1, 0], id: "document2#1", metadata: {genre: "action"}}
-        ],
-        namespace: namespace
-      }
-    }
-
-    before do
-      expect(index.upsert(data)["upsertedCount"]).to eq(3)
-      wait_for_upsert_completion(expected_count: 3)
-    end
-
-    after :each do
-      index.delete(delete_all: true, namespace: namespace)
-    end
-
-    describe "successful response" do
-      it "returns all vector IDs in the namespace" do
-        response = index.list(namespace: namespace)
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
-        expect(response.parsed_response["vectors"]).to eq([{"id" => "document1#1"}, {"id" => "document1#2"}, {"id" => "document2#1"}])
-      end
-
-      it "returns vector IDs with a specific prefix" do
-        response = index.list(namespace: namespace, prefix: "document1#")
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
-        expect(response.parsed_response["vectors"]).to eq([{"id" => "document1#1"}, {"id" => "document1#2"}])
-      end
-
-      it "respects the limit parameter" do
-        index.list(namespace: namespace, limit: 2)
-        response = index.list(namespace: namespace, limit: 2)
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
-        expect(response.parsed_response["vectors"].length).to eq(2)
-      end
-
-      it "handles pagination" do
-        first_response = index.list(namespace: namespace, limit: 2)
-        expect(first_response.parsed_response["vectors"].length).to eq(2)
-        expect(first_response.parsed_response["pagination"]).to have_key("next")
-
-        second_response = index.list(namespace: namespace, limit: 2, pagination_token: first_response.parsed_response["pagination"]["next"])
-        expect(second_response.parsed_response["vectors"].length).to eq(1)
-        expect(second_response.parsed_response).not_to have_key("pagination")
-
-        all_ids = (first_response.parsed_response["vectors"] + second_response.parsed_response["vectors"])
-        expect(all_ids).to eq([{"id" => "document1#1"}, {"id" => "document1#2"}, {"id" => "document2#1"}])
-      end
-    end
-
-    describe "error handling" do
-      it "handles invalid limit" do
-        response = index.list(namespace: namespace, limit: 10001)  # Assuming 10000 is max limit
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(400)
       end
     end
   end

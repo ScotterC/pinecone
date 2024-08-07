@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 07 Aug 2024 17:49:12 GMT
+      - Wed, 07 Aug 2024 18:46:52 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -33,11 +33,11 @@ http_interactions:
       X-Pinecone-Request-Lsn:
       - '1'
       X-Pinecone-Request-Latency-Ms:
-      - '30'
+      - '33'
       X-Pinecone-Request-Id:
-      - '6359825000553275177'
+      - '8106952813651655468'
       X-Envoy-Upstream-Service-Time:
-      - '30'
+      - '34'
       Grpc-Status:
       - '0'
       Server:
@@ -45,7 +45,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":1}'
-  recorded_at: Wed, 07 Aug 2024 17:49:12 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:52 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/update
@@ -69,7 +69,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 07 Aug 2024 17:49:12 GMT
+      - Wed, 07 Aug 2024 18:46:52 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -79,11 +79,11 @@ http_interactions:
       X-Pinecone-Request-Lsn:
       - '2'
       X-Pinecone-Request-Latency-Ms:
-      - '44'
+      - '31'
       X-Pinecone-Request-Id:
-      - '5052110531158764551'
+      - '488607255379406932'
       X-Envoy-Upstream-Service-Time:
-      - '44'
+      - '32'
       Grpc-Status:
       - '0'
       Server:
@@ -91,7 +91,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Wed, 07 Aug 2024 17:49:12 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:52 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/delete
@@ -115,7 +115,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 07 Aug 2024 17:49:12 GMT
+      - Wed, 07 Aug 2024 18:46:52 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -123,11 +123,11 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '12'
+      - '10'
       X-Pinecone-Request-Id:
-      - '3243965821485611837'
+      - '947106939894729300'
       X-Envoy-Upstream-Service-Time:
-      - '13'
+      - '11'
       Grpc-Status:
       - '0'
       Server:
@@ -135,5 +135,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Wed, 07 Aug 2024 17:49:12 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:52 GMT
 recorded_with: VCR 6.1.0

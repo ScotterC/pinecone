@@ -25,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 07 Aug 2024 17:53:27 GMT
+      - Wed, 07 Aug 2024 18:46:08 GMT
       X-Envoy-Upstream-Service-Time:
-      - '49'
+      - '48'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -37,7 +37,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":3}'
-  recorded_at: Wed, 07 Aug 2024 17:53:27 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:09 GMT
 - request:
     method: post
     uri: https://server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/describe_index_stats
@@ -63,9 +63,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 07 Aug 2024 17:53:27 GMT
+      - Wed, 07 Aug 2024 18:46:08 GMT
       X-Envoy-Upstream-Service-Time:
-      - '1'
+      - '0'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -75,7 +75,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"namespaces":{"":{"vectorCount":2}},"dimension":3,"indexFullness":0,"totalVectorCount":3}'
-  recorded_at: Wed, 07 Aug 2024 17:53:28 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:09 GMT
 - request:
     method: post
     uri: https://server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
@@ -101,9 +101,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 07 Aug 2024 17:53:27 GMT
+      - Wed, 07 Aug 2024 18:46:09 GMT
       X-Envoy-Upstream-Service-Time:
-      - '9'
+      - '7'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -113,5 +113,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Wed, 07 Aug 2024 17:53:28 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:09 GMT
 recorded_with: VCR 6.1.0
