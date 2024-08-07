@@ -157,6 +157,13 @@ index.describe_index_stats(
 )
 ```
 
+List all vectors in an index.
+```ruby
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+index.list(prefix: "document1#", namespace: "example-namespace")
+```
+
 ### Filtering queries
 
 Add a `filter` option to apply filters to your query. You can use vector metadata to limit your search. See [metadata filtering](https://www.pinecone.io/docs/metadata-filtering/) in Pinecode documentation.

@@ -44,7 +44,7 @@ module Pinecone
       def self.new(input)
         validation = QueryContract.new.call(input)
         if validation.success?
-          super(input)
+          super
         else
           raise ArgumentError.new(validation.errors.to_h.inspect)
         end

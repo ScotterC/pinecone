@@ -2,8 +2,8 @@ require "spec_helper"
 
 RSpec.describe Pinecone::Vector do
   let(:index) {
-    VCR.use_cassette("use_index") do
-      Pinecone::Vector.new("example-index-2")
+    VCR.use_cassette("use_serverless_index") do
+      Pinecone::Vector.new("serverless-index")
     end
   }
 
@@ -13,85 +13,90 @@ RSpec.describe Pinecone::Vector do
 
   describe "#upsert", :vcr do
     let(:data) { {vectors: [{values: [1, 2, 3], id: "1"}]} }
-    let(:response) {
-      index.upsert(data)
-    }
 
     describe "successful response" do
-      let(:response) {
+      let(:upsert_response) {
         index.upsert(data)
       }
+
       it "returns a response" do
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
-        expect(response.parsed_response).to eq({"upsertedCount" => 1})
+        expect(upsert_response).to be_a(HTTParty::Response)
+        expect(upsert_response.code).to eq(200)
+        expect(upsert_response.parsed_response).to eq({"upsertedCount" => 1})
       end
     end
 
     describe "unsuccessful response" do
-      let(:response) {
+      let(:upsert_response) {
         index.upsert("foo")
       }
+
       it "returns a response" do
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(400)
-        expect(response.parsed_response).to eq(": Root element must be a message.")
+        expect(upsert_response).to be_a(HTTParty::Response)
+        expect(upsert_response.code).to eq(400)
+        expect(upsert_response.parsed_response).to eq(": Root element must be a message.")
       end
     end
   end
 
   describe "#delete", :vcr do
+    let(:index) {
+      VCR.use_cassette("use_server_index") do
+        Pinecone::Vector.new("server-index") # delete by filter requires server index
+      end
+    }
     let(:data) { {vectors: [{values: [1, 2, 3], id: "5"}]} }
 
     describe "successful response" do
-      let(:response) {
+      let(:delete_response) {
         index.delete(ids: ["5"])
       }
 
       it "returns a response" do
         index.upsert(data)
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
+        expect(delete_response).to be_a(HTTParty::Response)
+        expect(delete_response.code).to eq(200)
       end
     end
 
     describe "successful response with filters" do
-      let(:response) {
+      let(:delete_response) {
         index.delete(filter: {genre: "comedy"})
       }
 
       it "returns a response" do
         index.upsert(data)
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
+        expect(delete_response).to be_a(HTTParty::Response)
+        expect(delete_response.code).to eq(200)
       end
     end
 
     context "when delete_all is true" do
-      let(:response) {
+      let(:delete_response) {
         index.delete(delete_all: true)
       }
+
       it "returns a response" do
         index.upsert(data)
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
+        expect(delete_response).to be_a(HTTParty::Response)
+        expect(delete_response.code).to eq(200)
       end
     end
   end
 
   describe "#fetch", :vcr do
     describe "successful response" do
-      let(:response) {
+      let(:fetch_response) {
         index.fetch(ids: ["1", "2"])
       }
 
       it "returns a response" do
         index.upsert({vectors: [{values: [1, 2, 3], id: "1"}]})
         index.upsert({vectors: [{values: [1, 2, 3], id: "2"}]})
-
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
-        expect(response.parsed_response).to match(
+        wait_for_upsert_completion(expected_count: 2)
+        expect(fetch_response).to be_a(HTTParty::Response)
+        expect(fetch_response.code).to eq(200)
+        expect(fetch_response.parsed_response).to match(
           "namespace" => "",
           "vectors" => {
             "1" => {
@@ -102,7 +107,8 @@ RSpec.describe Pinecone::Vector do
               "id" => "2",
               "values" => [1, 2, 3]
             }
-          }
+          },
+          "usage" => {"readUnits" => 1}
         )
       end
     end
@@ -110,16 +116,16 @@ RSpec.describe Pinecone::Vector do
 
   describe "#update", :vcr do
     describe "successful response" do
-      let(:response) {
+      let(:update_response) {
         index.update(id: "1", values: [1, 0, 3], set_metadata: {genre: "drama"})
       }
 
       it "returns a response" do
         index.upsert({vectors: [{values: [1, 2, 3], id: "1"}]})
 
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
-        expect(response.parsed_response).to eq({})
+        expect(update_response).to be_a(HTTParty::Response)
+        expect(update_response.code).to eq(200)
+        expect(update_response.parsed_response).to eq({})
       end
     end
   end
@@ -139,9 +145,10 @@ RSpec.describe Pinecone::Vector do
     describe "successful response" do
       before do
         index.upsert(data)
+        wait_for_upsert_completion(expected_count: 3)
       end
 
-      let(:response) {
+      let(:query_response) {
         index.query(vector: query_vector)
       }
 
@@ -149,7 +156,7 @@ RSpec.describe Pinecone::Vector do
         Pinecone::Vector::Query.new(vector: query_vector)
       }
 
-      let(:response_with_object) {
+      let(:query_response_with_object) {
         index.query(query_object)
       }
 
@@ -175,70 +182,74 @@ RSpec.describe Pinecone::Vector do
               "values" => []
             }
           ],
-          "namespace" => ""
+          "namespace" => "",
+          "usage" => {"readUnits" => 6}
         }
       }
 
       it "returns a response" do
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.parsed_response).to eq(valid_result)
+        expect(query_response).to be_a(HTTParty::Response)
+        expect(query_response.parsed_response).to eq(valid_result)
       end
 
       it "returns a response when queried with object" do
-        expect(response_with_object).to be_a(HTTParty::Response)
-        expect(response_with_object.parsed_response).to eq(valid_result)
+        expect(query_response_with_object).to be_a(HTTParty::Response)
+        expect(query_response_with_object.parsed_response).to eq(valid_result)
+      end
+    end
+
+    describe "with filter" do
+      before do
+        index.upsert(data)
+        wait_for_upsert_completion(expected_count: 3)
       end
 
-      describe "with filter" do
-        let(:valid_result) {
-          {
-            "results" => [],
-            "matches" => [
-              {
-                "id" => "2",
-                "metadata" => {"genre" => "comedy"},
-                "score" => -0.5,
-                "values" => []
-              },
-              {
-                "id" => "1",
-                "metadata" => {"genre" => "comedy"},
-                "score" => -0.5,
-                "values" => []
-              }
-            ],
-            "namespace" => ""
-          }
+      let(:valid_result) {
+        {
+          "results" => [],
+          "matches" => [
+            {
+              "id" => "2",
+              "metadata" => {"genre" => "comedy"},
+              "score" => -0.5,
+              "values" => []
+            },
+            {
+              "id" => "1",
+              "metadata" => {"genre" => "comedy"},
+              "score" => -0.5,
+              "values" => []
+            }
+          ],
+          "namespace" => "",
+          "usage" => {"readUnits" => 6}
         }
+      }
+      let(:filter) { {genre: {"$eq": "comedy"}} }
+      let(:filter_response) { index.query(vector: query_vector, filter: filter) }
 
-        let(:filter) { {genre: {"$eq": "comedy"}} }
-        let(:response) { index.query(vector: query_vector, filter: filter) }
-
-        it "returns a response" do
-          expect(response).to be_a(HTTParty::Response)
-          expect(response.code).to eq(200)
-          expect(response.parsed_response).to eq(valid_result)
-        end
+      it "returns a response" do
+        expect(filter_response).to be_a(HTTParty::Response)
+        expect(filter_response.code).to eq(200)
+        expect(filter_response.parsed_response).to eq(valid_result)
       end
     end
 
     describe "with namespace" do
       let(:namespace) { "example-namespace" }
+
       before do
         index.upsert(data.merge(namespace: namespace))
+        wait_for_upsert_completion(expected_count: 3)
       end
 
-      after :each do
-        index.delete(delete_all: true, namespace: namespace)
-      end
-
-      let(:response) {
+      let(:query_response) {
         index.query(namespace: "example-namespace", vector: query_vector)
       }
 
       it "returns a response" do
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.parsed_response).to eq({
+        expect(query_response).to be_a(HTTParty::Response)
+        expect(query_response.parsed_response).to eq({
           "results" => [],
           "matches" => [
             {
@@ -259,7 +270,8 @@ RSpec.describe Pinecone::Vector do
               "values" => []
             }
           ],
-          "namespace" => "example-namespace"
+          "namespace" => "example-namespace",
+          "usage" => {"readUnits" => 6}
         })
       end
     end
@@ -274,6 +286,13 @@ RSpec.describe Pinecone::Vector do
   end
 
   describe "#describe_index_stats", :vcr do
+    let(:index) {
+      # Server required for metadata filtering
+      VCR.use_cassette("use_server_index") do
+        Pinecone::Vector.new("server-index")
+      end
+    }
+
     let(:data) {
       {
         vectors: [
@@ -284,7 +303,7 @@ RSpec.describe Pinecone::Vector do
       }
     }
 
-    let(:response) {
+    let(:describe_response) {
       index.describe_index_stats
     }
 
@@ -293,9 +312,9 @@ RSpec.describe Pinecone::Vector do
     end
 
     it "returns a successful response" do
-      expect(response).to be_a(HTTParty::Response)
-      expect(response.code).to eq(200)
-      expect(response.parsed_response).to eq({
+      expect(describe_response).to be_a(HTTParty::Response)
+      expect(describe_response.code).to eq(200)
+      expect(describe_response.parsed_response).to eq({
         "namespaces" => {"" => {"vectorCount" => 3}},
         "dimension" => 3,
         "indexFullness" => 0,
@@ -305,13 +324,14 @@ RSpec.describe Pinecone::Vector do
 
     describe "with filter" do
       let(:filter) { {genre: {"$eq": "comedy"}} }
-      let(:response) {
+      let(:describe_response) {
         index.describe_index_stats(filter: filter)
       }
+
       it "returns a succesful response" do
-        expect(response).to be_a(HTTParty::Response)
-        expect(response.code).to eq(200)
-        expect(response.parsed_response).to eq({
+        expect(describe_response).to be_a(HTTParty::Response)
+        expect(describe_response.code).to eq(200)
+        expect(describe_response.parsed_response).to eq({
           "namespaces" => {"" => {"vectorCount" => 2}},
           "dimension" => 3,
           "indexFullness" => 0,
@@ -319,5 +339,88 @@ RSpec.describe Pinecone::Vector do
         })
       end
     end
+  end
+
+  describe "#list", :vcr, :focus do
+    let(:namespace) { "example-namespace" }
+    let(:data) {
+      {
+        vectors: [
+          {values: [1, 2, 3], id: "document1#1", metadata: {genre: "comedy"}},
+          {values: [0, 1, -1], id: "document1#2", metadata: {genre: "drama"}},
+          {values: [1, -1, 0], id: "document2#1", metadata: {genre: "action"}}
+        ],
+        namespace: namespace
+      }
+    }
+
+    before do
+      expect(index.upsert(data)["upsertedCount"]).to eq(3)
+      wait_for_upsert_completion(expected_count: 3)
+    end
+
+    after :each do
+      index.delete(delete_all: true, namespace: namespace)
+    end
+
+    describe "successful response" do
+      it "returns all vector IDs in the namespace" do
+        response = index.list(namespace: namespace)
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response["vectors"]).to eq([{"id" => "document1#1"}, {"id" => "document1#2"}, {"id" => "document2#1"}])
+      end
+
+      it "returns vector IDs with a specific prefix" do
+        response = index.list(namespace: namespace, prefix: "document1#")
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response["vectors"]).to eq([{"id" => "document1#1"}, {"id" => "document1#2"}])
+      end
+
+      it "respects the limit parameter" do
+        index.list(namespace: namespace, limit: 2)
+        response = index.list(namespace: namespace, limit: 2)
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(200)
+        expect(response.parsed_response["vectors"].length).to eq(2)
+      end
+
+      it "handles pagination" do
+        first_response = index.list(namespace: namespace, limit: 2)
+        expect(first_response.parsed_response["vectors"].length).to eq(2)
+        expect(first_response.parsed_response["pagination"]).to have_key("next")
+
+        second_response = index.list(namespace: namespace, limit: 2, pagination_token: first_response.parsed_response["pagination"]["next"])
+        expect(second_response.parsed_response["vectors"].length).to eq(1)
+        expect(second_response.parsed_response).not_to have_key("pagination")
+
+        all_ids = (first_response.parsed_response["vectors"] + second_response.parsed_response["vectors"])
+        expect(all_ids).to eq([{"id" => "document1#1"}, {"id" => "document1#2"}, {"id" => "document2#1"}])
+      end
+    end
+
+    describe "error handling" do
+      it "handles invalid limit" do
+        response = index.list(namespace: namespace, limit: 10001)  # Assuming 10000 is max limit
+        expect(response).to be_a(HTTParty::Response)
+        expect(response.code).to eq(400)
+      end
+    end
+  end
+
+  # Total Vector Count can take awhile
+  def wait_for_upsert_completion(expected_count:)
+    timeout = 20
+    interval = 0.5
+    Timeout.timeout(timeout) do
+      loop do
+        response = index.describe_index_stats
+        break if response.parsed_response["totalVectorCount"] == expected_count
+        sleep interval
+      end
+    end
+  rescue Timeout::Error
+    raise "Timed out waiting for upsert to complete"
   end
 end

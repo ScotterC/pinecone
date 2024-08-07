@@ -30,10 +30,12 @@ http_interactions:
       - origin,access-control-request-method,access-control-request-headers
       Access-Control-Expose-Headers:
       - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
       X-Cloud-Trace-Context:
-      - 9c21a0ceff2e8bda6517e3a76f27937d
+      - 4c0923917adea60f099152b090484ff0
       Date:
-      - Mon, 29 Jan 2024 16:11:06 GMT
+      - Wed, 07 Aug 2024 18:33:58 GMT
       Server:
       - Google Frontend
       Content-Length:
@@ -46,7 +48,7 @@ http_interactions:
       encoding: UTF-8
       string: 'Failed to deserialize the JSON body into the target type: missing field
         `source` at line 1 column 62'
-  recorded_at: Mon, 29 Jan 2024 16:11:06 GMT
+  recorded_at: Wed, 07 Aug 2024 18:33:58 GMT
 - request:
     method: delete
     uri: https://api.pinecone.io/collections/test-collection
@@ -75,10 +77,12 @@ http_interactions:
       - origin,access-control-request-method,access-control-request-headers
       Access-Control-Expose-Headers:
       - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
       X-Cloud-Trace-Context:
-      - 6d8c2e03d323b393bef118a0cb202ac6
+      - 871b1bb7f321ce0e3a31f93c5047a93d
       Date:
-      - Mon, 29 Jan 2024 16:11:06 GMT
+      - Wed, 07 Aug 2024 18:33:59 GMT
       Content-Type:
       - text/html
       Server:
@@ -92,5 +96,246 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-  recorded_at: Mon, 29 Jan 2024 16:11:06 GMT
+  recorded_at: Wed, 07 Aug 2024 18:33:59 GMT
+- request:
+    method: get
+    uri: https://api.pinecone.io/collections/test-collection
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
+      X-Cloud-Trace-Context:
+      - 3c676df24a1ce4c61afdc595f912d6dd
+      Date:
+      - Wed, 07 Aug 2024 18:33:59 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '78'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: '{"name":"test-collection","status":"Terminating","environment":"<PINECONE_ENVIRONMENT>"}'
+  recorded_at: Wed, 07 Aug 2024 18:33:59 GMT
+- request:
+    method: get
+    uri: https://api.pinecone.io/collections/test-collection
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
+      X-Cloud-Trace-Context:
+      - 2ef9086d6e3b45aad592d4d59d32e2a1
+      Date:
+      - Wed, 07 Aug 2024 18:33:59 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '78'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: '{"name":"test-collection","status":"Terminating","environment":"<PINECONE_ENVIRONMENT>"}'
+  recorded_at: Wed, 07 Aug 2024 18:33:59 GMT
+- request:
+    method: get
+    uri: https://api.pinecone.io/collections/test-collection
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
+      X-Cloud-Trace-Context:
+      - 749ae6f4906dc0421dbd85fc856ddb51
+      Date:
+      - Wed, 07 Aug 2024 18:34:00 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '78'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: '{"name":"test-collection","status":"Terminating","environment":"<PINECONE_ENVIRONMENT>"}'
+  recorded_at: Wed, 07 Aug 2024 18:34:00 GMT
+- request:
+    method: get
+    uri: https://api.pinecone.io/collections/test-collection
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
+      X-Cloud-Trace-Context:
+      - fb86c39a4469d679bc698197da5e1f38
+      Date:
+      - Wed, 07 Aug 2024 18:34:01 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '78'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: '{"name":"test-collection","status":"Terminating","environment":"<PINECONE_ENVIRONMENT>"}'
+  recorded_at: Wed, 07 Aug 2024 18:34:01 GMT
+- request:
+    method: get
+    uri: https://api.pinecone.io/collections/test-collection
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Content-Type:
+      - text/plain; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Vary:
+      - origin,access-control-request-method,access-control-request-headers
+      Access-Control-Expose-Headers:
+      - "*"
+      X-Pinecone-Api-Version:
+      - 2024-04
+      X-Cloud-Trace-Context:
+      - 6b3300434bff21809e648fca4ae50a71
+      Date:
+      - Wed, 07 Aug 2024 18:34:01 GMT
+      Server:
+      - Google Frontend
+      Content-Length:
+      - '90'
+      Via:
+      - 1.1 google
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: UTF-8
+      string: '{"error":{"code":"NOT_FOUND","message":"Resource test-collection not
+        found"},"status":404}'
+  recorded_at: Wed, 07 Aug 2024 18:34:01 GMT
 recorded_with: VCR 6.1.0
