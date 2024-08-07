@@ -23,7 +23,7 @@ http_interactions:
       message: Bad Request
     headers:
       Date:
-      - Wed, 07 Aug 2024 17:49:09 GMT
+      - Wed, 07 Aug 2024 18:46:45 GMT
       Content-Type:
       - text/plain
       Content-Length:
@@ -35,7 +35,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ": Root element must be a message."
-  recorded_at: Wed, 07 Aug 2024 17:49:09 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:45 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/delete
@@ -59,7 +59,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Wed, 07 Aug 2024 17:49:10 GMT
+      - Wed, 07 Aug 2024 18:46:45 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -67,15 +67,15 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '80'
+      - '39'
       X-Pinecone-Request-Id:
-      - '3075019710536462273'
+      - '8451834062307051237'
       X-Envoy-Upstream-Service-Time:
-      - '81'
+      - '39'
       Server:
       - envoy
     body:
       encoding: UTF-8
       string: '{"code":5,"message":"Namespace not found","details":[]}'
-  recorded_at: Wed, 07 Aug 2024 17:49:10 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:45 GMT
 recorded_with: VCR 6.1.0

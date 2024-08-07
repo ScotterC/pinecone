@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 07 Aug 2024 17:49:09 GMT
+      - Wed, 07 Aug 2024 18:46:45 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -33,11 +33,11 @@ http_interactions:
       X-Pinecone-Request-Lsn:
       - '1'
       X-Pinecone-Request-Latency-Ms:
-      - '62'
+      - '170'
       X-Pinecone-Request-Id:
-      - '8373139083634977725'
+      - '6865562909832141795'
       X-Envoy-Upstream-Service-Time:
-      - '63'
+      - '170'
       Grpc-Status:
       - '0'
       Server:
@@ -45,7 +45,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":1}'
-  recorded_at: Wed, 07 Aug 2024 17:49:09 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:45 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/delete
@@ -69,7 +69,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 07 Aug 2024 17:49:09 GMT
+      - Wed, 07 Aug 2024 18:46:45 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -77,11 +77,11 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '10'
+      - '44'
       X-Pinecone-Request-Id:
-      - '491744994311037654'
+      - '502407124432237438'
       X-Envoy-Upstream-Service-Time:
-      - '11'
+      - '45'
       Grpc-Status:
       - '0'
       Server:
@@ -89,5 +89,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Wed, 07 Aug 2024 17:49:09 GMT
+  recorded_at: Wed, 07 Aug 2024 18:46:45 GMT
 recorded_with: VCR 6.1.0

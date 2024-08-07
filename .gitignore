@@ -1,3 +1,4 @@
 .env
 scratch/
 *.gem
+settings.json

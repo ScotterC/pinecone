@@ -23,7 +23,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Wed, 07 Aug 2024 18:00:19 GMT
+      - Wed, 07 Aug 2024 19:34:53 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -31,15 +31,15 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '40'
+      - '0'
       X-Pinecone-Request-Id:
-      - '5725234991588895942'
+      - '9088300449105557427'
       X-Envoy-Upstream-Service-Time:
-      - '41'
+      - '1'
       Server:
       - envoy
     body:
       encoding: UTF-8
       string: '{"code":5,"message":"Namespace not found","details":[]}'
-  recorded_at: Wed, 07 Aug 2024 18:00:19 GMT
+  recorded_at: Wed, 07 Aug 2024 19:34:53 GMT
 recorded_with: VCR 6.1.0
