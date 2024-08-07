@@ -40,7 +40,7 @@ RSpec.describe Pinecone::Index do
         expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(200)
         expect(response.parsed_response).to be_a(Hash)
-        expect(response["indexes"].map { |h| h["name"] }).to include("example-index-2")
+        expect(response["indexes"].map { |h| h["name"] }).to include("server-index")
       end
     end
   end
@@ -53,9 +53,9 @@ RSpec.describe Pinecone::Index do
 
       describe "successful response" do
         before do
-          response = client.delete(serverless_attributes[:name])
+          resp = client.delete(serverless_attributes[:name])
           sleep 1
-          if response.ok?
+          if resp.ok?
             expect(client.describe(serverless_attributes[:name]).code).to eq(404)
           end
         end
@@ -160,7 +160,7 @@ RSpec.describe Pinecone::Index do
   end
 
   describe "#configure_index", :vcr do
-    let(:index_name) { "example-index-2" }
+    let(:index_name) { "server-index" }
 
     let(:response) {
       client.configure(index_name, spec: {pod: {replicas: 2}})

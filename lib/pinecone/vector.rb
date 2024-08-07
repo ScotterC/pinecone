@@ -26,7 +26,6 @@ module Pinecone
         deleteAll: delete_all,
         filter: filter
       }
-
       inputs.delete(:filter) if delete_all || ids.any?
       payload = options.merge(body: inputs.to_json)
       self.class.post("#{@base_uri}/vectors/delete", payload)
@@ -79,6 +78,18 @@ module Pinecone
         options.merge(body: {filter: filter}.to_json)
       end
       self.class.post("#{@base_uri}/describe_index_stats", payload)
+    end
+
+    def list(namespace: "", prefix: nil, limit: 100, pagination_token: nil)
+      query_params = {
+        namespace: namespace,
+        limit: limit
+      }
+      query_params[:prefix] = prefix if prefix
+      query_params[:paginationToken] = pagination_token if pagination_token
+
+      query_string = URI.encode_www_form(query_params)
+      self.class.get("#{@base_uri}/vectors/list?#{query_string}", options)
     end
 
     def options

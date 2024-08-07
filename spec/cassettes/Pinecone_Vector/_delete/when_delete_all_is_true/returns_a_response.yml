@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
+    uri: https://server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/upsert
     body:
       encoding: UTF-8
       string: '{"vectors":[{"values":[1,2,3],"id":"5"}]}'
@@ -25,9 +25,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 29 Jan 2024 16:11:13 GMT
+      - Wed, 07 Aug 2024 17:49:10 GMT
       X-Envoy-Upstream-Service-Time:
-      - '11'
+      - '8'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -37,10 +37,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":1}'
-  recorded_at: Mon, 29 Jan 2024 16:11:13 GMT
+  recorded_at: Wed, 07 Aug 2024 17:49:11 GMT
 - request:
     method: post
-    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
+    uri: https://server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
     body:
       encoding: UTF-8
       string: '{"namespace":"","ids":[],"deleteAll":true}'
@@ -63,9 +63,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 29 Jan 2024 16:11:13 GMT
+      - Wed, 07 Aug 2024 17:49:10 GMT
       X-Envoy-Upstream-Service-Time:
-      - '12'
+      - '8'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -75,10 +75,10 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Mon, 29 Jan 2024 16:11:13 GMT
+  recorded_at: Wed, 07 Aug 2024 17:49:11 GMT
 - request:
     method: post
-    uri: https://example-index-2-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
+    uri: https://server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
     body:
       encoding: UTF-8
       string: '{"namespace":"","ids":[],"deleteAll":true}'
@@ -101,9 +101,9 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 29 Jan 2024 16:11:13 GMT
+      - Wed, 07 Aug 2024 17:49:11 GMT
       X-Envoy-Upstream-Service-Time:
-      - '9'
+      - '8'
       Grpc-Status:
       - '0'
       Content-Length:
@@ -113,5 +113,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Mon, 29 Jan 2024 16:11:13 GMT
+  recorded_at: Wed, 07 Aug 2024 17:49:11 GMT
 recorded_with: VCR 6.1.0

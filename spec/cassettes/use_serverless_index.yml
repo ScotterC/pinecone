@@ -1,49 +1,49 @@
 ---
 http_interactions:
-- request:
-    method: get
-    uri: https://api.pinecone.io/indexes/test-index-serverless
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json
-      Access-Control-Allow-Origin:
-      - "*"
-      Vary:
-      - origin,access-control-request-method,access-control-request-headers
-      Access-Control-Expose-Headers:
-      - "*"
-      X-Cloud-Trace-Context:
-      - ad1a5890b0d1eaa19ef59c99396ddb9a
-      Date:
-      - Wed, 17 Apr 2024 14:50:52 GMT
-      Server:
-      - Google Frontend
-      Content-Length:
-      - '237'
-      Via:
-      - 1.1 google
-      Alt-Svc:
-      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
-    body:
-      encoding: UTF-8
-      string: '{"name":"test-index-serverless","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"test-index-serverless-d2c1065.svc.aped-4627-b74a.pinecone.io","spec":{"serverless":{"region":"us-east-1","cloud":"aws"}}}'
-  recorded_at: Wed, 17 Apr 2024 14:50:52 GMT
+  - request:
+      method: get
+      uri: https://api.pinecone.io/indexes/test-index-serverless
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Content-Type:
+          - application/json
+        Accept:
+          - application/json
+        Api-Key:
+          - "<PINECONE_API_KEY>"
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        User-Agent:
+          - Ruby
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Content-Type:
+          - application/json
+        Access-Control-Allow-Origin:
+          - "*"
+        Vary:
+          - origin,access-control-request-method,access-control-request-headers
+        Access-Control-Expose-Headers:
+          - "*"
+        X-Cloud-Trace-Context:
+          - ad1a5890b0d1eaa19ef59c99396ddb9a
+        Date:
+          - Wed, 17 Apr 2024 14:50:52 GMT
+        Server:
+          - Google Frontend
+        Content-Length:
+          - "237"
+        Via:
+          - 1.1 google
+        Alt-Svc:
+          - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      body:
+        encoding: UTF-8
+        string: '{"name":"test-index-serverless","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"test-index-serverless-d2c1065.svc.aped-4627-b74a.pinecone.io","spec":{"serverless":{"region":"us-east-1","cloud":"aws"}}}'
+    recorded_at: Wed, 17 Apr 2024 14:50:52 GMT
 recorded_with: VCR 6.1.0
