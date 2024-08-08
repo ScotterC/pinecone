@@ -127,16 +127,18 @@ index.list(
   prefix: "example-prefix",
 )
 
-# also as a block (default limit of 100)
+
 index.list(
   namespace: "example-namespace",
   prefix: "example-prefix",
-) do |vector_batch|
-  puts vector_batch
+  limit: 150
+) do |vector_id|
+  puts vector_id
 end
 ```
 
 List vector IDs with pagination (only for serverless indexes)
+(default limit of 100)
 ```ruby
 pinecone = Pinecone::Client.new
 index = pinecone.index("example-index")
