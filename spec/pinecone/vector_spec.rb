@@ -115,6 +115,88 @@ RSpec.describe Pinecone::Vector do
   end
 
   describe "#list", :vcr do
+    let(:data) {
+      {
+        vectors: [
+          {values: [1, 2, 3], id: "test1"},
+          {values: [4, 5, 6], id: "test2"},
+          {values: [7, 8, 9], id: "test3"},
+          {values: [10, 11, 12], id: "other1"}
+        ]
+      }
+    }
+
+    before do
+      index.upsert(data)
+      wait_for_upsert_completion(expected_count: 4)
+    end
+
+    context "without a block" do
+      it "returns all IDs" do
+        result = index.list
+        expect(result).to match_array(["test1", "test2", "test3", "other1"])
+      end
+
+      it "respects the limit parameter" do
+        result = index.list(limit: 2)
+        expect(result.length).to eq(2)
+        expect(["test1", "test2", "test3", "other1"]).to include(*result)
+      end
+
+      it "filters by prefix" do
+        result = index.list(prefix: "test")
+        expect(result).to match_array(["test1", "test2", "test3"])
+      end
+
+      it "respects namespace" do
+        index.upsert(vectors: [{values: [13, 14, 15], id: "ns1"}], namespace: "example-namespace")
+        wait_for_upsert_completion(expected_count: 5)
+
+        result = index.list(namespace: "example-namespace")
+        expect(result).to eq(["ns1"])
+      end
+    end
+
+    context "with a block" do
+      it "yields batches of IDs" do
+        yielded_ids = []
+        index.list do |batch|
+          yielded_ids.concat(batch)
+        end
+        expect(yielded_ids).to match_array(["test1", "test2", "test3", "other1"])
+      end
+
+      it "respects the limit parameter" do
+        yielded_ids = []
+        index.list(limit: 2) do |batch|
+          yielded_ids.concat(batch)
+        end
+        expect(yielded_ids.length).to eq(2)
+        expect(["test1", "test2", "test3", "other1"]).to include(*yielded_ids)
+      end
+
+      it "filters by prefix" do
+        yielded_ids = []
+        index.list(prefix: "test") do |batch|
+          yielded_ids.concat(batch)
+        end
+        expect(yielded_ids).to match_array(["test1", "test2", "test3"])
+      end
+
+      it "respects namespace" do
+        index.upsert(vectors: [{values: [13, 14, 15], id: "ns1"}], namespace: "example-namespace")
+        wait_for_upsert_completion(expected_count: 5)
+
+        yielded_ids = []
+        index.list(namespace: "example-namespace") do |batch|
+          yielded_ids.concat(batch)
+        end
+        expect(yielded_ids).to eq(["ns1"])
+      end
+    end
+  end
+
+  describe "#list_paginated", :vcr do
     let(:index) {
       VCR.use_cassette("use_serverless_index") do
         Pinecone::Vector.new("serverless-index")
@@ -131,7 +213,7 @@ RSpec.describe Pinecone::Vector do
     }
 
     describe "successful response" do
-      let(:response) { index.list }
+      let(:response) { index.list_paginated }
 
       before do
         index.upsert(data)
@@ -163,7 +245,7 @@ RSpec.describe Pinecone::Vector do
         }
       }
 
-      let(:response) { index.list(prefix: "foo#") }
+      let(:response) { index.list_paginated(prefix: "foo#") }
 
       before do
         index.upsert(data)
@@ -185,7 +267,7 @@ RSpec.describe Pinecone::Vector do
     end
 
     describe "success with limit" do
-      let(:response) { index.list(limit: 1) }
+      let(:response) { index.list_paginated(limit: 1) }
 
       before do
         index.upsert(data)
@@ -205,9 +287,9 @@ RSpec.describe Pinecone::Vector do
     end
 
     describe "success with pagination token" do
-      let(:pagination_token) { index.list(limit: 1).parsed_response.dig("pagination", "next") }
+      let(:pagination_token) { index.list_paginated(limit: 1).parsed_response.dig("pagination", "next") }
       let(:response) {
-        index.list(limit: 1, pagination_token: pagination_token)
+        index.list_paginated(limit: 1, pagination_token: pagination_token)
       }
 
       before do
