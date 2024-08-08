@@ -32,6 +32,8 @@ RSpec.configure do |c|
   # Only use indexes with names: ["serverless-index", "server-index"]
   # Only use namespaces with names: ["example-namespace", ""]
   c.after(:each) do
-    IndexHelpers.clear_indices
+    VCR.use_cassette("clear_index") do
+      IndexHelpers.clear_indices
+    end
   end
 end

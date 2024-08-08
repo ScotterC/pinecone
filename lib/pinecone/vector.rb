@@ -39,11 +39,14 @@ module Pinecone
     def list(prefix: nil, limit: nil, namespace: nil, &block)
       all_ids = []
       pagination_token = nil
+      total_fetched = 0
 
       loop do
+        current_limit = limit.nil? ? 100 : [limit - total_fetched, 100].min
+
         response = list_paginated(
           prefix: prefix,
-          limit: limit,
+          limit: current_limit,
           pagination_token: pagination_token,
           namespace: namespace
         )
@@ -59,9 +62,12 @@ module Pinecone
           all_ids.concat(ids)
         end
 
-        pagination_token = results["paginationToken"]
+        total_fetched += ids.length
+        pagination_token = results.dig("pagination", "next")
+
+        break if ids.empty?
+        break if limit && total_fetched >= limit
         break if pagination_token.nil? || pagination_token.empty?
-        break if limit && all_ids.length >= limit
       end
 
       if block

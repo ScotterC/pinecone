@@ -23,7 +23,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:37 GMT
+      - Thu, 08 Aug 2024 20:52:54 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -33,11 +33,11 @@ http_interactions:
       X-Pinecone-Request-Lsn:
       - '1'
       X-Pinecone-Request-Latency-Ms:
-      - '31'
+      - '119'
       X-Pinecone-Request-Id:
-      - '8429124158285148072'
+      - '8376377409324306569'
       X-Envoy-Upstream-Service-Time:
-      - '31'
+      - '120'
       Grpc-Status:
       - '0'
       Server:
@@ -45,7 +45,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"upsertedCount":4}'
-  recorded_at: Thu, 08 Aug 2024 20:21:37 GMT
+  recorded_at: Thu, 08 Aug 2024 20:52:54 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
@@ -69,7 +69,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:38 GMT
+      - Thu, 08 Aug 2024 20:52:54 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -77,9 +77,9 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '2'
+      - '3'
       X-Pinecone-Request-Id:
-      - '8630910819883885308'
+      - '443554804804242475'
       X-Envoy-Upstream-Service-Time:
       - '3'
       Grpc-Status:
@@ -89,7 +89,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:38 GMT
+  recorded_at: Thu, 08 Aug 2024 20:52:54 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
@@ -113,7 +113,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:38 GMT
+      - Thu, 08 Aug 2024 20:52:54 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -123,183 +123,7 @@ http_interactions:
       X-Pinecone-Request-Latency-Ms:
       - '3'
       X-Pinecone-Request-Id:
-      - '4101893741335321363'
-      X-Envoy-Upstream-Service-Time:
-      - '3'
-      Grpc-Status:
-      - '0'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:38 GMT
-- request:
-    method: post
-    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
-    body:
-      encoding: UTF-8
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Thu, 08 Aug 2024 20:21:39 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '70'
-      Connection:
-      - keep-alive
-      X-Pinecone-Request-Latency-Ms:
-      - '3'
-      X-Pinecone-Request-Id:
-      - '7735571847042829208'
-      X-Envoy-Upstream-Service-Time:
-      - '3'
-      Grpc-Status:
-      - '0'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:39 GMT
-- request:
-    method: post
-    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
-    body:
-      encoding: UTF-8
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Thu, 08 Aug 2024 20:21:39 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '70'
-      Connection:
-      - keep-alive
-      X-Pinecone-Request-Latency-Ms:
-      - '3'
-      X-Pinecone-Request-Id:
-      - '2722406256708591204'
-      X-Envoy-Upstream-Service-Time:
-      - '3'
-      Grpc-Status:
-      - '0'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:39 GMT
-- request:
-    method: post
-    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
-    body:
-      encoding: UTF-8
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Thu, 08 Aug 2024 20:21:40 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '70'
-      Connection:
-      - keep-alive
-      X-Pinecone-Request-Latency-Ms:
-      - '2'
-      X-Pinecone-Request-Id:
-      - '7291678743068708769'
-      X-Envoy-Upstream-Service-Time:
-      - '3'
-      Grpc-Status:
-      - '0'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:40 GMT
-- request:
-    method: post
-    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
-    body:
-      encoding: UTF-8
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Thu, 08 Aug 2024 20:21:41 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '70'
-      Connection:
-      - keep-alive
-      X-Pinecone-Request-Latency-Ms:
-      - '3'
-      X-Pinecone-Request-Id:
-      - '5311190870589171461'
+      - '6506181923512922945'
       X-Envoy-Upstream-Service-Time:
       - '4'
       Grpc-Status:
@@ -309,7 +133,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:41 GMT
+  recorded_at: Thu, 08 Aug 2024 20:52:54 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
@@ -333,7 +157,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:41 GMT
+      - Thu, 08 Aug 2024 20:52:55 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -343,7 +167,51 @@ http_interactions:
       X-Pinecone-Request-Latency-Ms:
       - '3'
       X-Pinecone-Request-Id:
-      - '3835835492574422386'
+      - '6416745219444857950'
+      X-Envoy-Upstream-Service-Time:
+      - '3'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
+  recorded_at: Thu, 08 Aug 2024 20:52:55 GMT
+- request:
+    method: post
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:52:56 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '70'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Latency-Ms:
+      - '3'
+      X-Pinecone-Request-Id:
+      - '7808790544940753061'
       X-Envoy-Upstream-Service-Time:
       - '4'
       Grpc-Status:
@@ -353,7 +221,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:41 GMT
+  recorded_at: Thu, 08 Aug 2024 20:52:56 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
@@ -377,7 +245,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:42 GMT
+      - Thu, 08 Aug 2024 20:52:56 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -385,9 +253,53 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '2'
+      - '3'
       X-Pinecone-Request-Id:
-      - '2158107811560015053'
+      - '540239514068057097'
+      X-Envoy-Upstream-Service-Time:
+      - '4'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
+  recorded_at: Thu, 08 Aug 2024 20:52:56 GMT
+- request:
+    method: post
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:52:57 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '70'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Latency-Ms:
+      - '3'
+      X-Pinecone-Request-Id:
+      - '712710374297344181'
       X-Envoy-Upstream-Service-Time:
       - '3'
       Grpc-Status:
@@ -397,7 +309,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:42 GMT
+  recorded_at: Thu, 08 Aug 2024 20:52:57 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
@@ -421,7 +333,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:42 GMT
+      - Thu, 08 Aug 2024 20:52:57 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -429,9 +341,9 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '2'
+      - '3'
       X-Pinecone-Request-Id:
-      - '4011564405826121247'
+      - '7114797734668211614'
       X-Envoy-Upstream-Service-Time:
       - '3'
       Grpc-Status:
@@ -441,7 +353,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"namespaces":{},"dimension":3,"indexFullness":0,"totalVectorCount":0}'
-  recorded_at: Thu, 08 Aug 2024 20:21:42 GMT
+  recorded_at: Thu, 08 Aug 2024 20:52:57 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
@@ -465,7 +377,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:43 GMT
+      - Thu, 08 Aug 2024 20:52:58 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -475,7 +387,97 @@ http_interactions:
       X-Pinecone-Request-Latency-Ms:
       - '3'
       X-Pinecone-Request-Id:
-      - '3693251825627904981'
+      - '191171846966051899'
+      X-Envoy-Upstream-Service-Time:
+      - '3'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"namespaces":{"":{"vectorCount":4}},"dimension":3,"indexFullness":0,"totalVectorCount":4}'
+  recorded_at: Thu, 08 Aug 2024 20:52:58 GMT
+- request:
+    method: post
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/upsert
+    body:
+      encoding: UTF-8
+      string: '{"vectors":[{"values":[0,1,2],"id":"extra0"},{"values":[1,2,3],"id":"extra1"},{"values":[2,3,4],"id":"extra2"},{"values":[3,4,5],"id":"extra3"},{"values":[4,5,6],"id":"extra4"},{"values":[5,6,7],"id":"extra5"},{"values":[6,7,8],"id":"extra6"},{"values":[7,8,9],"id":"extra7"},{"values":[8,9,10],"id":"extra8"},{"values":[9,10,11],"id":"extra9"},{"values":[10,11,12],"id":"extra10"},{"values":[11,12,13],"id":"extra11"},{"values":[12,13,14],"id":"extra12"},{"values":[13,14,15],"id":"extra13"},{"values":[14,15,16],"id":"extra14"},{"values":[15,16,17],"id":"extra15"},{"values":[16,17,18],"id":"extra16"},{"values":[17,18,19],"id":"extra17"},{"values":[18,19,20],"id":"extra18"},{"values":[19,20,21],"id":"extra19"},{"values":[20,21,22],"id":"extra20"},{"values":[21,22,23],"id":"extra21"},{"values":[22,23,24],"id":"extra22"},{"values":[23,24,25],"id":"extra23"},{"values":[24,25,26],"id":"extra24"},{"values":[25,26,27],"id":"extra25"},{"values":[26,27,28],"id":"extra26"},{"values":[27,28,29],"id":"extra27"},{"values":[28,29,30],"id":"extra28"},{"values":[29,30,31],"id":"extra29"},{"values":[30,31,32],"id":"extra30"},{"values":[31,32,33],"id":"extra31"},{"values":[32,33,34],"id":"extra32"},{"values":[33,34,35],"id":"extra33"},{"values":[34,35,36],"id":"extra34"},{"values":[35,36,37],"id":"extra35"},{"values":[36,37,38],"id":"extra36"},{"values":[37,38,39],"id":"extra37"},{"values":[38,39,40],"id":"extra38"},{"values":[39,40,41],"id":"extra39"},{"values":[40,41,42],"id":"extra40"},{"values":[41,42,43],"id":"extra41"},{"values":[42,43,44],"id":"extra42"},{"values":[43,44,45],"id":"extra43"},{"values":[44,45,46],"id":"extra44"},{"values":[45,46,47],"id":"extra45"},{"values":[46,47,48],"id":"extra46"},{"values":[47,48,49],"id":"extra47"},{"values":[48,49,50],"id":"extra48"},{"values":[49,50,51],"id":"extra49"},{"values":[50,51,52],"id":"extra50"},{"values":[51,52,53],"id":"extra51"},{"values":[52,53,54],"id":"extra52"},{"values":[53,54,55],"id":"extra53"},{"values":[54,55,56],"id":"extra54"},{"values":[55,56,57],"id":"extra55"},{"values":[56,57,58],"id":"extra56"},{"values":[57,58,59],"id":"extra57"},{"values":[58,59,60],"id":"extra58"},{"values":[59,60,61],"id":"extra59"},{"values":[60,61,62],"id":"extra60"},{"values":[61,62,63],"id":"extra61"},{"values":[62,63,64],"id":"extra62"},{"values":[63,64,65],"id":"extra63"},{"values":[64,65,66],"id":"extra64"},{"values":[65,66,67],"id":"extra65"},{"values":[66,67,68],"id":"extra66"},{"values":[67,68,69],"id":"extra67"},{"values":[68,69,70],"id":"extra68"},{"values":[69,70,71],"id":"extra69"},{"values":[70,71,72],"id":"extra70"},{"values":[71,72,73],"id":"extra71"},{"values":[72,73,74],"id":"extra72"},{"values":[73,74,75],"id":"extra73"},{"values":[74,75,76],"id":"extra74"},{"values":[75,76,77],"id":"extra75"},{"values":[76,77,78],"id":"extra76"},{"values":[77,78,79],"id":"extra77"},{"values":[78,79,80],"id":"extra78"},{"values":[79,80,81],"id":"extra79"},{"values":[80,81,82],"id":"extra80"},{"values":[81,82,83],"id":"extra81"},{"values":[82,83,84],"id":"extra82"},{"values":[83,84,85],"id":"extra83"},{"values":[84,85,86],"id":"extra84"},{"values":[85,86,87],"id":"extra85"},{"values":[86,87,88],"id":"extra86"},{"values":[87,88,89],"id":"extra87"},{"values":[88,89,90],"id":"extra88"},{"values":[89,90,91],"id":"extra89"},{"values":[90,91,92],"id":"extra90"},{"values":[91,92,93],"id":"extra91"},{"values":[92,93,94],"id":"extra92"},{"values":[93,94,95],"id":"extra93"},{"values":[94,95,96],"id":"extra94"},{"values":[95,96,97],"id":"extra95"},{"values":[96,97,98],"id":"extra96"},{"values":[97,98,99],"id":"extra97"},{"values":[98,99,100],"id":"extra98"},{"values":[99,100,101],"id":"extra99"},{"values":[100,101,102],"id":"extra100"},{"values":[101,102,103],"id":"extra101"},{"values":[102,103,104],"id":"extra102"},{"values":[103,104,105],"id":"extra103"},{"values":[104,105,106],"id":"extra104"},{"values":[105,106,107],"id":"extra105"},{"values":[106,107,108],"id":"extra106"},{"values":[107,108,109],"id":"extra107"},{"values":[108,109,110],"id":"extra108"},{"values":[109,110,111],"id":"extra109"},{"values":[110,111,112],"id":"extra110"},{"values":[111,112,113],"id":"extra111"},{"values":[112,113,114],"id":"extra112"},{"values":[113,114,115],"id":"extra113"},{"values":[114,115,116],"id":"extra114"},{"values":[115,116,117],"id":"extra115"},{"values":[116,117,118],"id":"extra116"},{"values":[117,118,119],"id":"extra117"},{"values":[118,119,120],"id":"extra118"},{"values":[119,120,121],"id":"extra119"},{"values":[120,121,122],"id":"extra120"},{"values":[121,122,123],"id":"extra121"},{"values":[122,123,124],"id":"extra122"},{"values":[123,124,125],"id":"extra123"},{"values":[124,125,126],"id":"extra124"},{"values":[125,126,127],"id":"extra125"},{"values":[126,127,128],"id":"extra126"},{"values":[127,128,129],"id":"extra127"},{"values":[128,129,130],"id":"extra128"},{"values":[129,130,131],"id":"extra129"},{"values":[130,131,132],"id":"extra130"},{"values":[131,132,133],"id":"extra131"},{"values":[132,133,134],"id":"extra132"},{"values":[133,134,135],"id":"extra133"},{"values":[134,135,136],"id":"extra134"},{"values":[135,136,137],"id":"extra135"},{"values":[136,137,138],"id":"extra136"},{"values":[137,138,139],"id":"extra137"},{"values":[138,139,140],"id":"extra138"},{"values":[139,140,141],"id":"extra139"},{"values":[140,141,142],"id":"extra140"},{"values":[141,142,143],"id":"extra141"},{"values":[142,143,144],"id":"extra142"},{"values":[143,144,145],"id":"extra143"},{"values":[144,145,146],"id":"extra144"},{"values":[145,146,147],"id":"extra145"},{"values":[146,147,148],"id":"extra146"},{"values":[147,148,149],"id":"extra147"},{"values":[148,149,150],"id":"extra148"},{"values":[149,150,151],"id":"extra149"}]}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:52:58 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '21'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Lsn:
+      - '2'
+      X-Pinecone-Request-Latency-Ms:
+      - '30'
+      X-Pinecone-Request-Id:
+      - '3910995209592120540'
+      X-Envoy-Upstream-Service-Time:
+      - '31'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"upsertedCount":150}'
+  recorded_at: Thu, 08 Aug 2024 20:52:58 GMT
+- request:
+    method: post
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:52:58 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '90'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Latency-Ms:
+      - '3'
+      X-Pinecone-Request-Id:
+      - '6541869318217082325'
       X-Envoy-Upstream-Service-Time:
       - '4'
       Grpc-Status:
@@ -485,10 +487,142 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"namespaces":{"":{"vectorCount":4}},"dimension":3,"indexFullness":0,"totalVectorCount":4}'
-  recorded_at: Thu, 08 Aug 2024 20:21:43 GMT
+  recorded_at: Thu, 08 Aug 2024 20:52:58 GMT
+- request:
+    method: post
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:52:59 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '90'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Latency-Ms:
+      - '3'
+      X-Pinecone-Request-Id:
+      - '4060502891547290978'
+      X-Envoy-Upstream-Service-Time:
+      - '3'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"namespaces":{"":{"vectorCount":4}},"dimension":3,"indexFullness":0,"totalVectorCount":4}'
+  recorded_at: Thu, 08 Aug 2024 20:52:59 GMT
+- request:
+    method: post
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:53:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '90'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Latency-Ms:
+      - '3'
+      X-Pinecone-Request-Id:
+      - '1507630760970814092'
+      X-Envoy-Upstream-Service-Time:
+      - '4'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"namespaces":{"":{"vectorCount":4}},"dimension":3,"indexFullness":0,"totalVectorCount":4}'
+  recorded_at: Thu, 08 Aug 2024 20:53:00 GMT
+- request:
+    method: post
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/describe_index_stats
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:53:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '94'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Latency-Ms:
+      - '3'
+      X-Pinecone-Request-Id:
+      - '8832361227360530680'
+      X-Envoy-Upstream-Service-Time:
+      - '4'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"namespaces":{"":{"vectorCount":154}},"dimension":3,"indexFullness":0,"totalVectorCount":154}'
+  recorded_at: Thu, 08 Aug 2024 20:53:00 GMT
 - request:
     method: get
-    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/list?prefix=test
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/list?limit=100
     body:
       encoding: US-ASCII
       string: ''
@@ -509,17 +643,61 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:43 GMT
+      - Thu, 08 Aug 2024 20:53:00 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '97'
+      - '1873'
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '2'
+      - '23'
       X-Pinecone-Request-Id:
-      - '1914863355015721886'
+      - '3777490944917965296'
+      X-Envoy-Upstream-Service-Time:
+      - '24'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"vectors":[{"id":"extra0"},{"id":"extra1"},{"id":"extra10"},{"id":"extra100"},{"id":"extra101"},{"id":"extra102"},{"id":"extra103"},{"id":"extra104"},{"id":"extra105"},{"id":"extra106"},{"id":"extra107"},{"id":"extra108"},{"id":"extra109"},{"id":"extra11"},{"id":"extra110"},{"id":"extra111"},{"id":"extra112"},{"id":"extra113"},{"id":"extra114"},{"id":"extra115"},{"id":"extra116"},{"id":"extra117"},{"id":"extra118"},{"id":"extra119"},{"id":"extra12"},{"id":"extra120"},{"id":"extra121"},{"id":"extra122"},{"id":"extra123"},{"id":"extra124"},{"id":"extra125"},{"id":"extra126"},{"id":"extra127"},{"id":"extra128"},{"id":"extra129"},{"id":"extra13"},{"id":"extra130"},{"id":"extra131"},{"id":"extra132"},{"id":"extra133"},{"id":"extra134"},{"id":"extra135"},{"id":"extra136"},{"id":"extra137"},{"id":"extra138"},{"id":"extra139"},{"id":"extra14"},{"id":"extra140"},{"id":"extra141"},{"id":"extra142"},{"id":"extra143"},{"id":"extra144"},{"id":"extra145"},{"id":"extra146"},{"id":"extra147"},{"id":"extra148"},{"id":"extra149"},{"id":"extra15"},{"id":"extra16"},{"id":"extra17"},{"id":"extra18"},{"id":"extra19"},{"id":"extra2"},{"id":"extra20"},{"id":"extra21"},{"id":"extra22"},{"id":"extra23"},{"id":"extra24"},{"id":"extra25"},{"id":"extra26"},{"id":"extra27"},{"id":"extra28"},{"id":"extra29"},{"id":"extra3"},{"id":"extra30"},{"id":"extra31"},{"id":"extra32"},{"id":"extra33"},{"id":"extra34"},{"id":"extra35"},{"id":"extra36"},{"id":"extra37"},{"id":"extra38"},{"id":"extra39"},{"id":"extra4"},{"id":"extra40"},{"id":"extra41"},{"id":"extra42"},{"id":"extra43"},{"id":"extra44"},{"id":"extra45"},{"id":"extra46"},{"id":"extra47"},{"id":"extra48"},{"id":"extra49"},{"id":"extra5"},{"id":"extra50"},{"id":"extra51"},{"id":"extra52"},{"id":"extra53"}],"pagination":{"next":"eyJza2lwX3Bhc3QiOiJleHRyYTUzIiwicHJlZml4IjpudWxsfQ=="},"namespace":"","usage":{"readUnits":1}}'
+  recorded_at: Thu, 08 Aug 2024 20:53:00 GMT
+- request:
+    method: get
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/list?limit=100&paginationToken=eyJza2lwX3Bhc3QiOiJleHRyYTUzIiwicHJlZml4IjpudWxsfQ==
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:53:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1032'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Latency-Ms:
+      - '3'
+      X-Pinecone-Request-Id:
+      - '6521324449336025335'
       X-Envoy-Upstream-Service-Time:
       - '3'
       Grpc-Status:
@@ -528,8 +706,52 @@ http_interactions:
       - envoy
     body:
       encoding: UTF-8
-      string: '{"vectors":[{"id":"test1"},{"id":"test2"},{"id":"test3"}],"namespace":"","usage":{"readUnits":1}}'
-  recorded_at: Thu, 08 Aug 2024 20:21:43 GMT
+      string: '{"vectors":[{"id":"extra54"},{"id":"extra55"},{"id":"extra56"},{"id":"extra57"},{"id":"extra58"},{"id":"extra59"},{"id":"extra6"},{"id":"extra60"},{"id":"extra61"},{"id":"extra62"},{"id":"extra63"},{"id":"extra64"},{"id":"extra65"},{"id":"extra66"},{"id":"extra67"},{"id":"extra68"},{"id":"extra69"},{"id":"extra7"},{"id":"extra70"},{"id":"extra71"},{"id":"extra72"},{"id":"extra73"},{"id":"extra74"},{"id":"extra75"},{"id":"extra76"},{"id":"extra77"},{"id":"extra78"},{"id":"extra79"},{"id":"extra8"},{"id":"extra80"},{"id":"extra81"},{"id":"extra82"},{"id":"extra83"},{"id":"extra84"},{"id":"extra85"},{"id":"extra86"},{"id":"extra87"},{"id":"extra88"},{"id":"extra89"},{"id":"extra9"},{"id":"extra90"},{"id":"extra91"},{"id":"extra92"},{"id":"extra93"},{"id":"extra94"},{"id":"extra95"},{"id":"extra96"},{"id":"extra97"},{"id":"extra98"},{"id":"extra99"},{"id":"other1"},{"id":"test1"},{"id":"test2"},{"id":"test3"}],"pagination":{"next":"eyJza2lwX3Bhc3QiOiJ0ZXN0MyIsInByZWZpeCI6bnVsbH0="},"namespace":"","usage":{"readUnits":1}}'
+  recorded_at: Thu, 08 Aug 2024 20:53:00 GMT
+- request:
+    method: get
+    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/list?limit=100&paginationToken=eyJza2lwX3Bhc3QiOiJ0ZXN0MyIsInByZWZpeCI6bnVsbH0=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - application/json
+      Api-Key:
+      - "<PINECONE_API_KEY>"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 08 Aug 2024 20:53:01 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '53'
+      Connection:
+      - keep-alive
+      X-Pinecone-Request-Latency-Ms:
+      - '11'
+      X-Pinecone-Request-Id:
+      - '5255519978669255789'
+      X-Envoy-Upstream-Service-Time:
+      - '11'
+      Grpc-Status:
+      - '0'
+      Server:
+      - envoy
+    body:
+      encoding: UTF-8
+      string: '{"vectors":[],"namespace":"","usage":{"readUnits":1}}'
+  recorded_at: Thu, 08 Aug 2024 20:53:01 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/delete
@@ -553,7 +775,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:43 GMT
+      - Thu, 08 Aug 2024 20:53:01 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -561,11 +783,11 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '9'
+      - '25'
       X-Pinecone-Request-Id:
-      - '7529099278219150902'
+      - '4291228757935627594'
       X-Envoy-Upstream-Service-Time:
-      - '10'
+      - '26'
       Grpc-Status:
       - '0'
       Server:
@@ -573,7 +795,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Thu, 08 Aug 2024 20:21:43 GMT
+  recorded_at: Thu, 08 Aug 2024 20:53:01 GMT
 - request:
     method: get
     uri: https://api.pinecone.io/indexes/serverless-index
@@ -607,9 +829,9 @@ http_interactions:
       X-Pinecone-Api-Version:
       - 2024-04
       X-Cloud-Trace-Context:
-      - 92470ff3440dd894d62fe2558c8331f6
+      - 252aa620683da587200ccb17d8fdec78
       Date:
-      - Thu, 08 Aug 2024 20:21:43 GMT
+      - Thu, 08 Aug 2024 20:53:01 GMT
       Server:
       - Google Frontend
       Content-Length:
@@ -621,7 +843,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"name":"serverless-index","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io","spec":{"serverless":{"region":"us-east-1","cloud":"aws"}}}'
-  recorded_at: Thu, 08 Aug 2024 20:21:43 GMT
+  recorded_at: Thu, 08 Aug 2024 20:53:01 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/delete
@@ -645,7 +867,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:44 GMT
+      - Thu, 08 Aug 2024 20:53:01 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -655,7 +877,7 @@ http_interactions:
       X-Pinecone-Request-Latency-Ms:
       - '0'
       X-Pinecone-Request-Id:
-      - '7319078526369387296'
+      - '1108149561988051890'
       X-Envoy-Upstream-Service-Time:
       - '1'
       Server:
@@ -663,7 +885,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"code":5,"message":"Namespace not found","details":[]}'
-  recorded_at: Thu, 08 Aug 2024 20:21:44 GMT
+  recorded_at: Thu, 08 Aug 2024 20:53:01 GMT
 - request:
     method: post
     uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/delete
@@ -687,7 +909,7 @@ http_interactions:
       message: Not Found
     headers:
       Date:
-      - Thu, 08 Aug 2024 20:21:44 GMT
+      - Thu, 08 Aug 2024 20:53:01 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -695,9 +917,9 @@ http_interactions:
       Connection:
       - keep-alive
       X-Pinecone-Request-Latency-Ms:
-      - '1'
+      - '0'
       X-Pinecone-Request-Id:
-      - '6209528531327562938'
+      - '7176465818224834265'
       X-Envoy-Upstream-Service-Time:
       - '1'
       Server:
@@ -705,7 +927,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"code":5,"message":"Namespace not found","details":[]}'
-  recorded_at: Thu, 08 Aug 2024 20:21:44 GMT
+  recorded_at: Thu, 08 Aug 2024 20:53:01 GMT
 - request:
     method: get
     uri: https://api.pinecone.io/indexes/server-index
@@ -739,9 +961,9 @@ http_interactions:
       X-Pinecone-Api-Version:
       - 2024-04
       X-Cloud-Trace-Context:
-      - 3872d3cab006e0115cf56dbe6bcecd75
+      - f5c513bb4c6262446f0d13f5eb343794
       Date:
-      - Thu, 08 Aug 2024 20:21:44 GMT
+      - Thu, 08 Aug 2024 20:53:02 GMT
       Server:
       - Google Frontend
       Content-Length:
@@ -753,7 +975,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"name":"server-index","metric":"dotproduct","dimension":3,"status":{"ready":true,"state":"Ready"},"host":"server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io","spec":{"pod":{"replicas":1,"shards":1,"pods":1,"pod_type":"p1.x1","environment":"<PINECONE_ENVIRONMENT>"}}}'
-  recorded_at: Thu, 08 Aug 2024 20:21:44 GMT
+  recorded_at: Thu, 08 Aug 2024 20:53:02 GMT
 - request:
     method: post
     uri: https://server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
@@ -779,7 +1001,7 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 08 Aug 2024 20:21:44 GMT
+      - Thu, 08 Aug 2024 20:53:02 GMT
       X-Envoy-Upstream-Service-Time:
       - '8'
       Grpc-Status:
@@ -791,7 +1013,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Thu, 08 Aug 2024 20:21:44 GMT
+  recorded_at: Thu, 08 Aug 2024 20:53:02 GMT
 - request:
     method: post
     uri: https://server-index-b2e8921.svc.<PINECONE_ENVIRONMENT>.pinecone.io/vectors/delete
@@ -817,7 +1039,7 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 08 Aug 2024 20:21:44 GMT
+      - Thu, 08 Aug 2024 20:53:02 GMT
       X-Envoy-Upstream-Service-Time:
       - '8'
       Grpc-Status:
@@ -829,49 +1051,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-  recorded_at: Thu, 08 Aug 2024 20:21:44 GMT
-- request:
-    method: get
-    uri: https://serverless-index-b2e8921.svc.aped-4627-b74a.pinecone.io/vectors/list?limit=100&prefix=test
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Content-Type:
-      - application/json
-      Accept:
-      - application/json
-      Api-Key:
-      - "<PINECONE_API_KEY>"
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Thu, 08 Aug 2024 21:02:11 GMT
-      Content-Type:
-      - application/json
-      Content-Length:
-      - '97'
-      Connection:
-      - keep-alive
-      X-Pinecone-Request-Latency-Ms:
-      - '4'
-      X-Pinecone-Request-Id:
-      - '2074444780022402433'
-      X-Envoy-Upstream-Service-Time:
-      - '5'
-      Grpc-Status:
-      - '0'
-      Server:
-      - envoy
-    body:
-      encoding: UTF-8
-      string: '{"vectors":[{"id":"test1"},{"id":"test2"},{"id":"test3"}],"namespace":"","usage":{"readUnits":1}}'
-  recorded_at: Thu, 08 Aug 2024 21:02:11 GMT
+  recorded_at: Thu, 08 Aug 2024 20:53:02 GMT
 recorded_with: VCR 6.1.0
