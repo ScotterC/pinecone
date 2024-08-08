@@ -24,15 +24,15 @@ RSpec.describe Pinecone do
     context "without an api key" do
       let(:api_key) { nil }
 
-      before do
-        Pinecone.configure do |config|
-          config.api_key = nil
-          config.environment = nil
-        end
-      end
-
       it "raises an error" do
-        expect { Pinecone::Client.new.list_indexes }.to raise_error(Pinecone::ConfigurationError)
+        expect {
+          Pinecone::Client.new.list_indexes
+        }.to raise_error(Pinecone::ConfigurationError)
+
+        # reset the configuration
+        Pinecone.configure do |config|
+          config.api_key = "foo"
+        end
       end
     end
   end
