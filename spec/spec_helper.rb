@@ -4,6 +4,7 @@ require "dotenv/load"
 require "pinecone"
 require "vcr"
 require "debug"
+require_relative "support/index_helpers"
 
 VCR.configure do |c|
   c.hook_into :webmock
@@ -18,6 +19,7 @@ VCR.configure do |c|
 end
 
 RSpec.configure do |c|
+  c.include IndexHelpers
   c.before(:all) do
     Pinecone.configure do |config|
       config.api_key = ENV.fetch("PINECONE_API_KEY")
@@ -25,19 +27,11 @@ RSpec.configure do |c|
     end
   end
 
-  c.after(:all) do
-    Pinecone.configure do |config|
-      config.api_key = ENV.fetch("PINECONE_API_KEY")
-      config.environment = ENV.fetch("PINECONE_ENVIRONMENT")
-    end
-    pinecone = Pinecone::Client.new
-    ["serverless-index", "server-index"].each do |index_name|
-      VCR.use_cassette("clear_index") do
-        index = pinecone.index(index_name)
-        ["example-namespace", ""].each do |namespace|
-          index.delete(delete_all: true, namespace: namespace)
-        end
-      end
-    end
+  # Clear Test Indices after each test
+  # Current Testing Caveats
+  # Only use indexes with names: ["serverless-index", "server-index"]
+  # Only use namespaces with names: ["example-namespace", ""]
+  c.after(:each) do
+    IndexHelpers.clear_indices
   end
 end

@@ -118,11 +118,29 @@ index.fetch(
 )
 ```
 
-List vector IDs from an index (only for serverless indexes)
+List all vector IDs (only for serverless indexes)
 ```ruby
 pinecone = Pinecone::Client.new
 index = pinecone.index("example-index")
 index.list(
+  namespace: "example-namespace",
+  prefix: "example-prefix",
+)
+
+# also as a block (default limit of 100)
+index.list(
+  namespace: "example-namespace",
+  prefix: "example-prefix",
+) do |vector_batch|
+  puts vector_batch
+end
+```
+
+List vector IDs with pagination (only for serverless indexes)
+```ruby
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")
+index.list_paginated(
   namespace: "example-namespace",
   prefix: "example-prefix",
   limit: 50,
@@ -270,7 +288,11 @@ Contributions welcome!
 - run linter with `standardrb`
 - `mv .env.copy .env` and add Pinecone API Key if developing a new endpoint or modifying existing ones
   - to disable VCR and hit real endpoints, `NO_VCR=true rspec`
-- To setup cloud indexes when writing new tests `ruby spec/support/setup.rb start` and `stop` to delete them
+- Cloud index helpers
+  - `rake indices:start`
+  - `rake indices:stop`
+  - `rake indices:clear`
+  - `rake indices:counts`
 
 ## License
 

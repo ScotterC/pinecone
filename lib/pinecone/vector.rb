@@ -36,12 +36,47 @@ module Pinecone
       self.class.get("#{@base_uri}/vectors/fetch?#{query_string}", options)
     end
 
-    def list(namespace: "", prefix: "", limit: nil, pagination_token: "")
+    def list(prefix: nil, limit: nil, namespace: nil, &block)
+      all_ids = []
+      pagination_token = nil
+
+      loop do
+        response = list_paginated(
+          prefix: prefix,
+          limit: limit,
+          pagination_token: pagination_token,
+          namespace: namespace
+        )
+
+        break unless response.success?
+
+        results = response.parsed_response
+        ids = results["vectors"]&.map { |v| v["id"] } || []
+
+        if block
+          yield ids
+        else
+          all_ids.concat(ids)
+        end
+
+        pagination_token = results["paginationToken"]
+        break if pagination_token.nil? || pagination_token.empty?
+        break if limit && all_ids.length >= limit
+      end
+
+      if block
+        nil
+      else
+        limit ? all_ids.first(limit) : all_ids
+      end
+    end
+
+    def list_paginated(prefix: nil, limit: nil, pagination_token: nil, namespace: nil)
       query_params = {}
-      query_params["namespace"] = namespace unless namespace.empty?
-      query_params["prefix"] = prefix unless prefix.empty?
+      query_params["prefix"] = prefix if prefix
       query_params["limit"] = limit if limit
-      query_params["paginationToken"] = pagination_token unless pagination_token.empty?
+      query_params["paginationToken"] = pagination_token if pagination_token
+      query_params["namespace"] = namespace if namespace
 
       query_string = URI.encode_www_form(query_params)
       self.class.get("#{@base_uri}/vectors/list?#{query_string}", options)
