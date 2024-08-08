@@ -194,6 +194,53 @@ RSpec.describe Pinecone::Vector do
         expect(yielded_ids).to eq(["ns1"])
       end
     end
+
+    context "with more than 100 vectors" do
+      before do
+        additional_data = {
+          vectors: 150.times.map do |i|
+            {values: [i, i + 1, i + 2], id: "extra#{i}"}
+          end
+        }
+
+        # Upsert the additional vectors in a single call
+        index.upsert(additional_data)
+        wait_for_upsert_completion(expected_count: 154)  # 4 original + 150 new
+      end
+
+      it "returns all vectors when no limit is specified" do
+        result = index.list
+        expect(result.length).to eq(154)
+      end
+
+      it "respects a limit larger than 100" do
+        result = index.list(limit: 150)
+        expect(result.length).to eq(150)
+      end
+
+      it "returns all vectors when limit is greater than total count" do
+        result = index.list(limit: 200)
+        expect(result.length).to eq(154)
+      end
+
+      context "with a block" do
+        it "yields all vectors when no limit is specified" do
+          yielded_ids = []
+          index.list do |batch|
+            yielded_ids.concat(batch)
+          end
+          expect(yielded_ids.length).to eq(154)
+        end
+
+        it "respects a limit larger than 100" do
+          yielded_ids = []
+          index.list(limit: 150) do |batch|
+            yielded_ids.concat(batch)
+          end
+          expect(yielded_ids.length).to eq(150)
+        end
+      end
+    end
   end
 
   describe "#list_paginated", :vcr do
@@ -283,6 +330,26 @@ RSpec.describe Pinecone::Vector do
           "pagination" => {"next" => be_a(String)},
           "usage" => {"readUnits" => 1}
         )
+      end
+
+      context "with more than 100 vectors" do
+        before do
+          additional_data = {
+            vectors: 150.times.map do |i|
+              {values: [i, i + 1, i + 2], id: "extra#{i}"}
+            end
+          }
+
+          # Upsert the additional vectors in a single call
+          index.upsert(additional_data)
+          wait_for_upsert_completion(expected_count: 152)  # 4 original + 150 new
+        end
+
+        # API limit is 100
+        it "returns all vectors when no limit is specified" do
+          response = index.list_paginated(limit: 100)
+          expect(response.parsed_response["vectors"].length).to eq(100)
+        end
       end
     end
 
