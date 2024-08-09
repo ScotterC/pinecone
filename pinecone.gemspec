@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.metadata = {"source_code_uri" => "https://github.com/ScotterC/pinecone"}
   s.license = "MIT"
 
-  s.add_dependency "httparty", "~> 0.21.0"
+  s.add_dependency "httparty", "~> 0.22.0"
   s.add_dependency "dry-struct", "~> 1.6.0"
   s.add_dependency "dry-validation", "~> 1.10.0"
 end
