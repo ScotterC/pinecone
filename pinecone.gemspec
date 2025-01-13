@@ -14,6 +14,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 3"
 
   s.add_dependency "httparty", "~> 0.22.0"
-  s.add_dependency "dry-struct", "~> 1.6.0"
-  s.add_dependency "dry-validation", "~> 1.10.0"
+  s.add_dependency "dry-struct", "~> 1.6"
+  s.add_dependency "dry-validation", "~> 1.10"
 end
