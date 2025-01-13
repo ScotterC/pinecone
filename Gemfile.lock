@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     pinecone (1.1.0)
-      dry-struct (~> 1.6.0)
-      dry-validation (~> 1.10.0)
+      dry-struct (~> 1.6)
+      dry-validation (~> 1.10)
       httparty (~> 0.22.0)
 
 GEM
@@ -139,6 +139,7 @@ PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
   arm64-darwin-23
+  arm64-darwin-24
   x86_64-darwin-21
   x86_64-linux
 
