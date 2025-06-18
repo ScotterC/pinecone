@@ -9,8 +9,16 @@ module Pinecone
 
     attr_reader :base_uri
 
-    def initialize(index_name)
-      @base_uri = set_base_uri(index_name)
+    def initialize(index_name = nil, host: nil)
+      if host
+        # Direct host targeting (preferred)
+        @base_uri = host.start_with?("https://") ? host : "https://#{host}"
+      elsif index_name
+        # Legacy path: call describe_index
+        @base_uri = set_base_uri(index_name)
+      else
+        raise ArgumentError, "Must provide either index_name or host: parameter"
+      end
 
       @headers = {
         "Content-Type" => "application/json",

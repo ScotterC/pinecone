@@ -8,17 +8,20 @@ RSpec.describe Pinecone do
   describe "#configure" do
     let(:api_key) { "abc123" }
     let(:environment) { "def456" }
+    let(:host) { "example.com" }
 
     before do
       Pinecone.configure do |config|
         config.api_key = api_key
         config.environment = environment
+        config.host = host
       end
     end
 
     it "returns the config" do
       expect(Pinecone.configuration.api_key).to eq(api_key)
       expect(Pinecone.configuration.environment).to eq(environment)
+      expect(Pinecone.configuration.host).to eq(host)
     end
 
     context "without an api key" do
