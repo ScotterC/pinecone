@@ -6,19 +6,50 @@
 
 This is the complete Pinecone API and fully tested. Bug reports and contributions are welcome!
 
+## What's New in v1.2
+
+- 🚀 **Host-based index targeting** for better performance (eliminates extra API calls)
+- 🐳 **Local development support** with Pinecone containers  
+- ⚙️ **Flexible configuration** with global host settings
+
 ## Installation
 
 `gem install pinecone`
 
 ## Configuration
 
+### Basic Configuration
+
 ```ruby
 require "dotenv/load"
 require 'pinecone'
 
 Pinecone.configure do |config|
-  config.api_key  = ENV.fetch('PINECONE_API_KEY')
-  config.environment = ENV.fetch('PINECONE_ENVIRONMENT')
+  config.api_key = ENV.fetch('PINECONE_API_KEY')
+  config.environment = ENV.fetch('PINECONE_ENVIRONMENT')  # Optional in v1.2+
+end
+```
+
+### v1.2+ Host-Based Configuration (Recommended)
+
+For better performance, you can configure a default index host:
+
+```ruby
+Pinecone.configure do |config|
+  config.api_key = ENV.fetch('PINECONE_API_KEY')
+  config.host = ENV.fetch('PINECONE_INDEX_HOST')  # e.g., "my-index-abc123.svc.us-east1.pinecone.io"
+end
+```
+
+### Local Development
+
+For local development with Pinecone containers:
+
+```ruby
+Pinecone.configure do |config|
+  config.api_key = "dummy-key"  # Not required for local containers
+  config.host = "localhost:5081"  # Automatically uses HTTP for localhost
+  config.silence_deprecation_warnings = true  # Optional: silence warnings in tests
 end
 ```
 
@@ -66,11 +97,34 @@ pinecone.configure_index("example-index", {
 
 ## Vector Operations
 
-Adding vectors to an existing index
+### Index Access
+
+**v1.2+ Recommended (Host-Based):**
+```ruby
+pinecone = Pinecone::Client.new
+
+# Option 1: Use global host (configured above)
+index = pinecone.index()
+
+# Option 2: Specify host directly (best performance)
+index = pinecone.index(host: "my-index-abc123.svc.us-east1.pinecone.io")
+
+# Option 3: Multiple indexes with different hosts
+dense_index = pinecone.index(host: "dense-index-host.svc.pinecone.io")
+sparse_index = pinecone.index(host: "sparse-index-host.svc.pinecone.io")
+```
+
+**Legacy (Still Supported):**
+```ruby
+pinecone = Pinecone::Client.new
+index = pinecone.index("example-index")  # ⚠️ Makes extra API call
+```
+
+### Adding Vectors
 
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-index-host")
 
 index.upsert(
   namespace: "example-namespace",
@@ -88,18 +142,19 @@ index.upsert(
 )
 ```
 
-Querying index with a vector
+### Querying Vectors
+
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-index-host")
 embedding = [0.0, -0.2, 0.4]
 response = index.query(vector: embedding)
 ```
 
-Querying index with options
+Querying with options:
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-index-host")
 embedding = [0.0, -0.2, 0.4]
 response = index.query(vector: embedding, 
                         namespace: "example-namespace",
@@ -111,7 +166,7 @@ response = index.query(vector: embedding,
 Fetching a vector from an index
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.fetch(
   ids: ["1"], 
   namespace: "example-namespace"
@@ -121,7 +176,7 @@ index.fetch(
 List all vector IDs (only for serverless indexes)
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.list(
   namespace: "example-namespace",
   prefix: "example-prefix",
@@ -141,7 +196,7 @@ List vector IDs with pagination (only for serverless indexes)
 (default limit of 100)
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.list_paginated(
   namespace: "example-namespace",
   prefix: "example-prefix",
@@ -153,7 +208,7 @@ index.list_paginated(
 Updating a vector in an index
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.update(
   id: "1", 
   values: [0.1, -0.2, 0.0],
@@ -167,7 +222,7 @@ Deleting a vector from an index
 Note, that only one of `ids`, `delete_all` or `filter` can be included. If `ids` are present or `delete_all: true` then the filter is removed from the request.
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.delete(
   ids: ["1"], 
   namespace: "example-namespace", 
@@ -181,7 +236,7 @@ index.delete(
 Describe index statistics. Can be filtered - see Filtering queries
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.describe_index_stats(
   filter: {
     "genre": { "$eq": "comedy" }
@@ -195,7 +250,7 @@ Add a `filter` option to apply filters to your query. You can use vector metadat
 
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 embedding = [0.0, -0.2, 0.4]
 response = index.query(
   vector: embedding,
@@ -228,7 +283,7 @@ Specifying an invalid filter raises `ArgumentError` with an error message.
 
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 embedding = [0.0, -0.2, 0.4]
 response = index.query(
   vector: embedding,
@@ -245,7 +300,7 @@ The length of indices and values must match.
 
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 embedding = [0.0, -0.2, 0.4]
 response = index.query(
   id: "vector1"
@@ -288,13 +343,23 @@ Contributions welcome!
 - `bundle` to install gems
 - run tests with `rspec`
 - run linter with `standardrb`
-- `mv .env.copy .env` and add Pinecone API Key if developing a new endpoint or modifying existing ones
-  - to disable VCR and hit real endpoints, `NO_VCR=true rspec`
-- Cloud index helpers
-  - `rake indices:start`
-  - `rake indices:stop`
-  - `rake indices:clear`
-  - `rake indices:counts`
+
+### Local Development with Containers
+
+For local development and testing:
+```bash
+# Start local Pinecone containers
+docker-compose -f docker-compose.test.yml up -d
+
+# Run local container tests
+bundle exec rspec spec/local_container_spec.rb
+
+# Run all tests
+bundle exec rspec
+
+# Stop containers
+docker-compose -f docker-compose.test.yml down
+```
 
 ## License
 

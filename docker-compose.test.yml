@@ -1,0 +1,33 @@
+services:
+  pinecone:
+    image: ghcr.io/pinecone-io/pinecone-local:latest
+    environment: 
+      PORT: 5080
+      PINECONE_HOST: localhost
+    ports: 
+      - "5080:5080"
+    platform: linux/amd64
+  dense-index:
+    image: ghcr.io/pinecone-io/pinecone-index:latest
+    container_name: dense-index
+    environment:
+      PORT: 5081
+      INDEX_TYPE: serverless
+      VECTOR_TYPE: dense
+      DIMENSION: 2 
+      METRIC: cosine
+    ports:
+      - "5081:5081"
+    platform: linux/amd64
+  sparse-index:
+    image: ghcr.io/pinecone-io/pinecone-index:latest
+    container_name: sparse-index
+    environment:
+      PORT: 5082
+      INDEX_TYPE: serverless
+      VECTOR_TYPE: sparse
+      DIMENSION: 0
+      METRIC: dotproduct
+    ports:
+      - "5082:5082"
+    platform: linux/amd64

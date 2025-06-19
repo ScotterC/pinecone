@@ -2,3 +2,5 @@
 scratch/
 *.gem
 settings.json
+plans/
+mise.toml

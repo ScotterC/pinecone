@@ -21,21 +21,61 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['3.2', '3.3']
+        ruby-version: ['3.4']
     env:
       PINECONE_API_KEY: sekret
-      PINECONE_ENVIRONMENT: us-east1-gcp
+    services:
+      pinecone-database:
+        image: ghcr.io/pinecone-io/pinecone-local:latest
+        env:
+          PORT: 5080
+          PINECONE_HOST: localhost
+        ports:
+          - 5080:5080
+      
+      dense-index:
+        image: ghcr.io/pinecone-io/pinecone-index:latest
+        env:
+          PORT: 5081
+          INDEX_TYPE: serverless
+          VECTOR_TYPE: dense
+          DIMENSION: 2
+          METRIC: cosine
+        ports:
+          - 5081:5081
+      
+      sparse-index:
+        image: ghcr.io/pinecone-io/pinecone-index:latest
+        env:
+          PORT: 5082
+          INDEX_TYPE: serverless
+          VECTOR_TYPE: sparse
+          DIMENSION: 0
+          METRIC: dotproduct
+        ports:
+          - 5082:5082
+    
     steps:
     - uses: actions/checkout@v3
+    
     - name: Set up Ruby
-    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-    # change this to (see https://github.com/ruby/setup-ruby#versioning):
+      # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
+      # change this to (see https://github.com/ruby/setup-ruby#versioning):
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    
+    - name: Wait for Pinecone containers to be ready
+      run: |
+        echo "Waiting for Pinecone containers to be ready..."
+        timeout 60 bash -c 'until curl -f http://localhost:5080/indexes; do echo "Waiting for database container..."; sleep 2; done'
+        timeout 60 bash -c 'until curl -f http://localhost:5081/vectors/list; do echo "Waiting for dense index container..."; sleep 2; done'
+        timeout 60 bash -c 'until curl -f http://localhost:5082/vectors/list; do echo "Waiting for sparse index container..."; sleep 2; done'
+        echo "All Pinecone containers are ready!"
         
     - name: Run StandardRB Lint
       run: bundle exec standardrb
+      
     - name: Run tests
       run: bundle exec rspec

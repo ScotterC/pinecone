@@ -41,7 +41,7 @@ module Pinecone
 
       context "when $eq is specified" do
         let(:filter) { described_class.new("$eq": 1) }
-        let(:invalid_filter) { described_class.new("$eq": ["foo", "bar"]) }
+        let(:invalid_filter) { described_class.new("$eq": %w[foo bar]) }
 
         it "does not raise an error with a valid filter" do
           expect { filter }.not_to raise_error
@@ -54,7 +54,7 @@ module Pinecone
 
       context "when $ne is specified" do
         let(:filter) { described_class.new("$ne": 1) }
-        let(:invalid_filter) { described_class.new("$ne": ["foo", "bar"]) }
+        let(:invalid_filter) { described_class.new("$ne": %w[foo bar]) }
 
         it "does not raise an error with a valid filter" do
           expect { filter }.not_to raise_error
@@ -69,7 +69,7 @@ module Pinecone
         context "when #{operator} is specified" do
           let(:filter) { described_class.new("#{operator}": 1) }
           let(:filter_2) { described_class.new("#{operator}": 1.5) }
-          let(:invalid_filter) { described_class.new("#{operator}": ["foo", "bar"]) }
+          let(:invalid_filter) { described_class.new("#{operator}": %w[foo bar]) }
           let(:invalid_filter_2) { described_class.new("#{operator}": "foo") }
 
           it "does not raise an error with a valid filter" do

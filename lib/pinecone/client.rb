@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pinecone
   class Client
     include HTTParty
@@ -40,8 +42,24 @@ module Pinecone
 
     # This is a very confusing naming convention
     # Pinecone's reference now delineates between 'control plane' and 'data plane' which we'll reflect eventually
-    def index(index_name)
-      Pinecone::Vector.new(index_name)
+    def index(index_name = nil, host: nil)
+      # Direct host provided
+      return Pinecone::Vector.new(host: host) if host
+
+      # Use global host if configured
+      return Pinecone::Vector.new(host: Pinecone.configuration.host) if Pinecone.configuration.host
+
+      # Legacy: index name provided
+      if index_name
+        unless Pinecone.configuration.silence_deprecation_warnings?
+          warn "[DEPRECATED] client.index('name') is deprecated. Use client.index(host: 'host') for better performance."
+        end
+        return Pinecone::Vector.new(index_name)
+      end
+
+      # No host available
+      raise ArgumentError,
+        "No host provided. Set via Pinecone.configure { |c| c.host = 'host' } or client.index(host: 'host')"
     end
   end
 end
