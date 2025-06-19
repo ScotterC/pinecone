@@ -343,8 +343,6 @@ Contributions welcome!
 - `bundle` to install gems
 - run tests with `rspec`
 - run linter with `standardrb`
-- `mv .env.copy .env` and add Pinecone API Key if developing a new endpoint or modifying existing ones
-  - to disable VCR and hit real endpoints, `NO_VCR=true rspec`
 
 ### Local Development with Containers
 
@@ -362,12 +360,6 @@ bundle exec rspec
 # Stop containers
 docker-compose -f docker-compose.test.yml down
 ```
-
-### Cloud Index Helpers
-- `rake indices:start`
-- `rake indices:stop`
-- `rake indices:clear`
-- `rake indices:counts`
 
 ## License
 
