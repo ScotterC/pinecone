@@ -22,6 +22,8 @@ jobs:
     strategy:
       matrix:
         ruby-version: ['3.4']
+    env:
+      PINECONE_API_KEY: sekret
     services:
       pinecone-database:
         image: ghcr.io/pinecone-io/pinecone-local:latest
