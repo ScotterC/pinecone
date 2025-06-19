@@ -166,7 +166,7 @@ response = index.query(vector: embedding,
 Fetching a vector from an index
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.fetch(
   ids: ["1"], 
   namespace: "example-namespace"
@@ -176,7 +176,7 @@ index.fetch(
 List all vector IDs (only for serverless indexes)
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.list(
   namespace: "example-namespace",
   prefix: "example-prefix",
@@ -196,7 +196,7 @@ List vector IDs with pagination (only for serverless indexes)
 (default limit of 100)
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.list_paginated(
   namespace: "example-namespace",
   prefix: "example-prefix",
@@ -208,7 +208,7 @@ index.list_paginated(
 Updating a vector in an index
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.update(
   id: "1", 
   values: [0.1, -0.2, 0.0],
@@ -222,7 +222,7 @@ Deleting a vector from an index
 Note, that only one of `ids`, `delete_all` or `filter` can be included. If `ids` are present or `delete_all: true` then the filter is removed from the request.
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.delete(
   ids: ["1"], 
   namespace: "example-namespace", 
@@ -236,7 +236,7 @@ index.delete(
 Describe index statistics. Can be filtered - see Filtering queries
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 index.describe_index_stats(
   filter: {
     "genre": { "$eq": "comedy" }
@@ -250,7 +250,7 @@ Add a `filter` option to apply filters to your query. You can use vector metadat
 
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 embedding = [0.0, -0.2, 0.4]
 response = index.query(
   vector: embedding,
@@ -283,7 +283,7 @@ Specifying an invalid filter raises `ArgumentError` with an error message.
 
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 embedding = [0.0, -0.2, 0.4]
 response = index.query(
   vector: embedding,
@@ -300,7 +300,7 @@ The length of indices and values must match.
 
 ```ruby
 pinecone = Pinecone::Client.new
-index = pinecone.index("example-index")
+index = pinecone.index(host: "your-example-index")
 embedding = [0.0, -0.2, 0.4]
 response = index.query(
   id: "vector1"
