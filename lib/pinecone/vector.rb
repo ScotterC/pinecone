@@ -1,6 +1,7 @@
 require "pinecone/vector/query"
 require "pinecone/vector/filter"
 require "pinecone/vector/sparse_vector"
+require "json"
 
 module Pinecone
   class Vector
@@ -12,10 +13,16 @@ module Pinecone
     def initialize(index_name = nil, host: nil)
       if host
         # Direct host targeting (preferred)
-        @base_uri = host.start_with?("https://") ? host : "https://#{host}"
+        @base_uri = if host.start_with?("http://", "https://")
+          host
+        elsif host.start_with?("localhost")
+          "http://#{host}"  # Use HTTP for localhost
+        else
+          "https://#{host}"  # Use HTTPS for production hosts
+        end
       elsif index_name
         # Legacy path: call describe_index
-        @base_uri = set_base_uri(index_name)
+        @base_uri = set_fallback_base_uri(index_name)
       else
         raise ArgumentError, "Must provide either index_name or host: parameter"
       end
@@ -122,7 +129,7 @@ module Pinecone
 
     def describe_index_stats(filter: {})
       payload = if filter.empty?
-        options
+        options.merge(body: {}.to_json)
       else
         options.merge(body: {filter: filter}.to_json)
       end
@@ -138,7 +145,7 @@ module Pinecone
     private
 
     # https://index_name-project_id.svc.environment.pinecone.io
-    def set_base_uri(index_name)
+    def set_fallback_base_uri(index_name)
       index_description = Pinecone::Index.new.describe(index_name)
       raise Pinecone::IndexNotFoundError, "Index #{index_name} does not exist" if index_description.code != 200
       uri = index_description.parsed_response["host"]
