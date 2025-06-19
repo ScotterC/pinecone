@@ -45,12 +45,25 @@ RSpec.describe Pinecone::Index do
     let(:response) { client.list }
 
     it "returns a response with list of indexes" do
+      test_attributes = {
+        name: "test-create-serverless",
+        dimension: 2,
+        metric: "cosine",
+        spec: {
+          serverless: {
+            cloud: "aws",
+            region: "us-east-1"
+          }
+        }
+      }
+      client.create(test_attributes)
+
       expect(response).to be_a(HTTParty::Response)
       expect(response.code).to eq(200)
       expect(response.parsed_response).to be_a(Hash)
       expect(response["indexes"]).to be_an(Array)
       # Local container should have the dense-index
-      expect(response["indexes"].map { |h| h["name"] }).to include("dense-index")
+      expect(response["indexes"].map { |h| h["name"] }).to include("test-create-serverless")
     end
   end
 
@@ -177,12 +190,24 @@ RSpec.describe Pinecone::Index do
 
   describe "#describe" do
     it "returns index details for existing index" do
-      # Test describing the dense-index that should exist
-      response = client.describe("dense-index")
+      test_attributes = {
+        name: "test-create-serverless",
+        dimension: 2,
+        metric: "cosine",
+        spec: {
+          serverless: {
+            cloud: "aws",
+            region: "us-east-1"
+          }
+        }
+      }
+      client.create(test_attributes)
+
+      response = client.describe("test-create-serverless")
       expect(response).to be_a(HTTParty::Response)
       expect(response.code).to eq(200)
       expect(response.parsed_response).to include(
-        "name" => "dense-index",
+        "name" => "test-create-serverless",
         "dimension" => 2,
         "metric" => "cosine"
       )
