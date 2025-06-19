@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "httparty"
 
 require "pinecone/response_parser"
@@ -13,7 +15,8 @@ module Pinecone
   class IndexNotFoundError < StandardError; end
 
   class Configuration
-    attr_writer :api_key, :base_uri, :environment, :host, :silence_deprecation_warnings
+    attr_writer :api_key, :base_uri, :environment, :silence_deprecation_warnings
+    attr_accessor :host
 
     def initialize
       @api_key = nil
@@ -39,10 +42,6 @@ module Pinecone
       return @environment if @environment
 
       raise ConfigurationError, "Pinecone environment not set"
-    end
-
-    def host
-      @host
     end
 
     def silence_deprecation_warnings?

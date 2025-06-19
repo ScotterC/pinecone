@@ -29,11 +29,9 @@ module Pinecone
 
       def self.new(input)
         validation = SparseVectorContract.new.call(input)
-        if validation.success?
-          super
-        else
-          raise ArgumentError.new(validation.errors.to_h.inspect)
-        end
+        raise ArgumentError, validation.errors.to_h.inspect unless validation.success?
+
+        super
       end
     end
   end

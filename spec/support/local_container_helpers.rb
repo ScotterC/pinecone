@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "net/http"
 require "timeout"
 
@@ -5,9 +7,9 @@ module LocalContainerHelpers
   DATABASE_HOST = "localhost:5080"
   DENSE_HOST = "localhost:5081"
   SPARSE_HOST = "localhost:5082"
-  DATABASE_URL = "http://#{DATABASE_HOST}"
-  DENSE_URL = "http://#{DENSE_HOST}"
-  SPARSE_URL = "http://#{SPARSE_HOST}"
+  DATABASE_URL = "http://#{DATABASE_HOST}".freeze
+  DENSE_URL = "http://#{DENSE_HOST}".freeze
+  SPARSE_URL = "http://#{SPARSE_HOST}".freeze
 
   module_function
 
@@ -43,6 +45,7 @@ module LocalContainerHelpers
     Timeout.timeout(timeout) do
       loop do
         break if all_containers_available?
+
         sleep 0.5
       end
     end
@@ -56,7 +59,7 @@ module LocalContainerHelpers
   end
 
   def local_client(api_key: "dummy-key")
-    Pinecone::Client.new.tap do |client|
+    Pinecone::Client.new.tap do |_client|
       # Configure for local testing
       Pinecone.configure do |config|
         config.api_key = api_key

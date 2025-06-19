@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Pinecone::Vector do
@@ -62,12 +64,12 @@ RSpec.describe Pinecone::Vector do
     end
 
     describe "#upsert" do
-      let(:data) { {vectors: [{values: [0.1, 0.2], id: "test1"}]} }  # 2D vectors for dense container
+      let(:data) { {vectors: [{values: [0.1, 0.2], id: "test1"}]} } # 2D vectors for dense container
 
       describe "successful response" do
-        let(:upsert_response) {
+        let(:upsert_response) do
           index.upsert(data)
-        }
+        end
 
         it "returns a response" do
           expect(upsert_response).to be_a(HTTParty::Response)
@@ -77,21 +79,21 @@ RSpec.describe Pinecone::Vector do
       end
 
       describe "unsuccessful response" do
-        let(:upsert_response) {
+        let(:upsert_response) do
           index.upsert("invalid-data")
-        }
+        end
 
         it "returns error for invalid data" do
           expect(upsert_response).to be_a(HTTParty::Response)
-          expect([400, 422]).to include(upsert_response.code)  # Local container may return different error codes
+          expect([400, 422]).to include(upsert_response.code) # Local container may return different error codes
         end
       end
 
       it "handles vectors with wrong dimensions" do
-        wrong_dimension_data = {vectors: [{values: [0.1, 0.2, 0.3], id: "wrong_dim"}]}  # 3D instead of 2D
+        wrong_dimension_data = {vectors: [{values: [0.1, 0.2, 0.3], id: "wrong_dim"}]} # 3D instead of 2D
         response = index.upsert(wrong_dimension_data)
         expect(response).to be_a(HTTParty::Response)
-        expect([400, 422]).to include(response.code)  # Should be validation error
+        expect([400, 422]).to include(response.code) # Should be validation error
       end
     end
 
@@ -99,9 +101,9 @@ RSpec.describe Pinecone::Vector do
       let(:data) { {vectors: [{values: [0.1, 0.2], id: "delete_test"}]} }
 
       describe "successful response" do
-        let(:delete_response) {
+        let(:delete_response) do
           index.delete(ids: ["delete_test"])
-        }
+        end
 
         it "returns a response" do
           index.upsert(data)
@@ -111,22 +113,22 @@ RSpec.describe Pinecone::Vector do
       end
 
       describe "successful response with filters" do
-        let(:delete_response) {
+        let(:delete_response) do
           index.delete(filter: {genre: "comedy"})
-        }
+        end
 
         it "returns a response" do
           metadata_data = {vectors: [{values: [0.1, 0.2], id: "filter_test", metadata: {genre: "comedy"}}]}
           index.upsert(metadata_data)
           expect(delete_response).to be_a(HTTParty::Response)
-          expect([200, 400]).to include(delete_response.code)  # Local container may not support metadata filtering
+          expect([200, 400]).to include(delete_response.code) # Local container may not support metadata filtering
         end
       end
 
       context "when delete_all is true" do
-        let(:delete_response) {
+        let(:delete_response) do
           index.delete(delete_all: true)
-        }
+        end
 
         it "returns a response" do
           index.upsert(data)
@@ -138,9 +140,9 @@ RSpec.describe Pinecone::Vector do
 
     describe "#fetch" do
       describe "successful response" do
-        let(:fetch_response) {
-          index.fetch(ids: ["fetch1", "fetch2"])
-        }
+        let(:fetch_response) do
+          index.fetch(ids: %w[fetch1 fetch2])
+        end
 
         it "returns a response" do
           index.upsert({vectors: [{values: [0.1, 0.2], id: "fetch1"}]})
@@ -175,7 +177,7 @@ RSpec.describe Pinecone::Vector do
     end
 
     describe "#list" do
-      let(:data) {
+      let(:data) do
         {
           vectors: [
             {values: [0.1, 0.2], id: "test1"},
@@ -184,11 +186,11 @@ RSpec.describe Pinecone::Vector do
             {values: [0.7, 0.8], id: "other1"}
           ]
         }
-      }
+      end
 
       before do
         index.upsert(data)
-        sleep 0.1  # Give container time to process
+        sleep 0.1 # Give container time to process
       end
 
       context "without a block" do
@@ -201,7 +203,7 @@ RSpec.describe Pinecone::Vector do
         it "respects the limit parameter" do
           result = index.list(limit: 2)
           expect(result.length).to eq(2)
-          expect(["test1", "test2", "test3", "other1"]).to include(*result)
+          expect(%w[test1 test2 test3 other1]).to include(*result)
         end
 
         it "filters by prefix" do
@@ -234,7 +236,7 @@ RSpec.describe Pinecone::Vector do
             yielded_ids.concat(batch)
           end
           expect(yielded_ids.length).to eq(2)
-          expect(["test1", "test2", "test3", "other1"]).to include(*yielded_ids)
+          expect(%w[test1 test2 test3 other1]).to include(*yielded_ids)
         end
 
         it "filters by prefix" do
@@ -268,12 +270,12 @@ RSpec.describe Pinecone::Vector do
 
           # Upsert the additional vectors
           index.upsert(additional_data)
-          sleep 0.2  # Give container time to process
+          sleep 0.2 # Give container time to process
         end
 
         it "returns all vectors when no limit is specified" do
           result = index.list
-          expect(result.length).to be >= 10  # At least the extra vectors
+          expect(result.length).to be >= 10 # At least the extra vectors
         end
 
         it "respects a limit" do
@@ -302,14 +304,14 @@ RSpec.describe Pinecone::Vector do
     end
 
     describe "#list_paginated" do
-      let(:data) {
+      let(:data) do
         {
           vectors: [
             {values: [0.1, 0.2], id: "page1"},
             {values: [0.3, 0.4], id: "page2"}
           ]
         }
-      }
+      end
 
       describe "successful response" do
         let(:response) { index.list_paginated }
@@ -334,7 +336,7 @@ RSpec.describe Pinecone::Vector do
       end
 
       describe "success with prefix" do
-        let(:prefix_data) {
+        let(:prefix_data) do
           {
             vectors: [
               {values: [0.1, 0.2], id: "foo#1"},
@@ -342,7 +344,7 @@ RSpec.describe Pinecone::Vector do
               {values: [0.5, 0.6], id: "bar#1"}
             ]
           }
-        }
+        end
 
         let(:response) { index.list_paginated(prefix: "foo#") }
 
@@ -406,9 +408,9 @@ RSpec.describe Pinecone::Vector do
 
     describe "#update" do
       describe "successful response" do
-        let(:update_response) {
+        let(:update_response) do
           index.update(id: "update_test", values: [0.9, 1.0], set_metadata: {genre: "drama"})
-        }
+        end
 
         it "returns a response" do
           index.upsert({vectors: [{values: [0.1, 0.2], id: "update_test"}]})
@@ -427,7 +429,7 @@ RSpec.describe Pinecone::Vector do
     end
 
     describe "#query" do
-      let(:data) {
+      let(:data) do
         {
           vectors: [
             {values: [0.1, 0.2], id: "query1", metadata: {genre: "comedy"}},
@@ -435,7 +437,7 @@ RSpec.describe Pinecone::Vector do
             {values: [0.5, 0.6], id: "query3"}
           ]
         }
-      }
+      end
       let(:query_vector) { [0.2, 0.3] }
 
       describe "successful response" do
@@ -444,17 +446,17 @@ RSpec.describe Pinecone::Vector do
           sleep 0.1
         end
 
-        let(:query_response) {
+        let(:query_response) do
           index.query(vector: query_vector, top_k: 3, include_values: true)
-        }
+        end
 
-        let(:query_object) {
+        let(:query_object) do
           Pinecone::Vector::Query.new(vector: query_vector, top_k: 3)
-        }
+        end
 
-        let(:query_response_with_object) {
+        let(:query_response_with_object) do
           index.query(query_object)
-        }
+        end
 
         it "returns a response" do
           expect(query_response).to be_a(HTTParty::Response)
@@ -509,9 +511,7 @@ RSpec.describe Pinecone::Vector do
           # Should only return vectors with genre: comedy metadata
           matches.each do |match|
             expect(match).to have_key("id")
-            if match["metadata"]
-              expect(match["metadata"]["genre"]).to eq("comedy")
-            end
+            expect(match["metadata"]["genre"]).to eq("comedy") if match["metadata"]
           end
         end
 
@@ -531,9 +531,9 @@ RSpec.describe Pinecone::Vector do
           sleep 0.1
         end
 
-        let(:query_response) {
+        let(:query_response) do
           index.query(namespace: "example-namespace", vector: query_vector, top_k: 3)
-        }
+        end
 
         it "returns a response" do
           expect(query_response).to be_a(HTTParty::Response)
@@ -558,18 +558,18 @@ RSpec.describe Pinecone::Vector do
 
         response = index.query(id: "query1", top_k: 2)
         expect(response).to be_a(HTTParty::Response)
-        expect([200, 400]).to include(response.code)  # Some containers may not support query by ID
+        expect([200, 400]).to include(response.code) # Some containers may not support query by ID
       end
 
       it "handles invalid query parameters" do
-        response = index.query(vector: [0.1])  # Wrong dimension
+        response = index.query(vector: [0.1]) # Wrong dimension
         expect(response).to be_a(HTTParty::Response)
         expect([400, 422]).to include(response.code)
       end
     end
 
     describe "#describe_index_stats" do
-      let(:data) {
+      let(:data) do
         {
           vectors: [
             {values: [0.1, 0.2], id: "stats1", metadata: {genre: "comedy"}},
@@ -577,11 +577,11 @@ RSpec.describe Pinecone::Vector do
             {values: [0.5, 0.6], id: "stats3"}
           ]
         }
-      }
+      end
 
-      let(:describe_response) {
+      let(:describe_response) do
         index.describe_index_stats
-      }
+      end
 
       before do
         index.upsert(data)
@@ -595,23 +595,21 @@ RSpec.describe Pinecone::Vector do
 
         # Verify actual vector count reflects upserted data
         total_count = describe_response.parsed_response["totalVectorCount"]
-        expect(total_count).to be >= 3  # At least the 3 vectors we upserted
+        expect(total_count).to be >= 3 # At least the 3 vectors we upserted
         expect(describe_response.parsed_response).to have_key("dimension")
-        expect(describe_response.parsed_response["dimension"]).to eq(2)  # Dense container is 2D
+        expect(describe_response.parsed_response["dimension"]).to eq(2) # Dense container is 2D
       end
 
       describe "with filter" do
         let(:filter) { {genre: {"$eq" => "comedy"}} }
-        let(:describe_response) {
+        let(:describe_response) do
           index.describe_index_stats(filter: filter)
-        }
+        end
 
         it "returns a response (filter may not be supported)" do
           expect(describe_response).to be_a(HTTParty::Response)
-          expect([200, 400]).to include(describe_response.code)  # Local container may not support filtering
-          if describe_response.code == 200
-            expect(describe_response.parsed_response).to have_key("totalVectorCount")
-          end
+          expect([200, 400]).to include(describe_response.code) # Local container may not support filtering
+          expect(describe_response.parsed_response).to have_key("totalVectorCount") if describe_response.code == 200
         end
       end
 

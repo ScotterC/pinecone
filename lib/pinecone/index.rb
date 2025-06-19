@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pinecone
   class Index
     include HTTParty

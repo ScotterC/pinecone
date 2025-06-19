@@ -33,7 +33,9 @@ module Pinecone
             key(:$and).failure("'$any' must be an array") unless value.is_a?(Array)
 
             value.each do |v|
-              key(:$and).failure("'$any' must be an array of filters") unless v.is_a?(Filter) || to_filter(v).is_a?(Filter)
+              unless v.is_a?(Filter) || to_filter(v).is_a?(Filter)
+                key(:$and).failure("'$any' must be an array of filters")
+              end
             end
           end
         end
@@ -43,24 +45,25 @@ module Pinecone
             key(:$or).failure("'$or' must be an array") unless value.is_a?(Array)
 
             value.each do |v|
-              key(:$or).failure("'$or' must be an array of filters") unless v.is_a?(Filter) || to_filter(v).is_a?(Filter)
+              unless v.is_a?(Filter) || to_filter(v).is_a?(Filter)
+                key(:$or).failure("'$or' must be an array of filters")
+              end
             end
           end
         end
 
         def to_filter(input)
           return false unless input.is_a?(Hash)
+
           Filter.new(input)
         end
       end
 
       def self.new(input)
         validation = FilterContract.new.call(input)
-        if validation.success?
-          super
-        else
-          raise ArgumentError.new(validation.errors.to_h.inspect)
-        end
+        raise ArgumentError, validation.errors.to_h.inspect unless validation.success?
+
+        super
       end
 
       def self.default?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Pinecone do
@@ -28,9 +30,9 @@ RSpec.describe Pinecone do
       let(:api_key) { nil }
 
       it "raises an error" do
-        expect {
+        expect do
           Pinecone::Client.new.list_indexes
-        }.to raise_error(Pinecone::ConfigurationError)
+        end.to raise_error(Pinecone::ConfigurationError)
 
         # reset the configuration
         Pinecone.configure do |config|

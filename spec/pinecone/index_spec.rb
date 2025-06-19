@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 RSpec.describe Pinecone::Index do
@@ -11,7 +13,7 @@ RSpec.describe Pinecone::Index do
     index_client.class.base_uri "http://localhost:5080"
     index_client
   end
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     {
       metric: "dotproduct",
       name: "test-index",
@@ -23,9 +25,9 @@ RSpec.describe Pinecone::Index do
         }
       }
     }
-  }
+  end
 
-  let(:serverless_attributes) {
+  let(:serverless_attributes) do
     {
       metric: "dotproduct",
       name: "test-index-serverless",
@@ -37,7 +39,7 @@ RSpec.describe Pinecone::Index do
         }
       }
     }
-  }
+  end
 
   describe "#list" do
     let(:response) { client.list }
@@ -117,8 +119,8 @@ RSpec.describe Pinecone::Index do
     it "returns error for invalid index creation" do
       invalid_attributes = {
         name: "invalid-index",
-        dimension: -1,  # Invalid dimension
-        metric: "invalid-metric",  # Invalid metric
+        dimension: -1, # Invalid dimension
+        metric: "invalid-metric", # Invalid metric
         spec: {
           serverless: {
             cloud: "invalid-cloud",
@@ -162,7 +164,7 @@ RSpec.describe Pinecone::Index do
       # Try to create again with same name
       duplicate_response = client.create(attributes)
       expect(duplicate_response).to be_a(HTTParty::Response)
-      expect([400, 409, 422]).to include(duplicate_response.code)  # Conflict or validation error
+      expect([400, 409, 422]).to include(duplicate_response.code) # Conflict or validation error
 
       # Clean up
       begin
@@ -272,15 +274,13 @@ RSpec.describe Pinecone::Index do
       # Try to create first
       create_response = client.create(pod_attributes)
 
+      response = client.delete(pod_name)
+      expect(response).to be_a(HTTParty::Response)
       if [200, 201].include?(create_response.code)
         # If created successfully, test deletion
-        response = client.delete(pod_name)
-        expect(response).to be_a(HTTParty::Response)
         expect([200, 202, 204]).to include(response.code)
       else
         # If creation failed due to unsupported feature, test delete on non-existent
-        response = client.delete(pod_name)
-        expect(response).to be_a(HTTParty::Response)
         expect(response.code).to eq(404)
       end
     end
@@ -311,18 +311,16 @@ RSpec.describe Pinecone::Index do
       # Try to create first
       create_response = client.create(pod_attributes)
 
+      response = client.configure(pod_name, spec: {pod: {replicas: 2}})
+      expect(response).to be_a(HTTParty::Response)
       if [200, 201].include?(create_response.code)
         # If created successfully, test configuration
-        response = client.configure(pod_name, spec: {pod: {replicas: 2}})
-        expect(response).to be_a(HTTParty::Response)
         expect([200, 400, 404, 422, 501]).to include(response.code)
 
         # Clean up
         client.delete(pod_name)
       else
         # If creation failed, still test configure on non-existent to verify error handling
-        response = client.configure(pod_name, spec: {pod: {replicas: 2}})
-        expect(response).to be_a(HTTParty::Response)
         expect([400, 404, 422]).to include(response.code)
       end
     end
@@ -337,7 +335,7 @@ RSpec.describe Pinecone::Index do
     it "returns error when configuring non-existent index" do
       response = client.configure("non-existent-index", spec: {pod: {replicas: 1}})
       expect(response).to be_a(HTTParty::Response)
-      expect([400, 404]).to include(response.code)  # Local container may return 400 instead of 404
+      expect([400, 404]).to include(response.code) # Local container may return 400 instead of 404
     end
   end
 end

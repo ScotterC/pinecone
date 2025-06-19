@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 # Tests for local container functionality
@@ -40,7 +42,7 @@ RSpec.describe "Pinecone Local Containers", :local_container do
     let(:test_vectors) do
       {
         vectors: [
-          {id: "test1", values: [0.1, 0.2]},  # 2D vectors for dense index
+          {id: "test1", values: [0.1, 0.2]}, # 2D vectors for dense index
           {id: "test2", values: [0.4, 0.5]}
         ]
       }

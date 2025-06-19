@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "pinecone/vector/query"
 require "pinecone/vector/filter"
 require "pinecone/vector/sparse_vector"
@@ -16,9 +18,9 @@ module Pinecone
         @base_uri = if host.start_with?("http://", "https://")
           host
         elsif host.start_with?("localhost")
-          "http://#{host}"  # Use HTTP for localhost
+          "http://#{host}" # Use HTTP for localhost
         else
-          "https://#{host}"  # Use HTTPS for production hosts
+          "https://#{host}" # Use HTTPS for production hosts
         end
       elsif index_name
         # Legacy path: call describe_index
@@ -148,6 +150,7 @@ module Pinecone
     def set_fallback_base_uri(index_name)
       index_description = Pinecone::Index.new.describe(index_name)
       raise Pinecone::IndexNotFoundError, "Index #{index_name} does not exist" if index_description.code != 200
+
       uri = index_description.parsed_response["host"]
       "https://#{uri}"
     end

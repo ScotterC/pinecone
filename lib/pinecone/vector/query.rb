@@ -43,19 +43,17 @@ module Pinecone
 
       def self.new(input)
         validation = QueryContract.new.call(input)
-        if validation.success?
-          super
-        else
-          raise ArgumentError.new(validation.errors.to_h.inspect)
-        end
+        raise ArgumentError, validation.errors.to_h.inspect unless validation.success?
+
+        super
       end
 
-      def to_json
-        to_h.map do |key, value|
-          [key.to_s.split("_").map.with_index do |word, index|
-            (index == 0) ? word : word.capitalize
-          end.join.to_sym, value]
-        end.to_h.to_json
+      def to_json(*_args)
+        to_h.transform_keys do |key|
+          key.to_s.split("_").map.with_index do |word, index|
+            index.zero? ? word : word.capitalize
+          end.join.to_sym
+        end.to_json
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 module Pinecone
@@ -69,12 +71,12 @@ module Pinecone
     describe "Sparse Vector" do
       context "must be arrays of indices and values" do
         let(:vector) { [0, 0.5, -0.5] }
-        let(:sparse) {
+        let(:sparse) do
           {
             indices: [0, 1, 2],
             values: [0, 0.5, -0.5]
           }
-        }
+        end
         let(:query) { described_class.new(vector: vector, sparse_vector: sparse) }
 
         it "is valid" do
