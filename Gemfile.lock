@@ -4,7 +4,7 @@ PATH
     pinecone (1.2.1)
       dry-struct (~> 1.6)
       dry-validation (~> 1.10)
-      httparty (~> 0.22.0)
+      httparty (~> 0.24.0)
 
 GEM
   remote: https://rubygems.org/
@@ -68,7 +68,7 @@ GEM
       zeitwerk (~> 2.6)
     erb (5.0.1)
     hashdiff (1.2.0)
-    httparty (0.22.0)
+    httparty (0.24.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
