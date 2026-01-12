@@ -4,7 +4,7 @@ PATH
     pinecone (1.2.1)
       dry-struct (~> 1.6)
       dry-validation (~> 1.10)
-      httparty (~> 0.22.0)
+      httparty (~> 0.24.0)
 
 GEM
   remote: https://rubygems.org/
@@ -68,7 +68,7 @@ GEM
       zeitwerk (~> 2.6)
     erb (5.0.1)
     hashdiff (1.2.0)
-    httparty (0.22.0)
+    httparty (0.24.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -152,9 +152,9 @@ GEM
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.25.0)
     stringio (3.1.7)
-    unicode-display_width (3.1.4)
-      unicode-emoji (~> 4.0, >= 4.0.4)
-    unicode-emoji (4.0.4)
+    unicode-display_width (3.2.0)
+      unicode-emoji (~> 4.1)
+    unicode-emoji (4.2.0)
     vcr (6.3.1)
       base64
     webmock (3.25.1)
@@ -168,6 +168,7 @@ PLATFORMS
   arm64-darwin-22
   arm64-darwin-23
   arm64-darwin-24
+  arm64-darwin-25
   x86_64-darwin-21
   x86_64-linux
 
