@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    pinecone (1.2.1)
+    pinecone (1.2.2)
       dry-struct (~> 1.6)
       dry-validation (~> 1.10)
-      httparty (~> 0.24.0)
+      httparty (>= 0.22.0)
 
 GEM
   remote: https://rubygems.org/
