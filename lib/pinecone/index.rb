@@ -6,7 +6,7 @@ module Pinecone
     parser Pinecone::ResponseParser
 
     def initialize
-      self.class.base_uri "https://api.pinecone.io"
+      self.class.base_uri Pinecone.configuration.base_uri
       @headers = {
         "Content-Type" => "application/json",
         "Accept" => "application/json",
