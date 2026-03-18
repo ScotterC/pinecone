@@ -15,13 +15,15 @@ module Pinecone
   class IndexNotFoundError < StandardError; end
 
   class Configuration
-    attr_writer :api_key, :base_uri, :environment, :silence_deprecation_warnings
-    attr_accessor :host
+    DEFAULT_BASE_URI = "https://api.pinecone.io"
+
+    attr_writer :api_key, :environment, :silence_deprecation_warnings
+    attr_accessor :host, :base_uri
 
     def initialize
       @api_key = nil
       @environment = nil
-      @base_uri = nil
+      @base_uri = DEFAULT_BASE_URI
       @host = nil
       @silence_deprecation_warnings = false
     end
@@ -30,12 +32,6 @@ module Pinecone
       return @api_key if @api_key
 
       raise ConfigurationError, "Pinecone API key not set"
-    end
-
-    def base_uri
-      return @base_uri if @base_uri
-
-      raise ConfigurationError, "Pinecone domain not set"
     end
 
     def environment

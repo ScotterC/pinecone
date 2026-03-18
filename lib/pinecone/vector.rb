@@ -18,9 +18,9 @@ module Pinecone
         @base_uri = if host.start_with?("http://", "https://")
           host
         elsif host.start_with?("localhost")
-          "http://#{host}" # Use HTTP for localhost
+          "http://#{host}"
         else
-          "https://#{host}" # Use HTTPS for production hosts
+          "https://#{host}"
         end
       elsif index_name
         # Legacy path: call describe_index

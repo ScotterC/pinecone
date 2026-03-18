@@ -7,12 +7,15 @@ RSpec.describe Pinecone::Index do
     skip "Local database container not available" unless database_available?
   end
 
-  let(:client) do
-    # Use local database container only
-    index_client = Pinecone::Index.new
-    index_client.class.base_uri "http://localhost:5080"
-    index_client
+  before(:each) do
+    Pinecone.configuration.base_uri = "http://localhost:5080"
   end
+
+  after(:each) do
+    Pinecone.configuration.base_uri = Pinecone::Configuration::DEFAULT_BASE_URI
+  end
+
+  let(:client) { Pinecone::Index.new }
   let(:valid_attributes) do
     {
       metric: "dotproduct",

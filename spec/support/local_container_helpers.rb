@@ -80,21 +80,11 @@ module LocalContainerHelpers
     @database_client ||= begin
       Pinecone.configure do |config|
         config.api_key = "dummy-key"
+        config.base_uri = DATABASE_URL
         config.silence_deprecation_warnings = true
       end
 
-      # Create a client that can talk to the database emulator for control plane operations
-      client = Pinecone::Client.new
-      # Override the base_uri for control plane operations
-      Pinecone::Index.any_instance.define_singleton_method(:initialize) do
-        self.class.base_uri "http://#{DATABASE_HOST}"
-        @headers = {
-          "Content-Type" => "application/json",
-          "Accept" => "application/json",
-          "Api-Key" => "dummy-key"
-        }
-      end
-      client
+      Pinecone::Client.new
     end
   end
 
