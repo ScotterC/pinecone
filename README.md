@@ -8,9 +8,10 @@ This is the complete Pinecone API and fully tested. Bug reports and contribution
 
 ## What's New in v1.2
 
-- 🚀 **Host-based index targeting** for better performance (eliminates extra API calls)
-- 🐳 **Local development support** with Pinecone containers  
-- ⚙️ **Flexible configuration** with global host settings
+- **Host-based index targeting** for better performance (eliminates extra API calls)
+- **Configurable `base_uri`** for full Pinecone Local support (control plane + data plane)
+- **Local development support** with Pinecone containers
+- **Flexible configuration** with global host settings
 
 ## Installation
 
@@ -43,14 +44,24 @@ end
 
 ### Local Development
 
-For local development with Pinecone containers:
+For local development with [Pinecone Local](https://docs.pinecone.io/guides/operations/local-development) containers:
 
 ```ruby
 Pinecone.configure do |config|
-  config.api_key = "dummy-key"  # Not required for local containers
-  config.host = "localhost:5081"  # Automatically uses HTTP for localhost
-  config.silence_deprecation_warnings = true  # Optional: silence warnings in tests
+  config.api_key = "dummy-key"        # Any value works, Pinecone Local skips auth
+  config.base_uri = "http://localhost:5080"  # Control plane (database emulator)
 end
+
+pinecone = Pinecone::Client.new
+
+# Control plane operations work against the local container
+pinecone.list_indexes
+pinecone.create_index({ name: "my-index", dimension: 2, metric: "cosine",
+                        spec: { serverless: { cloud: "aws", region: "us-east-1" } } })
+
+# Data plane: pass http:// prefix for local hosts
+index = pinecone.index(host: "http://localhost:5081")
+index.upsert(vectors: [{ id: "vec1", values: [0.1, 0.2] }])
 ```
 
 ## Index Operations
